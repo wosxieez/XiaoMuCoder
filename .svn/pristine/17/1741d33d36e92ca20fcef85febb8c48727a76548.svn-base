@@ -1,0 +1,108 @@
+package com.xiaomu.view.actionview
+{
+	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.manager.ActionComponentManager;
+	import com.xiaomu.view.actionview.action.DoWhileActionComponent;
+	import com.xiaomu.view.actionview.action.MoveXActionComponent;
+	import com.xiaomu.view.actionview.action.MoveYActionComponent;
+	import com.xiaomu.view.actionview.action.StartActionComponent;
+	import com.xiaomu.view.actionview.action.WhileActionComponent;
+	
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+	
+	import coco.component.Group;
+	import coco.component.HorizontalAlign;
+	import coco.layout.VerticalLayout;
+	import coco.manager.PopUpManager;
+	
+	
+	/**
+	 * 脚本列表视图 
+	 * @author coco
+	 */	
+	public class ActionList extends Group
+	{
+		public function ActionList()
+		{
+			super();
+			
+			var vlayout:VerticalLayout = new VerticalLayout();
+			vlayout.padding = vlayout.gap = 20;
+			vlayout.horizontalAlign = HorizontalAlign.CENTER;
+			layout = vlayout;
+			
+			autoDrawSkin = true;
+			borderColor = 0xF0E7CC;
+			backgroundColor = 0xF9F4E6;
+			addEventListener(MouseEvent.MOUSE_DOWN, this_mouseDownHandler);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			var startAction:StartActionComponent = new StartActionComponent();
+			startAction.mouseChildren = false;
+			addChild(startAction);
+			
+			var moveXAction:MoveXActionComponent = new MoveXActionComponent();
+			moveXAction.y = 50;
+			moveXAction.mouseChildren = false;
+			addChild(moveXAction);
+			
+			var moveYAction:MoveYActionComponent = new MoveYActionComponent();
+			moveYAction.y = 100;
+			moveYAction.mouseChildren = false;
+			addChild(moveYAction);
+			
+			var moveXAction2:MoveXActionComponent = new MoveXActionComponent();
+			moveXAction2.y = 150;
+			moveXAction2.mouseChildren = false;
+			addChild(moveXAction2);
+			
+			var moveYAction2:MoveYActionComponent = new MoveYActionComponent();
+			moveYAction2.y = 200;
+			moveYAction2.mouseChildren = false;
+			addChild(moveYAction2);
+			
+			var doWhileAction:DoWhileActionComponent = new DoWhileActionComponent();
+			doWhileAction.y = 250;
+			doWhileAction.mouseChildren = false;
+			addChild(doWhileAction);
+			
+			var doWhileAction2:WhileActionComponent = new WhileActionComponent();
+			doWhileAction2.y = 400;
+			doWhileAction2.mouseChildren = false;
+			addChild(doWhileAction2);
+		}
+		
+		protected function this_mouseDownHandler(event:MouseEvent):void
+		{
+			var hookComponent:ActionComponent = event.target as ActionComponent;
+			if (hookComponent)
+			{
+				var globalPoint:Point = hookComponent.localToGlobal(new Point(0, 0));
+				
+				var hookComponentClass:Class = getDefinitionByName(getQualifiedClassName(hookComponent)) as Class;
+				var newHookComponent:ActionComponent = new hookComponentClass() as ActionComponent;
+				newHookComponent.x = globalPoint.x;
+				newHookComponent.y = globalPoint.y;
+				ActionComponentManager.getInstance().doDraggingHookComponent(newHookComponent);
+				
+				// close this view
+				PopUpManager.removePopUp(this);
+			}
+		}
+		
+	}
+}

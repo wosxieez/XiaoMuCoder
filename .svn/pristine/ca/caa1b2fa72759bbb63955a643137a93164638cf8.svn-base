@@ -1,0 +1,101 @@
+package com.xiaomu.view.actionview
+{
+	import com.xiaomu.actioncomponent.MoveXActionComponent;
+	import com.xiaomu.actioncomponent.MoveYActionComponent;
+	import com.xiaomu.actioncomponent.TestActionComponent;
+	import com.xiaomu.actioncomponent.TestActionComponent2;
+	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.component.AppAlert;
+	import com.xiaomu.manager.ActionComponentManager;
+	import com.xiaomu.manager.RoleManager;
+	
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
+	
+	import coco.component.Group;
+	import coco.component.HorizontalAlign;
+	import coco.layout.VerticalLayout;
+	import coco.manager.PopUpManager;
+	
+	
+	/**
+	 * 脚本列表视图 
+	 * @author coco
+	 */	
+	public class ActionList extends Group
+	{
+		public function ActionList()
+		{
+			super();
+			
+			var vlayout:VerticalLayout = new VerticalLayout();
+			vlayout.padding = vlayout.gap = 20;
+			vlayout.horizontalAlign = HorizontalAlign.CENTER;
+			layout = vlayout;
+			
+			autoDrawSkin = true;
+			borderColor = 0xF0E7CC;
+			backgroundColor = 0xF9F4E6;
+			addEventListener(MouseEvent.MOUSE_DOWN, this_mouseDownHandler);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			var testActionComponent:TestActionComponent = new TestActionComponent();
+			testActionComponent.mouseChildren = false;
+			testActionComponent.menuEnabled = false;
+			addChild(testActionComponent);
+			
+			var testActionComponent2:TestActionComponent2 = new TestActionComponent2();
+			testActionComponent2.mouseChildren = false;
+			testActionComponent2.menuEnabled = false;
+			addChild(testActionComponent2);
+			
+			var moveXAction:MoveXActionComponent = new MoveXActionComponent();
+			moveXAction.mouseChildren = false;
+			moveXAction.menuEnabled = false;
+			addChild(moveXAction);
+			
+			var moveYAction2:MoveYActionComponent = new MoveYActionComponent();
+			moveYAction2.mouseChildren = false;
+			moveYAction2.menuEnabled = false;
+			addChild(moveYAction2);
+		}
+		
+		protected function this_mouseDownHandler(event:MouseEvent):void
+		{
+			if (!RoleManager.getInstance().currentRole) 
+			{
+				AppAlert.show("请选择角色");
+				return;
+			}
+			
+			var actionComponent:ActionComponent = event.target as ActionComponent;
+			if (actionComponent)
+			{
+				var globalPoint:Point = actionComponent.localToGlobal(new Point(0, 0));
+				
+				var actionComponentClass:Class = getDefinitionByName(getQualifiedClassName(actionComponent)) as Class;
+				var newActionComponent:ActionComponent = new actionComponentClass() as ActionComponent;
+				newActionComponent.x = globalPoint.x;
+				newActionComponent.y = globalPoint.y;
+				ActionComponentManager.getInstance().doDraggingActionComponent(newActionComponent);
+				
+				// close this view
+				PopUpManager.removePopUp(this);
+			}
+		}
+		
+	}
+}

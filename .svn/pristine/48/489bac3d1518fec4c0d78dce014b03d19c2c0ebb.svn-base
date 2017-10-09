@@ -1,0 +1,44 @@
+package com.xiaomu.renderer
+{
+	import flash.events.MouseEvent;
+	
+	import coco.component.DefaultItemRenderer;
+	
+	public class ListItemRenderer extends DefaultItemRenderer
+	{
+		public function ListItemRenderer()
+		{
+			super();
+			buttonMode = true;
+			autoDrawSkin = false;
+		}
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			labelDisplay.color = 0xff0000;
+			labelDisplay.x = 5;
+			labelDisplay.fontSize=15;
+			labelDisplay.fontFamily="Microsoft YaHei"
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			labelDisplay.width = width - 50;
+		}
+		
+		override protected function drawSkin():void
+		{
+			graphics.clear();
+			graphics.lineStyle(1, 0xEEEEEE);
+			graphics.beginFill(0xFFF5E6);
+			graphics.drawRect(0, 0, width, height);
+			graphics.endFill();
+		}
+		
+		
+	}
+}

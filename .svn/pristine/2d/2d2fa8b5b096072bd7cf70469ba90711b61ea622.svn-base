@@ -1,0 +1,102 @@
+package com.xiaomu.component
+{
+	
+	import com.xiaomu.event.ActionHookEvent;
+	
+	import flash.events.EventDispatcher;
+	import flash.geom.Point;
+	
+	
+	[Event(name="targetChanged", type="com.xiaomu.event.ActionHookEvent")]
+	
+	[Event(name="matchChanged", type="com.xiaomu.event.ActionHookEvent")]
+	
+	
+	/**
+	 * 向上的钩子 
+	 */	
+	public class ActionHook extends EventDispatcher
+	{
+		public function ActionHook()
+		{
+			super();
+		}
+		
+		/**
+		 * 钩子组件 
+		 */		
+		public var actionComponent:ActionComponent;
+		
+		private var _targetActionHook:ActionHook;
+		
+		/**
+		 * 对应的钩子
+		 */
+		public function get targetActionHook():ActionHook
+		{
+			return _targetActionHook;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set targetActionHook(value:ActionHook):void
+		{
+			if (_targetActionHook == value) return;
+			_targetActionHook = value;
+			
+			dispatchEvent(new ActionHookEvent(ActionHookEvent.TARGET_CHANGED));
+		}
+		
+		
+		private var _matchActionHook:ActionHook;
+		
+		/**
+		 * 匹配上的钩子 
+		 */
+		public function get matchActionHook():ActionHook
+		{
+			return _matchActionHook;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set matchActionHook(value:ActionHook):void
+		{
+			if (_matchActionHook == value) return;
+			_matchActionHook = value;
+			
+			dispatchEvent(new ActionHookEvent(ActionHookEvent.MATCH_CHANGED));
+		}
+		
+		/**
+		 * 钩子的坐标位置 
+		 */		
+		public var x:Number = 0;
+		public var y:Number = 0;
+		
+		/**
+		 * 钩子是否匹配
+		 * @param hook
+		 * @return 
+		 */		
+		public function match(actionHook:ActionHook):Boolean
+		{
+			var thisPoint:Point = actionComponent.localToGlobal(new Point(0, 0));
+			thisPoint.x = thisPoint.x + x;
+			thisPoint.y = thisPoint.y + y;
+			
+			var thatPoint:Point = actionHook.actionComponent.localToGlobal(new Point(0, 0));
+			thatPoint.x = thatPoint.x + actionHook.x;
+			thatPoint.y = thatPoint.y + actionHook.y;
+			
+			if (Math.abs(thatPoint.x - thisPoint.x) <= 10 &&
+				Math.abs(thatPoint.y - thisPoint.y) <= 10) 
+				return true;
+			else
+				return false;
+		}
+		
+	}
+}

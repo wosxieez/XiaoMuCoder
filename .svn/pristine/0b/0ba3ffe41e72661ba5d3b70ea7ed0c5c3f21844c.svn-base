@@ -1,0 +1,43 @@
+package com.xiaomu.util
+{
+	
+	/**
+	 * 主题配色 
+	 * @author coco
+	 */	
+	public class Theme
+	{
+		/**
+		 * 品牌色红色
+		 */		
+		public static const color1:uint = 0xED3221;
+		/**
+		 * 品牌色蓝色 
+		 */		
+		public static const color2:uint = 0x5DCBF3;
+		/**
+		 * 主色调 黄色 
+		 */		
+		public static const color3:uint = 0xFFDD00;
+		/**
+		 * 主色调 橙色 
+		 */	
+		public static const color4:uint = 0xFF8624;
+		/**
+		 * 主色调 红色
+		 */	
+		public static const color5:uint = 0xFF5121;
+		/**
+		 * 主色调 紫色
+		 */	
+		public static const color6:uint = 0xA230DB;
+		/**
+		 * 主色调 紫红色
+		 */	
+		public static const color7:uint = 0xF53897;
+		/**
+		 * 主色调 蓝色
+		 */	
+		public static const color8:uint = 0x5DCCF5;
+	}
+}

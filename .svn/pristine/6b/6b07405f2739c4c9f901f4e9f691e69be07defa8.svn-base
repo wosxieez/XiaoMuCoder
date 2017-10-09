@@ -1,0 +1,17 @@
+package com.xiaomu.data
+{
+	
+	/**
+	 * 脚本数据类 
+	 * @author coco
+	 */	
+	public class ActionData
+	{
+		public function ActionData()
+		{
+		}
+		
+		public var componentClassName:String;
+		
+	}
+}

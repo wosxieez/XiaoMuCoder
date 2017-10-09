@@ -1,0 +1,28 @@
+package com.xiaomu.data
+{
+	
+	/**
+	 * 角色组件数据类 
+	 * @author coco
+	 * 
+	 * RoleComponentData
+	 * 		roleData
+	 * 		[
+	 * 			ActionComponentData
+	 * 			ActionComponentData
+	 *      ]
+	 * 
+	 */	
+	public class RoleComponentData
+	{
+		/**
+		 * 角色数据
+		 */		
+		public var roleData:RoleData;
+		
+		/**
+		 * 脚本组件数据集
+		 */		
+		public var actionComponentDatas:Vector.<ActionComponentData>;
+	}
+}

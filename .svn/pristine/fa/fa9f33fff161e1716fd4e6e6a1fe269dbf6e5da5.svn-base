@@ -1,0 +1,22 @@
+package com.xiaomu.action
+{
+	import com.xiaomu.view.stageview.RoleComponent;
+	
+	public class MoveXAction extends Action
+	{
+		public function MoveXAction()
+		{
+			super();
+		}
+		
+		override public function doAction(actionTarget:RoleComponent, actionParam:Object, actionCallback:Function):void
+		{
+			if (actionTarget)
+				actionTarget.x += 10;
+			
+			if (actionCallback)
+				actionCallback.call();
+		}
+		
+	}
+}

@@ -1,0 +1,11 @@
+package com.xiaomu.action
+{
+	import com.xiaomu.data.Actoin;
+
+	public class StartAction extends Actoin
+	{
+		public function StartAction()
+		{
+		}
+	}
+}

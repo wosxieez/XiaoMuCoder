@@ -1,0 +1,19 @@
+package com.xiaomu.hookcore
+{
+	public class DownHook extends Hook
+	{
+		public function DownHook()
+		{
+			super();
+		}
+		
+		override public function match(hook:Hook):Boolean
+		{
+			if (hook is UpHook)
+				return super.match(hook);
+			else
+				return false;
+		}
+		
+	}
+}

@@ -1,0 +1,67 @@
+package com.xiaomu.view.actionview.action
+{
+	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.event.ActionHookEvent;
+	import com.xiaomu.component.DownActionHook;
+	import com.xiaomu.component.UpActionHook;
+	
+	import coco.component.Label;
+	
+	public class MoveYActionComponent extends ActionComponent
+	{
+		public function MoveYActionComponent()
+		{
+			super();
+			
+			width = 150;
+			height = 30;
+			
+			upActionHook = new UpActionHook();
+			upActionHook.x = 15;
+			
+			downActionHook = new DownActionHook();
+			downActionHook.addEventListener(ActionHookEvent.MATCH_CHANGED, matchChangedHandler);
+			downActionHook.x = 15;
+		}
+		
+		private var labelDisplay:Label;
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			labelDisplay = new Label();
+			labelDisplay.color = 0xFFFFFF;
+			labelDisplay.text = "移动 10 步";
+			addChild(labelDisplay);
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			downActionHook.y = height;
+			
+			labelDisplay.width = width;
+			labelDisplay.height = height;
+		}
+		
+		override protected function drawSkin():void
+		{
+			graphics.clear();
+			graphics.beginFill(0xDD6AEA);
+			graphics.drawRect(0, 0, width, height);
+			graphics.drawRect(upActionHook.x, upActionHook.y, 10, 5);
+			graphics.endFill();
+			graphics.beginFill(downActionHook.matchActionHook ? 0x00FF00 : 0xDD6AEA);
+			graphics.drawRect(downActionHook.x, downActionHook.y, 10, 5);
+			graphics.endFill();
+		}
+		
+		protected function matchChangedHandler(event:ActionHookEvent):void
+		{
+			invalidateSkin();
+		}
+		
+	}
+}

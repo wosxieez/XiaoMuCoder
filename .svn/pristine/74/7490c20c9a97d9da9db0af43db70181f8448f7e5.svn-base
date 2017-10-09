@@ -1,0 +1,10 @@
+[
+    {
+        "name": "背景1",
+        "source": "assets/background/background1.jpg"
+    },
+    {
+    	 "name": "背景2",
+        "source": "assets/background/background2.jpg"
+    }
+]

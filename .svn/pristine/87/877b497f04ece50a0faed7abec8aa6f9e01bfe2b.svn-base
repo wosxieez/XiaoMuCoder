@@ -1,0 +1,106 @@
+package com.xiaomu.view.roleview
+{
+	import flash.events.MouseEvent;
+	
+	import coco.component.Image;
+	import coco.core.UIComponent;
+	
+	public class RoleCover extends UIComponent
+	{
+		public function RoleCover()
+		{
+			super();
+			width = 100;
+			height = 80;
+			
+			addEventListener(MouseEvent.CLICK, this_clickHandler);
+		}
+		
+		private var imageDisplay:Image , micButton1 : Image , micButton2 :Image;
+		
+		private var _selected:Boolean = true;
+
+		public function get selected():Boolean
+		{
+			return _selected;
+		}
+
+		public function set selected(value:Boolean):void
+		{
+			_selected = value;
+			invalidateProperties();
+			invalidateSkin();
+		}
+		
+		private var _source:Object;
+
+		public function get source():Object
+		{
+			return _source;
+		}
+
+		public function set source(value:Object):void
+		{
+			_source = value;
+			invalidateProperties();
+		}
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			imageDisplay = new Image();
+			imageDisplay.width = 100;
+			imageDisplay.height = 80;
+			addChild(imageDisplay);
+			
+			micButton1 = new Image();
+			micButton1.width = 20;
+			micButton1.height = 20;
+			micButton1.source = "assets/设置.png";
+			addChild(micButton1);
+			
+			micButton2 = new Image();
+			micButton2.width = 20;
+			micButton2.height = 20;
+			micButton2.source = "assets/关闭2.png";
+			addChild(micButton2);
+			
+		}
+		
+		override protected function commitProperties():void
+		{
+			super.commitProperties();
+			
+			imageDisplay.source = source;
+			micButton1.visible = selected;
+			micButton2.visible = selected
+		}
+		
+		override protected function updateDisplayList():void
+		{
+		    super.updateDisplayList();
+			
+			micButton1.x = 0;
+			micButton1.y = 0;
+			
+			micButton2.x = width-micButton2.width;
+			micButton2.y = 0;
+		}
+		
+		override protected function drawSkin():void
+		{
+		    super.drawSkin();
+			graphics.clear();
+			graphics.beginFill(0x0000ff, selected ? 0.5 : 0);
+			graphics.drawRect(0,0,width,height);
+			graphics.endFill();
+		}
+		
+		protected function this_clickHandler(event:MouseEvent):void
+		{
+			selected = !selected;
+		}
+		
+	}
+}

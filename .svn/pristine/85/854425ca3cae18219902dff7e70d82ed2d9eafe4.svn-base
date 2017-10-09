@@ -1,0 +1,60 @@
+/**
+ * Created by coco on 17/03/2017.
+ */
+package com.xiaomu.component
+{
+    import coco.component.Image;
+    import coco.component.ToggleButton;
+
+    public class ToggleButtonForApp extends ToggleButton
+    {
+        public function ToggleButtonForApp()
+        {
+            super();
+        }
+
+        override protected function measure():void
+        {
+            var defaultWidth:Number = 90;
+            var defaultHeight:Number = 21;
+
+            // width or height isNaN
+            if (labelDisplay)
+            {
+                defaultWidth = Math.max(defaultWidth, labelDisplay.width + 30);
+                defaultHeight = Math.max(defaultHeight, labelDisplay.height + 10);
+            }
+
+            measuredWidth = defaultWidth;
+            measuredHeight = defaultHeight;
+        }
+
+        override protected function updateDisplayList():void
+        {
+            super.updateDisplayList();
+
+            labelDisplay.x = 25;
+            labelDisplay.setmeasuredSizeWithoutDispatchResizeEvent(width - 20, height);
+        }
+
+        override protected function drawSkin():void
+        {
+            var icon:Image = new Image();
+            if (selected)
+			{
+				icon.source = "assets/selected.png";
+			}
+			else
+			{
+				icon.source = "assets/unselected.png";
+			}
+			addChild(icon);
+
+//            graphics.clear();
+//            graphics.beginFill(0xFFFFFF, 0);
+//            graphics.drawRect(0, 0, width, height);
+//            DrawHelper.drawBitmapdata(graphics, icon, icon.width, icon.height, 5, (height - icon.height) / 2);
+        }
+
+    }
+}

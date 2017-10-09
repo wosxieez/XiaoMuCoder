@@ -1,0 +1,61 @@
+package com.xiaomu.util
+{
+	import flash.geom.Point;
+	
+	
+	/**
+	 * 程序辅助类 
+	 * @author coco
+	 * 
+	 */	
+	public class AppUtil
+	{
+		public function AppUtil()
+		{
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		//  Get Instance
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private static var instance:AppUtil;
+		
+		public static function getInstance():AppUtil
+		{
+			if (!instance)
+				instance = new AppUtil();
+			
+			return instance;
+		}
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		//  Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		/**
+		 * 获取鼠标缩放轴点
+		 *  
+		 * @param axisPoint1
+		 * @param axisPoint2
+		 * @param mousePoint
+		 * @return 
+		 */		
+		public function getMouseZoomAxisPoint(axisPoint1:Point, axisPoint2:Point, mousePoint:Point):Point
+		{
+			var k : Number ;
+			var y : Number ;
+			var x : Number ;
+			k = (axisPoint1.y - axisPoint2.y)/(axisPoint1.x - axisPoint2.x) ;
+			x = (k*k*axisPoint1.x + k*(mousePoint.y - axisPoint1.y) + mousePoint.x)/(1+k*k) ;
+			y = k*x - k*axisPoint1.x + axisPoint1.y ;
+			return new Point(x , y);
+		}
+		
+		
+	}
+}

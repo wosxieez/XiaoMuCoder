@@ -1,0 +1,62 @@
+package com.xiaomu.view.actionview.action
+{
+	import com.xiaomu.hookcore.DownHook;
+	import com.xiaomu.hookcore.HookComponent;
+	import com.xiaomu.hookcore.HookEvent;
+	
+	import coco.component.Label;
+	
+	public class StartActionComponent extends HookComponent
+	{
+		public function StartActionComponent()
+		{
+			super();
+			
+			width = 150;
+			height = 30;
+			
+			downHook = new DownHook();
+			downHook.addEventListener(HookEvent.MATCH_CHANGED, matchChangedHandler);
+			downHook.x = 15;
+		}
+		
+		private var labelDisplay:Label;
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			labelDisplay = new Label();
+			labelDisplay.color = 0xFFFFFF;
+			labelDisplay.text = "当开始被点击";
+			addChild(labelDisplay);
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			downHook.y = height;
+			
+			labelDisplay.width = width;
+			labelDisplay.height = height;
+		}
+		
+		override protected function drawSkin():void
+		{
+			graphics.clear();
+			graphics.beginFill(0x6A8EE7);
+			graphics.drawRect(0, 0, width, height);
+			graphics.endFill();
+			graphics.beginFill(downHook.matchHook ? 0x00FF00 : 0x6A8EE7);
+			graphics.drawRect(downHook.x, downHook.y, 10, 5);
+			graphics.endFill();
+		}
+		
+		protected function matchChangedHandler(event:HookEvent):void
+		{
+			invalidateSkin();
+		}
+		
+	}
+}

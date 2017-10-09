@@ -1,0 +1,133 @@
+package com.xiaomu.data
+{
+	import com.xiaomu.view.stageview.RoleComponent;
+	
+	import coco.core.coco;
+	
+	/**
+	 * 脚本组件数据类 
+	 * @author coco
+	 */	
+	public class Action
+	{
+		
+		public var x:Number;
+		public var y:Number;
+		public var className:String;
+		public var actionParam:Object;
+		public var upHook:Hook;
+		public var downHook:Hook;
+		public var downHook2:Hook;
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Action Control
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var thisActionTarget:RoleComponent;
+		private var thisActionCallback:Function;
+		
+		/**
+		 * 执行动作
+		 * @param actionTarget
+		 * @param actionData
+		 * @param actionCallback
+		 */		
+		coco function doAction(actionTarget:RoleComponent, 
+							   actionCallback:Function):void
+		{
+			thisActionTarget = actionTarget;
+			thisActionCallback = actionCallback;
+			
+			trace(className + " doAction()");
+			
+			coco::startAction(thisActionTarget, onActionComplete);
+		}
+		
+		private function onActionComplete():void
+		{
+			// 自己的脚本结束后 执行子脚本
+			
+			if (downHook2 && 
+				downHook2.targetHook && 
+				downHook2.targetHook.action)
+			{
+				
+				downHook2.targetHook.action.coco::startAction(thisActionTarget,
+					downActionHook2ActionComplete);
+			}
+			else if (downHook &&
+				downHook.targetHook && 
+				downHook.targetHook.action)
+			{
+				downHook.targetHook.action.coco::startAction(thisActionTarget, 
+					downActionHookActionComplete);
+			}
+			else
+			{
+				if (thisActionCallback)
+					thisActionCallback.call();
+			}
+		}
+		
+		private function downActionHook2ActionComplete():void
+		{
+			if (downHook &&
+				downHook.targetHook && 
+				downHook.targetHook.action)
+			{
+				downHook.targetHook.action.coco::startAction(thisActionTarget, 
+					downActionHookActionComplete);
+			}
+			else
+			{
+				if (thisActionCallback)
+					thisActionCallback.call();
+			}
+		}
+		
+		private function downActionHookActionComplete():void
+		{
+			if (thisActionCallback)
+				thisActionCallback.call();
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Do Me Action
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var meActionCallback:Function;
+		
+		coco function startAction(actionTarget:RoleComponent, actionCallback:Function):void
+		{
+			meActionCallback = actionCallback;
+			onAction(actionTarget);
+		}
+		
+		/**
+		 * 执行动作 
+		 * @param actionTarget
+		 * @param actionParam
+		 */		
+		protected function onAction(actionTarget:RoleComponent):void
+		{
+			// should override here
+			endAction();
+		}
+		
+		/**
+		 * 结束动作
+		 */		
+		protected function  endAction():void
+		{
+			if (meActionCallback)
+				meActionCallback.call();
+		}
+		
+	}
+}

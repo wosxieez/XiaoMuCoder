@@ -1,0 +1,411 @@
+package com.xiaomu.manager
+{
+	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.component.ActionHook;
+	import com.xiaomu.component.DownActionHook;
+	
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	
+	import coco.core.Application;
+	import coco.core.UIComponent;
+	
+	/**
+	 * 脚本组件管理器 
+	 * @author coco
+	 * 
+	 */	
+	public class ActionComponentManager
+	{
+		public function ActionComponentManager()
+		{
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var view:UIComponent;
+		private var draggingActionComponents:Vector.<ActionComponent> = new Vector.<ActionComponent>();
+		private var draggingFreeHooks:Vector.<ActionHook> = new Vector.<ActionHook>();
+		private var matchingFreeHooks:Vector.<ActionHook> = new Vector.<ActionHook>();
+		private var mouseDownX:Number = 0;
+		private var mouseDownY:Number = 0;
+		private var matchedDraggingHook:ActionHook;
+		private var matchedMatchingHook:ActionHook;
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Get Instance
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private static var instance:ActionComponentManager;
+		
+		public static function getInstance():ActionComponentManager
+		{
+			if (!instance)
+				instance = new ActionComponentManager();
+			
+			return instance;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		public function init(viewport:UIComponent):void
+		{
+			view = viewport;
+			view.addEventListener(MouseEvent.MOUSE_DOWN, this_mouseDownHandler);
+		}
+		
+		protected function this_mouseDownHandler(event:MouseEvent):void
+		{
+			doDraggingActionComponent(event.target as ActionComponent);
+		}
+		
+		/**
+		 * 开始拖拽一个脚本组件
+		 * @param draggingActionComponent
+		 */		
+		public function doDraggingActionComponent(draggingActionComponent:ActionComponent):void
+		{
+			if (!draggingActionComponent) return;
+			
+			// 记录当前鼠标按下的点
+			mouseDownX = view.stage.mouseX;
+			mouseDownY = view.stage.mouseY;
+			
+			// 解锁超类钩子
+			if (draggingActionComponent.upActionHook && draggingActionComponent.upActionHook.targetActionHook)
+			{
+				draggingActionComponent.upActionHook.targetActionHook.targetActionHook = null;
+				draggingActionComponent.upActionHook.targetActionHook = null;
+			}
+			
+			initDraggingActionComponents(draggingActionComponent); // 生成所有的拖拽脚本组件
+			initDraggingFreeHooks(draggingActionComponent); // 生成空闲可匹配的钩子组
+			initMatchingFreetHooks(); // 生成匹配目标的钩子组
+			
+			view.stage.addEventListener(MouseEvent.MOUSE_MOVE, stage_mouseMoveHandler);
+			view.stage.addEventListener(MouseEvent.MOUSE_UP, stage_mouseUpHandler);
+		}
+		
+		protected function stage_mouseMoveHandler(event:MouseEvent):void
+		{
+			for each (var draggingActionComponent:ActionComponent in draggingActionComponents)
+			{
+				draggingActionComponent.x = view.stage.mouseX - mouseDownX + draggingActionComponent.mouseDownX;
+				draggingActionComponent.y = view.stage.mouseY - mouseDownY + draggingActionComponent.mouseDownY;
+			}
+			
+			event.updateAfterEvent();
+			invalidateMatchHook();
+		}
+		
+		protected function stage_mouseUpHandler(event:MouseEvent):void
+		{
+			view.stage.removeEventListener(MouseEvent.MOUSE_MOVE, stage_mouseMoveHandler);
+			view.stage.removeEventListener(MouseEvent.MOUSE_UP, stage_mouseUpHandler);
+			
+			// 如果有匹配上的钩子 则进行对接
+			if (matchedDraggingHook && matchedMatchingHook)
+			{
+				// 如果匹配目标是向下的钩子且已经有对接的钩子 则属于插入操作
+				if (matchedMatchingHook is DownActionHook && matchedMatchingHook.targetActionHook)
+				{
+					var upHook:ActionHook = matchedMatchingHook.targetActionHook;
+					matchedDraggingHook.targetActionHook = matchedMatchingHook;
+					matchedMatchingHook.targetActionHook = matchedDraggingHook;
+					var lastDownHook:DownActionHook = getLastDownHook(matchedDraggingHook.actionComponent);
+					if (lastDownHook)
+					{
+						lastDownHook.targetActionHook = upHook;
+						upHook.targetActionHook = lastDownHook;
+					}
+				}
+				else
+				{
+					matchedDraggingHook.targetActionHook = matchedMatchingHook;
+					matchedMatchingHook.targetActionHook = matchedDraggingHook;
+				}
+				
+				// 将拖拽的钩子组件移动到缝合的位置
+				var targetPoint:Point = matchedMatchingHook.actionComponent.localToGlobal(new Point(0, 0));
+				targetPoint.x = targetPoint.x + matchedMatchingHook.x - matchedDraggingHook.x - 
+					matchedDraggingHook.actionComponent.mouseDownX + mouseDownX;
+				targetPoint.y = targetPoint.y + matchedMatchingHook.y - matchedDraggingHook.y - 
+					matchedDraggingHook.actionComponent.mouseDownY + mouseDownY;
+				
+				for each (var draggingActionComponent:ActionComponent in draggingActionComponents)
+				{
+					draggingActionComponent.x = targetPoint.x - mouseDownX + draggingActionComponent.mouseDownX;
+					draggingActionComponent.y = targetPoint.y - mouseDownY + draggingActionComponent.mouseDownY;
+				}
+			}
+			
+			disposeDraggingActionComponents();
+			disposeDraggingFreeHooks();
+			disposeMatchingFreeHooks();
+			disposeMatchedHook();
+			updateActionComponentsSize();  // 更新所有钩子组件大小
+			updateActionComponentsPosition(); // 更新所有钩子组件位置
+		}
+		
+		private function initDraggingActionComponents(draggingActionComponent:ActionComponent):void
+		{
+			// 还原到脚本视图上
+			var globalPoint:Point = draggingActionComponent.localToGlobal(new Point(0, 0));
+			draggingActionComponent.x = globalPoint.x;
+			draggingActionComponent.y = globalPoint.y;
+			Application.topApplication.addChild(draggingActionComponent);
+			
+			draggingActionComponent.mouseDownX = draggingActionComponent.x;
+			draggingActionComponent.mouseDownY = draggingActionComponent.y;
+			draggingActionComponents.push(draggingActionComponent);
+			
+			if (draggingActionComponent.downActionHook && draggingActionComponent.downActionHook.targetActionHook)
+				initDraggingActionComponents(draggingActionComponent.downActionHook.targetActionHook.actionComponent);
+			
+			if (draggingActionComponent.downActionHook2 && draggingActionComponent.downActionHook2.targetActionHook)
+				initDraggingActionComponents(draggingActionComponent.downActionHook2.targetActionHook.actionComponent);
+		}
+		
+		private function disposeDraggingActionComponents():void
+		{
+			var draggingActionComponent:ActionComponent;
+			var localPoint:Point;
+			while (draggingActionComponents.length > 0)
+			{
+				draggingActionComponent = draggingActionComponents.pop();
+				
+				// 添加到全局视图 能够全局拖拽
+				localPoint = view.globalToLocal(new Point(draggingActionComponent.x, draggingActionComponent.y));
+				draggingActionComponent.x = localPoint.x;
+				draggingActionComponent.y = localPoint.y;
+				view.addChild(draggingActionComponent);
+			}
+		}
+		
+		private function initDraggingFreeHooks(draggingActionComponent:ActionComponent):void
+		{
+			if (draggingActionComponent.upActionHook && !draggingActionComponent.upActionHook.targetActionHook)
+				draggingFreeHooks.push(draggingActionComponent.upActionHook);
+			
+			if (draggingActionComponent.downActionHook)
+			{
+				if (draggingActionComponent.downActionHook.targetActionHook)
+					initDraggingFreeHooks(draggingActionComponent.downActionHook.targetActionHook.actionComponent);
+				else
+					draggingFreeHooks.push(draggingActionComponent.downActionHook);
+			}
+			
+			if (draggingActionComponent.downActionHook2)
+			{
+				if (!draggingActionComponent.downActionHook2.targetActionHook)
+					draggingFreeHooks.push(draggingActionComponent.downActionHook2);
+			}
+		}
+		
+		private function disposeDraggingFreeHooks():void
+		{
+			var draggingFreeHook:ActionHook;
+			while ( draggingFreeHooks.length > 0)
+			{
+				draggingFreeHook = draggingFreeHooks.pop();
+			}
+		}
+		
+		private function initMatchingFreetHooks():void
+		{
+			var numActionComponent:int = view.numChildren;
+			var childActionComponent:ActionComponent;
+			for (var index:int = 0; index < numActionComponent; index++)
+			{
+				childActionComponent = view.getChildAt(index) as ActionComponent;
+				if (childActionComponent)
+				{
+					if (childActionComponent.upActionHook)
+						matchingFreeHooks.push(childActionComponent.upActionHook);
+					
+					if (childActionComponent.downActionHook)
+						matchingFreeHooks.push(childActionComponent.downActionHook);
+					
+					if (childActionComponent.downActionHook2)
+						matchingFreeHooks.push(childActionComponent.downActionHook2);
+				}
+			}
+		}
+		
+		private function disposeMatchingFreeHooks():void
+		{
+			var matchingFreeHook:ActionHook;
+			while ( matchingFreeHooks.length > 0)
+			{
+				matchingFreeHook = matchingFreeHooks.pop();
+			}
+		}
+		
+		private function initMatchedHook(draggingHook:ActionHook, matchingHook:ActionHook):void
+		{
+			if (draggingHook != matchedDraggingHook ||
+				matchingHook != matchedMatchingHook)
+			{
+				disposeMatchedHook();
+				
+				matchedDraggingHook = draggingHook;
+				matchedMatchingHook = matchingHook;
+				
+				matchedDraggingHook.matchActionHook = matchedMatchingHook;
+				matchedMatchingHook.matchActionHook = matchedDraggingHook;
+			}
+		}
+		
+		private function disposeMatchedHook():void
+		{
+			if (matchedDraggingHook)
+			{
+				matchedDraggingHook.matchActionHook = null;
+				matchedDraggingHook = null;
+			}
+			if (matchedMatchingHook)
+			{
+				matchedMatchingHook.matchActionHook = null;
+				matchedMatchingHook = null;
+			}
+		}
+		
+		private function getLastDownHook(actionComponent:ActionComponent):DownActionHook
+		{
+			if (actionComponent.downActionHook)
+			{
+				if (actionComponent.downActionHook.targetActionHook)
+					return getLastDownHook(actionComponent.downActionHook.targetActionHook.actionComponent);
+				else
+					return actionComponent.downActionHook;
+			}
+			else
+				return null;
+		}
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// 布局钩子组件
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private function updateActionComponentsSize():void
+		{
+			var numActionComponent:int = view.numChildren;
+			var childActionComponent:ActionComponent;
+			for (var index:int = 0; index < numActionComponent; index++)
+			{
+				childActionComponent = view.getChildAt(index) as ActionComponent;
+				if (childActionComponent)
+				{
+					if (!childActionComponent.upActionHook ||
+						!childActionComponent.upActionHook.targetActionHook)
+						updateActionComponentSize(childActionComponent);
+				}
+			}
+		}
+		
+		private function updateActionComponentSize(actionComponent:ActionComponent):void
+		{
+			if (actionComponent.downActionHook && actionComponent.downActionHook.targetActionHook)
+				updateActionComponentSize(actionComponent.downActionHook.targetActionHook.actionComponent);
+			
+			if (actionComponent.downActionHook2 && actionComponent.downActionHook2.targetActionHook)
+				updateActionComponentSize(actionComponent.downActionHook2.targetActionHook.actionComponent);
+			
+			actionComponent.invalidateSize();
+			actionComponent.invalidateDisplayList();
+		}
+		
+		private function updateActionComponentsPosition():void
+		{
+			var numActionComponent:int = view.numChildren;
+			var childActionComponent:ActionComponent;
+			for (var index:int = 0; index < numActionComponent; index++)
+			{
+				childActionComponent = view.getChildAt(index) as ActionComponent;
+				if (childActionComponent)
+				{
+					if (!childActionComponent.upActionHook ||
+						!childActionComponent.upActionHook.targetActionHook)
+						updateActionComponentPosition(childActionComponent);
+				}
+			}
+		}
+		
+		private function updateActionComponentPosition(actionComponent:ActionComponent):void
+		{
+			actionComponent.invalidatePosition();
+			
+			if (actionComponent.downActionHook && actionComponent.downActionHook.targetActionHook)
+				updateActionComponentPosition(actionComponent.downActionHook.targetActionHook.actionComponent);
+			
+			if (actionComponent.downActionHook2 && actionComponent.downActionHook2.targetActionHook)
+				updateActionComponentPosition(actionComponent.downActionHook2.targetActionHook.actionComponent);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// 钩子匹配失效
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var invalidateMatchHookFlag:Boolean = false; // 属性失效
+		
+		public function invalidateMatchHook():void
+		{
+			if (!invalidateMatchHookFlag)
+			{
+				invalidateMatchHookFlag = true;
+				Application.topApplication.callLater(validateMatchHook);
+			}
+		}
+		
+		/**
+		 * call validateMatchHook now
+		 */        
+		public function validateMatchHook():void
+		{
+			if (invalidateMatchHookFlag)
+			{
+				invalidateMatchHookFlag = false;
+				matchHook();
+			}
+		}
+		
+		/**
+		 * 匹配钩子
+		 */		
+		private function matchHook():void
+		{
+			for each(var draggingFreeHook:ActionHook in draggingFreeHooks)
+			{
+				for each (var matchingFreeHook:ActionHook in matchingFreeHooks)
+				{
+					if (matchingFreeHook.match(draggingFreeHook))
+					{
+						initMatchedHook(draggingFreeHook, matchingFreeHook);
+						return;
+					}
+				}
+			}
+			
+			disposeMatchedHook();
+		}
+		
+	}
+}

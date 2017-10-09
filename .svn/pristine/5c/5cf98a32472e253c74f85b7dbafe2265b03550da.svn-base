@@ -1,0 +1,133 @@
+package com.xiaomu.manager
+{
+	import com.xiaomu.data.Role;
+	import com.xiaomu.event.RoleEvent;
+	import com.xiaomu.view.stageview.RoleComponent;
+	import com.xiaomu.view.stageview.StageView;
+	
+	import flash.events.EventDispatcher;
+	import flash.events.IEventDispatcher;
+	
+	import coco.core.coco;
+	
+	[Event(name="addRole", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="selectedRole", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="removeRole", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="settingRole", type="com.xiaomu.event.RoleEvent")]
+	
+	public class RoleManager extends EventDispatcher
+	{
+		
+		public function RoleManager(target:IEventDispatcher=null)
+		{
+			super(target);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Get Instance
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		//单例
+		private static var instance : RoleManager ;
+		
+		public static function getInstance():RoleManager
+		{
+			if(!instance)
+				instance = new RoleManager();
+			
+			return instance;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		/**
+		 * 选中的角色 
+		 */		
+		public var selectedRole:Role;
+		
+		/**
+		 * 当前选中的角色组件 
+		 * @return 
+		 * 
+		 */		
+		public function get selectedRoleComponent():RoleComponent
+		{
+			return getRoleComponent(selectedRole);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		/**
+		 * 添加一个角色 
+		 * @param role
+		 */		
+		public function addRole(role:Role):void
+		{
+			var roleEvent:RoleEvent = new RoleEvent(RoleEvent.ADD_ROLE);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
+		/**
+		 * 选中一个角色 
+		 * @param role
+		 */		
+		public function selectRole(role:Role):void
+		{
+			selectedRole = role;
+			
+			var roleEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ROLE);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
+		/**
+		 * 删除一个角色 
+		 * @param role
+		 */		
+		public function removeRole(role:Role):void
+		{
+			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_ROLE);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
+		/**
+		 * 设置一个角色 
+		 * @param role
+		 */		
+		public function settingRole(role:Role):void
+		{
+			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.SETTING_ROLE);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
+		/**
+		 * 根据角色数据获取角色组件
+		 * @param role
+		 * @return 
+		 */		
+		public function getRoleComponent(role:Role):RoleComponent
+		{
+			if (!role)
+				return null;
+			else
+				return StageView.getInstance().coco::getRoleComponent(role);
+		}
+		
+	}
+}

@@ -1,0 +1,12 @@
+package com.xiaomu.action
+{
+	import com.xiaomu.data.Action;
+	
+	public class DoWhileAction extends Action
+	{
+		public function DoWhileAction()
+		{
+			super();
+		}
+	}
+}

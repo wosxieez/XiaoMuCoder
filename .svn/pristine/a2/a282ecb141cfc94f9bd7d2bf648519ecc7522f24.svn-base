@@ -1,0 +1,15 @@
+package com.xiaomu.data
+{
+	
+	
+	/**
+	 * 脚本钩子数据类 
+	 * @author coco
+	 */	
+	public class ActionHookData
+	{
+		public function ActionHookData()
+		{
+		}
+	}
+}

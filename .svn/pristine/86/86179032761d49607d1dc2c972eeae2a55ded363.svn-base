@@ -1,0 +1,47 @@
+package com.xiaomu.view.roleview
+{
+	import coco.component.Image;
+	
+	public class RoleIcon extends Image
+	{
+		public function RoleIcon()
+		{
+			super();
+			width = 80;
+			height = 60;
+		}
+		
+//		private var _id : Number;
+//		
+//		public function get id():Number
+//		{
+//		    return _id;
+//		}
+//		public function set id(values:Number):void
+//		{
+//		    _id = values;
+//		}
+		
+		
+		override protected function createChildren():void
+		{
+		    super.createChildren();
+			
+		}
+		
+		override protected function commitProperties():void
+		{
+		    super.commitProperties();
+		}
+		
+//		原始角色图标类的 初始皮肤
+//		override protected function drawSkin():void
+//		{
+//			super.drawSkin();
+//			graphics.clear();
+//			graphics.beginFill(0x0000ff,0.5);
+//			graphics.drawRect(0,0,width,height);
+//			graphics.endFill();
+//		}
+	}
+}

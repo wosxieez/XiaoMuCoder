@@ -1,0 +1,85 @@
+package com.xiaomu.view.stageview
+{
+	import com.xiaomu.data.RoleData;
+	
+	import coco.component.Image;
+	import coco.core.UIComponent;
+	
+	public class RoleComponent extends UIComponent
+	{
+		public function RoleComponent()
+		{
+			super();
+			
+			width = 100;
+			height = 100;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var imgDisplay:Image;
+		
+		private var _roleData:RoleData;
+		
+		public function get roleData():RoleData
+		{
+			return _roleData;
+		}
+		
+		public function set roleData(value:RoleData):void
+		{
+			_roleData = value;
+			
+			invalidateProperties();
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			imgDisplay = new Image();
+			addChild(imgDisplay);
+		}
+		
+		override protected function commitProperties():void
+		{
+			super.commitProperties();
+			
+			if (roleData)
+			{
+				imgDisplay.source = roleData.source;
+			}
+			else
+				imgDisplay.source = null;
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			imgDisplay.width = width;
+			imgDisplay.height = height;
+		}
+		
+		override protected function drawSkin():void
+		{
+			super.drawSkin();
+			graphics.clear();
+			graphics.beginFill(0x0000ff,0);
+			graphics.drawRect(0,0,width,height);
+			graphics.endFill();
+		}
+		
+	}
+}

@@ -1,0 +1,178 @@
+package com.xiaomu.view.stageview
+{
+	import com.xiaomu.component.IconButton2;
+	import com.xiaomu.data.RoleData;
+	import com.xiaomu.event.RoleEvent;
+	import com.xiaomu.manager.ActionComponentManager;
+	import com.xiaomu.manager.RoleManager;
+	
+	import flash.events.MouseEvent;
+	
+	import coco.component.SkinComponent;
+	import coco.core.UIComponent;
+	import coco.core.coco;
+	
+	/**
+	 * 舞台视图 
+	 * @author coco
+	 * 
+	 */	
+	public class StageView extends SkinComponent
+	{
+		public function StageView()
+		{
+			super();
+			
+			borderAlpha = backgroundAlpha = 1;
+			borderColor = 0xF0E7CC;
+			backgroundColor = 0xFEFBF0;
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Get Instance
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private static var instance:StageView;
+		
+		public static function getInstance():StageView
+		{
+			if (!instance)
+				instance = new StageView();
+			
+			return instance;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var transformer:Transformer;
+		private var roleContainer:UIComponent;
+		private var playButton:IconButton2;
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			roleContainer = new UIComponent();
+			roleContainer.addEventListener(MouseEvent.MOUSE_DOWN, roleContainer_mouseDownHandler);
+			addChild(roleContainer);
+			
+			transformer = new Transformer();
+			roleContainer.addChild(transformer);
+			
+			playButton = new IconButton2();
+			playButton.source = "assets/fodder.png";
+			playButton.addEventListener(MouseEvent.CLICK, playButton_clickHandler);
+			addChild(playButton);
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			roleContainer.width = width;
+			roleContainer.height = height - 30;
+			playButton.y = height - 30;
+		}
+		
+		override protected function drawSkin():void
+		{
+			super.drawSkin();
+			
+			graphics.beginFill(0xF9F4E6);
+			graphics.drawRect(0, height - 30, width, 30);
+			graphics.endFill();
+		}
+		
+		protected function addRoleHandler(event:RoleEvent):void
+		{
+			var roleComponent:RoleComponent = new RoleComponent();
+			roleComponent.roleData = event.roleData;
+			roleContainer.addChild(roleComponent);
+		}	
+		
+		protected function selectRoleHandler(event:RoleEvent):void
+		{
+			var selectRoleData:RoleData = event.roleData;
+			var roleComponent:RoleComponent;
+			for (var i:int = 0; i < roleContainer.numChildren; i++)
+			{
+				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+				if (roleComponent && roleComponent.roleData.id == selectRoleData.id)
+				{
+					transformer.target = roleComponent;
+					break;
+				}
+			}
+		}
+		
+		/**
+		 * 根据角色数据获取角色组件 
+		 * Use RoleManager.getInstance().getRoleComponent() instead of
+		 * @param roleData
+		 * @return      
+		 */		
+		coco function getRoleComponent(roleData:RoleData):RoleComponent
+		{
+			var roleComponent:RoleComponent;
+			for (var i:int = 0; i < roleContainer.numChildren; i++)
+			{
+				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+				if (roleComponent && roleComponent.roleData.id == roleData.id)
+				{
+					return roleComponent;
+				}
+			}
+			
+			return null;
+		}
+		
+		protected function roleContainer_mouseDownHandler(event:MouseEvent):void
+		{
+			if (event.target is RoleComponent)
+			{
+				transformer.target = event.target as RoleComponent;
+				transformer.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+			}
+			else if (event.target is Transformer)
+			{
+				// do things
+			}
+			else
+			{
+				transformer.target = null; 
+			}
+		}
+		
+		protected function playButton_clickHandler(event:MouseEvent):void
+		{
+			// 保存当前的脚本数据 到 当前选中的角色
+			ActionComponentManager.getInstance().saveActionData(RoleManager.getInstance().selectedRoleComponent);
+			
+			var roleComponent:RoleComponent;
+			for (var i:int = 0; i < roleContainer.numChildren; i++)
+			{
+				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+				if (roleComponent)
+					roleComponent.doAction();
+			}
+		}
+		
+	}
+}

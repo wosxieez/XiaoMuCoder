@@ -1,0 +1,81 @@
+package com.xiaomu.view.stageview
+{
+	import com.xiaomu.data.RoleData;
+	import com.xiaomu.event.RoleEvent;
+	import com.xiaomu.manager.RoleManager;
+	
+	import flash.events.MouseEvent;
+	
+	import coco.component.SkinComponent;
+	import coco.core.UIComponent;
+	
+	public class StageView extends SkinComponent
+	{
+		public function StageView()
+		{
+			super();
+			
+			borderAlpha = backgroundAlpha = 1;
+			borderColor = 0xF0E7CC;
+			backgroundColor = 0xFEFBF0;
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
+		}
+		
+		
+		private var transformer:Transformer;
+		
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			transformer = new Transformer();
+			transformer.x = transformer.y = 100;
+			transformer.addEventListener(MouseEvent.CLICK, transformer_clickHandler);
+			addChild(transformer);
+		}
+		
+		protected function transformer_clickHandler(event:MouseEvent):void
+		{
+		}
+		
+		override protected function drawSkin():void
+		{
+			super.drawSkin();
+			
+			graphics.beginFill(0xF9F4E6);
+			graphics.drawRect(0, height - 30, width, 30);
+			graphics.endFill();
+		}
+		
+		protected function addRoleHandler(event:RoleEvent):void
+		{
+			var roleComponent:RoleComponent = new RoleComponent();
+			roleComponent.data = event.roleData;
+			roleComponent.addEventListener(MouseEvent.MOUSE_DOWN, roleComponent_mouseDownHandler);
+			addChild(roleComponent);
+		}	
+		
+		protected function selectRoleHandler(event:RoleEvent):void
+		{
+			var selectRoleData:RoleData = event.roleData;
+			var roleComponent:RoleComponent;
+			for (var i:int = 0; i < numChildren; i++)
+			{
+				roleComponent = getChildAt(i) as RoleComponent;
+				if (roleComponent && roleComponent.data.id == selectRoleData.id)
+				{
+					transformer.target = roleComponent;
+					break;
+				}
+			}
+		}
+		
+		protected function roleComponent_mouseDownHandler(event:MouseEvent):void
+		{
+			transformer.target = event.currentTarget as UIComponent;
+		}
+		
+	}
+}

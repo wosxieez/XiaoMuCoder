@@ -1,0 +1,147 @@
+package com.xiaomu.component
+{
+	import coco.core.UIComponent;
+	
+	/**
+	 * 钩子组件超类 
+	 * @author coco
+	 */	
+	public class ActionComponent extends UIComponent
+	{
+		public function ActionComponent()
+		{
+			super();
+			
+			mouseChildren = false;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		public var mouseDownX:Number = 0;
+		public var mouseDownY:Number = 0;
+		
+		private var _upActionHook:UpActionHook;
+		
+		/**
+		 * 向上的钩子 
+		 * @return 
+		 */		
+		public function get upActionHook():UpActionHook
+		{
+			return _upActionHook;
+		}
+		
+		public function set upActionHook(value:UpActionHook):void
+		{
+			_upActionHook = value;
+			
+			if (_upActionHook)
+				_upActionHook.actionComponent = this;
+		}
+		
+		private var _downActionHook:DownActionHook;
+		
+		/**
+		 * 向下的钩子 
+		 * @return 
+		 */		
+		public function get downActionHook():DownActionHook
+		{
+			return _downActionHook;
+		}
+		
+		public function set downActionHook(value:DownActionHook):void
+		{
+			_downActionHook = value;
+			
+			if (_downActionHook)
+				_downActionHook.actionComponent = this;
+		}
+		
+		private var _downActionHook2:DownActionHook;
+		
+		/**
+		 * 向下的钩子2
+		 * @return 
+		 */		
+		public function get downActionHook2():DownActionHook
+		{
+			return _downActionHook2;
+		}
+		
+		public function set downActionHook2(value:DownActionHook):void
+		{
+			_downActionHook2 = value;
+			
+			if (_downActionHook2)
+				_downActionHook2.actionComponent = this;
+		}
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function measure():void
+		{
+			measuredWidth = measuredHeight = 50;
+		}
+		
+		override protected function drawSkin():void
+		{
+			graphics.clear();
+			graphics.beginFill(0x6C6C6C);
+			graphics.drawRect(0, 0, width, height);
+			graphics.endFill();
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// 位置失效
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var invalidatePositionFlag:Boolean = false; // 位置失效
+		
+		public function invalidatePosition():void
+		{
+			if (!invalidatePositionFlag)
+			{
+				invalidatePositionFlag = true;
+				callLater(validatePosition);
+			}
+		}
+		
+		/**
+		 * call updatePosition now
+		 */        
+		public function validatePosition():void
+		{
+			if (invalidatePositionFlag)
+			{
+				invalidatePositionFlag = false;
+				updatePosition();
+			}
+		}
+		
+		/**
+		 * 更新相对位置 
+		 */		
+		protected function updatePosition():void
+		{
+			if (upActionHook && upActionHook.targetActionHook)
+			{
+				x = upActionHook.targetActionHook.actionComponent.x + upActionHook.targetActionHook.x - upActionHook.x;
+				y = upActionHook.targetActionHook.actionComponent.y + upActionHook.targetActionHook.y - upActionHook.y;
+			}
+		}
+		
+	}
+}

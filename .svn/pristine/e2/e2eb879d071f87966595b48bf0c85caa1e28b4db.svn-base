@@ -1,0 +1,60 @@
+package com.xiaomu.component
+{
+	import com.xiaomu.manager.ITip;
+	
+	import flash.geom.ColorTransform;
+	
+	public class IconButton3 extends IconButton implements ITip
+	{
+		public function IconButton3()
+		{
+			super();
+			
+			width = 18;
+			height = 18;
+		}
+		
+		private var _tip:String;
+		
+		public function get tip():String
+		{
+			return _tip;
+		}
+		
+		public function set tip(value:String):void
+		{
+			if(_tip != value)
+			{
+				_tip = value;
+			}
+		}
+		
+		private var oldColorTransform:ColorTransform;
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			imageDisplay.width = imageDisplay.height = 16;
+			oldColorTransform = imageDisplay.transform.colorTransform;
+		}
+		
+		override protected function drawSkin():void
+		{
+			super.drawSkin();
+			
+			if (mouseOver && !mouseDown)
+			{
+				var newColorTransform:ColorTransform = imageDisplay.transform.colorTransform;
+				newColorTransform.color = 0x95A7AF;
+				imageDisplay.transform.colorTransform = newColorTransform;
+			}
+			else
+			{
+				imageDisplay.transform.colorTransform = oldColorTransform;
+			}
+		}
+		
+		
+	}
+}

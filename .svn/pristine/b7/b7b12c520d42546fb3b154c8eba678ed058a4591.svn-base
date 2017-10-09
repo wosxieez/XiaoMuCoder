@@ -1,0 +1,21 @@
+package com.xiaomu.component
+{
+	public class UpActionHook extends ActionHook
+	{
+		public function UpActionHook()
+		{
+			super();
+		}
+		
+		override public function match(hook:ActionHook):Boolean
+		{
+			if (!targetActionHook && hook is DownActionHook)
+			{
+				return super.match(hook);
+			}
+			else
+				return false;
+		}
+		
+	}
+}

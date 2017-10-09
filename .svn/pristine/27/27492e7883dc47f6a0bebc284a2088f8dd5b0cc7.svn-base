@@ -1,0 +1,147 @@
+package com.xiaomu.hook
+{
+	import coco.core.UIComponent;
+	
+	/**
+	 * 钩子组件超类 
+	 * @author coco
+	 */	
+	public class HookComponent extends UIComponent
+	{
+		public function HookComponent()
+		{
+			super();
+			
+			mouseChildren = false;
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Properties
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		public var mouseDownX:Number = 0;
+		public var mouseDownY:Number = 0;
+		
+		private var _upHook:UpHook;
+		
+		/**
+		 * 向上的钩子 
+		 * @return 
+		 */		
+		public function get upHook():UpHook
+		{
+			return _upHook;
+		}
+		
+		public function set upHook(value:UpHook):void
+		{
+			_upHook = value;
+			
+			if (_upHook)
+				_upHook.hookComponent = this;
+		}
+		
+		private var _downHook:DownHook;
+		
+		/**
+		 * 向下的钩子 
+		 * @return 
+		 */		
+		public function get downHook():DownHook
+		{
+			return _downHook;
+		}
+		
+		public function set downHook(value:DownHook):void
+		{
+			_downHook = value;
+			
+			if (_downHook)
+				_downHook.hookComponent = this;
+		}
+		
+		private var _downHook2:DownHook;
+		
+		/**
+		 * 向下的钩子2
+		 * @return 
+		 */		
+		public function get downHook2():DownHook
+		{
+			return _downHook2;
+		}
+		
+		public function set downHook2(value:DownHook):void
+		{
+			_downHook2 = value;
+			
+			if (_downHook2)
+				_downHook2.hookComponent = this;
+		}
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// Methods
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		override protected function measure():void
+		{
+			measuredWidth = measuredHeight = 50;
+		}
+		
+		override protected function drawSkin():void
+		{
+			graphics.clear();
+			graphics.beginFill(0x6C6C6C);
+			graphics.drawRect(0, 0, width, height);
+			graphics.endFill();
+		}
+		
+		
+		//----------------------------------------------------------------------------------------------------------------
+		//
+		// 位置失效
+		//
+		//----------------------------------------------------------------------------------------------------------------
+		
+		private var invalidatePositionFlag:Boolean = false; // 位置失效
+		
+		public function invalidatePosition():void
+		{
+			if (!invalidatePositionFlag)
+			{
+				invalidatePositionFlag = true;
+				callLater(validatePosition);
+			}
+		}
+		
+		/**
+		 * call updatePosition now
+		 */        
+		public function validatePosition():void
+		{
+			if (invalidatePositionFlag)
+			{
+				invalidatePositionFlag = false;
+				updatePosition();
+			}
+		}
+		
+		/**
+		 * 更新相对位置 
+		 */		
+		protected function updatePosition():void
+		{
+			if (upHook && upHook.targetHook)
+			{
+				x = upHook.targetHook.hookComponent.x + upHook.targetHook.x - upHook.x;
+				y = upHook.targetHook.hookComponent.y + upHook.targetHook.y - upHook.y;
+			}
+		}
+		
+	}
+}

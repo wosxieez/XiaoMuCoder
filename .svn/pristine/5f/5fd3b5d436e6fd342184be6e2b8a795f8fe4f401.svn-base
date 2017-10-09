@@ -1,0 +1,168 @@
+package com.xiaomu.view.roleview
+{
+	import com.xiaomu.component.ListWithMouseWheel;
+	import com.xiaomu.data.RoleData;
+	import com.xiaomu.event.RoleEvent;
+	import com.xiaomu.manager.RoleManager;
+	import com.xiaomu.renderer.RoleItemRenderer;
+	
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	
+	import mx.utils.UIDUtil;
+	
+	import coco.component.HorizontalAlign;
+	import coco.component.List;
+	import coco.component.Panel;
+	import coco.component.VerticalAlign;
+	import coco.event.UIEvent;
+	import coco.manager.PopUpManager;
+	
+	public class RoleCollection extends Panel
+	{
+		public function RoleCollection()
+		{
+			width = 860;
+			height = 560;
+			title = "角色库"
+			borderAlpha = backgroundAlpha = 1;
+			borderColor = 0xF0E7CC;
+			backgroundColor = 0xFEFBF0;
+		}
+		
+		private var roleList:List;
+		private var itemList : List;
+		private var itemArray : Array ;
+		
+		override protected function createChildren():void
+		{
+			super.createChildren();
+			
+			roleList = new ListWithMouseWheel();
+			roleList.gap = roleList.padding = 20;
+			roleList.paddingTop = 0;
+			roleList.itemRendererColumnCount = 4;
+			roleList.itemRendererHeight = roleList.itemRendererWidth = 165;
+			roleList.itemRendererClass = RoleItemRenderer;
+			roleList.verticalAlign = VerticalAlign.TOP;
+			roleList.horizontalAlign = HorizontalAlign.RIGHT;
+			roleList.addEventListener(UIEvent.CHANGE, roleList_changeHandler);
+			addChild(roleList);
+			
+			itemArray = new Array (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+			itemList = new List();
+			itemList.padding = 20;
+			itemList.paddingTop = 0;
+			itemList.itemRendererHeight = 50;
+			itemList.verticalAlign = VerticalAlign.TOP;
+			itemList.dataProvider = itemArray;
+			itemList.addEventListener(UIEvent.CHANGE, itemList_changeHandler);
+			addChild(itemList);
+			
+			// 加载所有的角色模版数据
+			var urlLoader:URLLoader = new URLLoader();
+			urlLoader.addEventListener(Event.COMPLETE, urlLoader_completeHandler);
+			urlLoader.load(new URLRequest("assets/role/roles.json"));
+		}
+		
+		protected function itemList_changeHandler(event:UIEvent):void
+		{
+			var itemListIndex : Number = event.currentTarget.selectedIndex;
+			trace("选项发生改变,选择列表的索引为："+itemListIndex);
+			itemList.selectedIndex = -1; // 重置选中(必须)
+			switch(itemListIndex)
+			{
+				case 0:
+				{
+					trace("选了0");
+					break;
+				}
+				case 1:
+				{
+					trace("选了1");
+					break;
+				}
+				case 2:
+				{
+					trace("选了2");
+					break;
+				}
+				case 3:
+				{
+					trace("选了3");
+					break;
+				}
+					
+				default:
+				{
+					break;
+				}
+			}
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
+			roleList.width = contentWidth;
+			roleList.height = contentHeight - 20;
+			
+			itemList.height = contentHeight - 20;
+			itemList.width =110;
+		}
+		
+		override protected function drawSkin():void
+		{
+			super.drawSkin();
+//			graphics.clear();
+//			graphics.lineStyle(1, 0xEEE6C9);
+//			graphics.beginFill(0xFEFBF2);
+//			graphics.drawRect(0, 0, width, height);
+//			graphics.endFill();
+		}
+		
+		protected function urlLoader_completeHandler(event:Event):void
+		{
+			trace("角色模版加载成功");
+			
+			var roles:Array = JSON.parse(event.currentTarget.data) as Array;
+			var rolesData:Array = [];
+			var roleData:RoleData;
+			for each (var item:Object in roles)
+			{
+				roleData = new RoleData();
+				roleData.name = item.name;
+				roleData.source = item.source;
+				rolesData.push(roleData);
+			}
+			
+			roleList.dataProvider = rolesData;
+		}
+		
+		protected function roleList_changeHandler(event:UIEvent):void
+		{
+			var roleData:RoleData = roleList.selectedItem as RoleData;
+			if (roleData)
+			{
+				// 要生成新的角色
+				// 生成唯一ID
+				roleData.id = UIDUtil.createUID();
+				
+				// 告诉别人要新增角色了
+				var roleEvent:RoleEvent = new RoleEvent(RoleEvent.ADD_ROLE);
+				roleEvent.roleData = roleData;
+				RoleManager.getInstance().dispatchEvent(roleEvent);
+				
+				// 告诉别人要选中这个角色
+				var selectRoleEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ROLE);
+				selectRoleEvent.roleData = roleData;
+				RoleManager.getInstance().dispatchEvent(selectRoleEvent);
+				
+				roleList.selectedIndex = -1; // 重置选中(必须)
+				PopUpManager.removePopUp(this); // 关闭窗口
+			}
+		}
+		
+	}
+}

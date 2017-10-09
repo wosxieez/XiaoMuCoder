@@ -1,0 +1,29 @@
+package com.xiaomu.action
+{
+	import com.xiaomu.view.stageview.RoleComponent;
+	
+	import flash.utils.setTimeout;
+	
+	public class Action
+	{
+		public function Action()
+		{
+		}
+		
+		private var thisActionCallback:Function;
+		
+		public function doAction(actionTarget:RoleComponent, actionParam:Object, actionCallback:Function):void
+		{
+			thisActionCallback = actionCallback;
+			
+			setTimeout(onActionComplete, 1000);
+		}
+		
+		private function onActionComplete():void
+		{
+			if (thisActionCallback)
+				thisActionCallback.call();
+		}
+		
+	}
+}
