@@ -23,6 +23,7 @@ package
 	
 	/**
 	 * XiaoMuCoder Application 
+	 * 小木编程
 	 * @author coco
 	 */	
 	[SWF(width="1024", height="700")]
