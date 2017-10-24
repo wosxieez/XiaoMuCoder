@@ -33,8 +33,6 @@ package
 		{
 			super();
 			
-			trace(coco::VERSION);
-			
 			autoDrawSkin = true;
 			borderAlpha = backgroundAlpha = 0;
 			TipManager.getInstance().init(this); // TIP管理器启动
