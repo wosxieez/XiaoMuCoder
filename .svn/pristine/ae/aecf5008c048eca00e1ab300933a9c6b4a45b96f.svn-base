@@ -1,9 +1,0 @@
-package com.xiaomu.action
-{
-	public class StartAction extends Action
-	{
-		public function StartAction()
-		{
-		}
-	}
-}
