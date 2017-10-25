@@ -1,5 +1,6 @@
 package com.xiaomu.view.stageview
 {
+	import com.xiaomu.component.PlayButton;
 	import com.xiaomu.data.Role;
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.ActionComponentManager;
@@ -57,7 +58,7 @@ package com.xiaomu.view.stageview
 		
 		private var transformer:Transformer;
 		private var roleContainer:SkinComponent;
-		private var playButton:Button;
+		private var playButton:PlayButton;
 		private var aButton:Button;
 		private var bButton:Button;
 		
@@ -80,8 +81,11 @@ package com.xiaomu.view.stageview
 			transformer = new Transformer();
 			roleContainer.addChild(transformer);
 			
-			playButton = new Button();
-			playButton.label = "播放";
+			playButton = new PlayButton();
+			playButton.text= "开始";
+			playButton.selectedSource = "assets/stop1.png";
+			playButton.selectedText = "结束";
+			playButton.source = "assets/begin1.png";
 			playButton.addEventListener(MouseEvent.CLICK, playButton_clickHandler);
 			addChild(playButton);
 		}
@@ -93,7 +97,8 @@ package com.xiaomu.view.stageview
 			roleContainer.width = width;
 			roleContainer.height = height - 30;
 			roleContainer.scrollRect = new Rectangle(0, 0, roleContainer.width, roleContainer.height);
-			playButton.y = height - 30;
+			playButton.y = height - 28;
+			playButton.x = 7;
 		}
 		
 		override protected function drawSkin():void
@@ -189,6 +194,7 @@ package com.xiaomu.view.stageview
 		
 		protected function playButton_clickHandler(event:MouseEvent):void
 		{
+			playButton.selected = !playButton.selected;
 			// 取消变形操作
 			transformer.target = null;
 			

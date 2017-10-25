@@ -6,5 +6,21 @@
     {
         "name": "背景",
         "source": "assets/collection/backgrounds.json"
+    },
+    {
+    	"name": "角色",
+        "source": "assets/collection/roles.json"
+    },
+    {
+        "name": "背景",
+        "source": "assets/collection/backgrounds.json"
+    },
+    {
+    	"name": "角色",
+        "source": "assets/collection/roles.json"
+    },
+    {
+        "name": "背景",
+        "source": "assets/collection/backgrounds.json"
     }
 ]

@@ -4,6 +4,7 @@ package com.xiaomu.view.roleview
 	import com.xiaomu.component.TextInputChange;
 	import com.xiaomu.component.ToggleButtonForApp;
 	import com.xiaomu.data.Role;
+	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	import com.xiaomu.renderer.ListItemRenderer;
 	import com.xiaomu.renderer.RoleItemRenderer;
@@ -64,20 +65,22 @@ package com.xiaomu.view.roleview
 			addChild(groupH2);
 			
 			icon1 = new Image();
-			icon1.source = "assets/people.png";
+			icon1.source = "assets/fodder.png";
+			icon1.alpha= 0.5;
 			icon1.width = icon1.height =35;
 			addChild(icon1);
 			
 			lab1 = new Label();
 			lab1.text = "我的素材库";
 			lab1.fontFamily = "Microsoft YaHei";
-			lab1.fontSize = 20;
+			lab1.color = 0xC8C1B3;
+			lab1.fontSize = 16;
 			addChild(lab1);
 			
 			icon2 = new RadiusButton();
 			icon2.buttonMode = true;
 			icon2.width = 45;
-			icon2.height = 32;
+			icon2.height = 25;
 			icon2.topRightRadius = 10;
 			icon2.bottomRightRadius = 10;
 			icon2.mouseOutSource = "assets/seach1.png";
@@ -86,13 +89,13 @@ package com.xiaomu.view.roleview
 			
 			textInput1 = new TextInputChange();
 			textInput1.textLab = "搜索我的素材库";
-			textInput1.fontSize = 16;
+			textInput1.fontSize = 15;
 			textInput1.color = 0x888888;
 			textInput1.maxChars = 10;
 			textInput1.width = 200;
-			textInput1.height = 32;
-			textInput1.topLeftRadius = 10;
-			textInput1.bottomLeftRadius = 10;
+			textInput1.height = 25;
+			textInput1.topLeftRadius = 11;
+			textInput1.bottomLeftRadius = 11;
 			textInput1.fontFamily = "Microsoft YaHei";
 			addChild(textInput1);
 			
@@ -112,17 +115,17 @@ package com.xiaomu.view.roleview
 			icon4.addEventListener(MouseEvent.CLICK,icon4_clickHandler);
 			addChild(icon4);
 			
-			lab2 = new Label();
-			lab2.text = "显示类型：";
-			lab2.fontFamily = "Microsoft YaHei";
-			lab2.fontSize = 18;
-			groupH2.addChild(lab2);
+//			lab2 = new Label();
+//			lab2.text = "显示类型：";
+//			lab2.fontFamily = "Microsoft YaHei";
+//			lab2.fontSize = 18;
+//			groupH2.addChild(lab2);
 			
 			toggleButton1 = new ToggleButtonForApp();
 			toggleButton1.buttonMode = true;
 			toggleButton1.selected = true;
 			toggleButton1.label = "全部";
-			toggleButton1.fontSize = 18;
+			toggleButton1.fontSize = 15;
 			toggleButton1.fontFamily = "Microsoft YaHei";
 			toggleButton1.addEventListener(MouseEvent.CLICK,toggleButton1_clickHandler);
 			groupH2.addChild(toggleButton1);
@@ -131,7 +134,7 @@ package com.xiaomu.view.roleview
 			toggleBotton2.buttonMode = true;
 			toggleBotton2.selected = false;
 			toggleBotton2.label = "角色";
-			toggleBotton2.fontSize = 18;
+			toggleBotton2.fontSize = 15;
 			toggleBotton2.fontFamily = "Microsoft YaHei";
 			toggleBotton2.addEventListener(MouseEvent.CLICK,toggleBotton2_clickHandler);
 			groupH2.addChild(toggleBotton2);
@@ -140,7 +143,7 @@ package com.xiaomu.view.roleview
 			toggleButton3.buttonMode = true;
 			toggleButton3.selected = false;
 			toggleButton3.label = "背景";
-			toggleButton3.fontSize = 18;
+			toggleButton3.fontSize = 15;
 			toggleButton3.fontFamily = "Microsoft YaHei";
 			toggleButton3.addEventListener(MouseEvent.CLICK,toggleButton3_clickHandler);
 			groupH2.addChild(toggleButton3);
@@ -149,17 +152,18 @@ package com.xiaomu.view.roleview
 			toggleButton4.buttonMode = true;
 			toggleButton4.selected = false;
 			toggleButton4.label = "声音";
-			toggleButton4.fontSize = 18;
+			toggleButton4.fontSize = 15;
 			toggleButton4.fontFamily = "Microsoft YaHei";
 			toggleButton4.addEventListener(MouseEvent.CLICK,toggleButton4_clickHandler);
 			groupH2.addChild(toggleButton4);
 			
 			roleList = new List();
 			roleList.buttonMode = true;
-			roleList.gap = roleList.padding = 20;
+			roleList.gap = roleList.padding = 35;
 			roleList.paddingTop = 0;
 			roleList.itemRendererColumnCount = 4;
-			roleList.itemRendererHeight = roleList.itemRendererWidth = 165;
+			roleList.itemRendererHeight = 125;
+			roleList.itemRendererWidth = 140;
 			roleList.itemRendererClass = RoleItemRenderer;
 			roleList.verticalAlign = VerticalAlign.TOP;
 			roleList.horizontalAlign = HorizontalAlign.RIGHT;
@@ -170,7 +174,7 @@ package com.xiaomu.view.roleview
 			itemList.labelField = "name";
 			itemList.itemRendererClass = ListItemRenderer;
 			itemList.autoDrawSkin = true;
-			itemList.borderColor = itemList.backgroundColor = 0xFFF5E6;
+			itemList.borderColor = itemList.backgroundColor = 0xFFFBF2;
 			itemList.radius = 10;
 			itemList.padding = 20;
 			itemList.paddingTop = 0;
@@ -238,6 +242,10 @@ package com.xiaomu.view.roleview
 			urlLoader.load(new URLRequest(category.source));
 			
 			itemList.selectedIndex = -1;
+			
+			var item_selectEvent : RoleEvent = new RoleEvent(RoleEvent.SELECT_ITEM);
+			RoleManager.getInstance().dispatchEvent(item_selectEvent);
+			
 		}
 		
 		protected function item_completeHandler(event:Event):void
@@ -261,35 +269,44 @@ package com.xiaomu.view.roleview
 		{
 			super.updateDisplayList();
 			
-			icon1.y = 36;
-			lab1.y = textInput1.y = icon2.y = icon3.y = 40;
+			icon1.y = 22;
+			lab1.y = textInput1.y = icon2.y = icon3.y = 26;
 			icon1.x = 20;
 			lab1.x = 60 ;
-			textInput1.x = 170;
+			textInput1.x = 470;
 			icon2.x = textInput1.x + textInput1.width;
-			icon3.x = 700;
+			icon3.x = 730;
+			icon3.height = 30;
 			
 			groupH2.width = width;
-			groupH2.height = 30;
-			groupH2.y = 80;
-			groupH2.x = 30;
+			groupH2.height = 25;
+			groupH2.y = 26;
+			groupH2.x = 190;
 			
 			icon4.x = width-icon4.width-35;
 			icon4.y = 5;
 			
 			roleList.width = contentWidth;
-			roleList.height = contentHeight - 140;
-			roleList.y = 120;
+			roleList.height = contentHeight - 130;
+			roleList.y = 100;
 			
-			itemList.height = contentHeight - 140;
-			itemList.width =110;
-			itemList.x = 10;
-			itemList.y = 120
+			itemList.height = contentHeight - 130;
+			itemList.width =160;
+			itemList.x = 1;
+			itemList.y = 80;
 		}
 		
 		override protected function drawSkin():void
 		{
 			super.drawSkin();
+		
+			graphics.lineStyle(1,0xF2E7C9);
+			graphics.moveTo(165,0);
+			graphics.lineTo(165,height);
+			graphics.moveTo(165,70);
+			graphics.lineTo(width,70);
+			graphics.endFill();
+			
 		}
 		
 		protected function urlLoader_completeHandler(event:Event):void
@@ -311,7 +328,7 @@ package com.xiaomu.view.roleview
 			{
 				var newRole:Role = new Role();
 //				newRole.id = UIDUtil.createUID(); // 生成唯一ID
-				throw new Error("这块需要修改...注意");
+//				throw new Error("这块需要修改...注意");
 				newRole.name = role.name;
 				newRole.icon = role.icon;
 				newRole.skin = role.skin;

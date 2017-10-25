@@ -2,10 +2,8 @@ package com.xiaomu.view.roleview
 {
 	import com.xiaomu.component.IconButton3;
 	import com.xiaomu.data.Role;
-	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import coco.component.Image;

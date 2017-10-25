@@ -15,7 +15,7 @@ package com.xiaomu.component
 
         override protected function measure():void
         {
-            var defaultWidth:Number = 90;
+            var defaultWidth:Number = 68;
             var defaultHeight:Number = 21;
 
             // width or height isNaN
@@ -41,6 +41,10 @@ package com.xiaomu.component
         override protected function drawSkin():void
         {
             var icon:Image = new Image();
+			icon.width = 24;
+			icon.height = 24;
+			icon.y = 2;
+			
             if (selected)
 			{
 				icon.source = "assets/selected.png";

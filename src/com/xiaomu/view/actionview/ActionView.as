@@ -49,12 +49,12 @@ package com.xiaomu.view.actionview
 		//----------------------------------------------------------------------------------------------------------------
 		
 		private var actionBarData:Array = [
-			{name:"事件", color:Theme.EVENT_COLOR, source:"assets/role1.png"}, 
-			{name:"控制", color:Theme.CONTROL_COLOR, source:"assets/role2.png"}, 
-			{name:"动作", color:Theme.ACTION_COLOR, source:"assets/role3.png"}, 
-			{name:"外观", color:Theme.SKIN_COLOR, source:"assets/role4.png"}, 
-			{name:"声音", color:Theme.VOICE_COLOR, source:"assets/role5.png"}, 
-			{name:"运算", color:Theme.OPERATION_COLOR, source:"assets/role6.png"}];
+			{name:"事件", color:Theme.EVENT_COLOR, source:"assets/role/role1.png"}, 
+			{name:"控制", color:Theme.CONTROL_COLOR, source:"assets/role/role2.png"}, 
+			{name:"动作", color:Theme.ACTION_COLOR, source:"assets/role/role3.png"}, 
+			{name:"外观", color:Theme.SKIN_COLOR, source:"assets/role/role4.png"}, 
+			{name:"声音", color:Theme.VOICE_COLOR, source:"assets/role/role5.png"}, 
+			{name:"运算", color:Theme.OPERATION_COLOR, source:"assets/role/role6.png"}];
 		
 		private var actionBar:ButtonGroup;
 		private var actionContent:ActionContent;

@@ -45,11 +45,11 @@ package com.xiaomu.renderer
 			super.createChildren();
 			
 			iconDisplay = new Image();
-			iconDisplay.width = iconDisplay.height = 100;
+			iconDisplay.width = iconDisplay.height = 80;
 			addChild(iconDisplay);
 			
 			nameDisplay = new Label();
-			nameDisplay.height = 50;
+			nameDisplay.height = 30;
 			nameDisplay.fontSize = 15;
 			addChild(nameDisplay);
 		}
@@ -85,12 +85,12 @@ package com.xiaomu.renderer
 		{
 			graphics.clear();
 			
-			graphics.beginFill(0xF2F0EB);
-			graphics.drawRoundRectComplex(0, 0, width, height, 5, 5, 5, 5);
+			graphics.beginFill(0xFF9948,0.1);
+			graphics.drawRoundRectComplex(0, 0, width, height, 2, 2, 2, 2);
 			graphics.endFill();
 			
 			graphics.beginFill(0xFFFFFF);
-			graphics.drawRoundRectComplex(0, height - 50, width, 50, 0, 0, 5, 5);
+			graphics.drawRoundRectComplex(0, height-30 , width, 30, 0, 0, 5, 5);
 			graphics.endFill();
 		}
 		

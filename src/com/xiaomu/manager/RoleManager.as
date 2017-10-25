@@ -17,7 +17,8 @@ package com.xiaomu.manager
 	[Event(name="addRoleCollection", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="deleteRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addRoleSkin", type="com.xiaomu.event.RoleEvent")]
-	
+	[Event(name="selectItem", type="com.xiaomu.event.RoleEvent")]
+
 	public class RoleManager extends EventDispatcher
 	{
 		
