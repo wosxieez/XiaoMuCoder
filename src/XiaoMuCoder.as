@@ -6,6 +6,7 @@ package
 	import com.xiaomu.manager.TipManager;
 	import com.xiaomu.manager.VersionManager;
 	import com.xiaomu.view.actionview.ActionView;
+	import com.xiaomu.view.headview.Headview;
 	import com.xiaomu.view.menuview.MenuView;
 	import com.xiaomu.view.roleview.RoleView;
 	import com.xiaomu.view.stageview.StageView;
@@ -26,7 +27,7 @@ package
 	 * 小木编程
 	 * @author coco
 	 */	
-	[SWF(width="1024", height="700")]
+	[SWF(width="1024", height="740")]
 	public class XiaoMuCoder extends Application
 	{
 		public function XiaoMuCoder()
@@ -46,6 +47,7 @@ package
 		private var stageView:StageView;
 		private var roleView:RoleView;
 		private var actionView:ActionView;
+		private var headview : Headview;
 		private var appLoading:AppLoading;
 		
 		
@@ -54,7 +56,7 @@ package
 			super.createChildren();
 			
 			stageView = StageView.getInstance();
-			stageView.y = 40;
+			stageView.y = 80;
 			stageView.width = 400;
 			addChild(stageView);
 			
@@ -64,12 +66,17 @@ package
 			
 			actionView = ActionView.getInstance();
 			actionView.x = 400;
-			actionView.y = 40;
+			actionView.y = 80;
 			addChild(actionView);
 			
 			menuView = new MenuView();
 			menuView.height = 40;
 			addChild(menuView);
+			
+			headview = new Headview();
+			headview.height = 40;
+			headview.y = 40;
+			addChild(headview);
 			
 			// 500毫秒后开始检查版本更新
 			setTimeout(checkAppVersion, 500);

@@ -97,7 +97,7 @@ package com.xiaomu.view.stageview
 			roleContainer.width = width;
 			roleContainer.height = height - 30;
 			roleContainer.scrollRect = new Rectangle(0, 0, roleContainer.width, roleContainer.height);
-			playButton.y = height - 28;
+			playButton.y = height - 68;
 			playButton.x = 7;
 		}
 		
@@ -106,7 +106,7 @@ package com.xiaomu.view.stageview
 			super.drawSkin();
 			
 			graphics.beginFill(0xF9F4E6);
-			graphics.drawRect(0, height - 30, width, 30);
+			graphics.drawRect(0, height - 70, width, 70);
 			graphics.endFill();
 		}
 		
