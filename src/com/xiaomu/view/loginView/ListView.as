@@ -1,11 +1,14 @@
 package com.xiaomu.view.loginView
 {
+	import com.xiaomu.component.BtnMode;
 	import com.xiaomu.component.PicIconbtn;
 	import com.xiaomu.renderer.AppMenuListItemRender;
+	import com.xiaomu.renderer.ListItemRenderer;
 	
 	import coco.component.List;
 	import coco.component.VerticalAlign;
 	import coco.core.UIComponent;
+	import com.xiaomu.component.Listcenterbutton;
 	
 	
 	public class ListView extends UIComponent
@@ -18,8 +21,12 @@ package com.xiaomu.view.loginView
 		}
 		
 		private var Icon:PicIconbtn;
-		private var list:List;
-		private var arr:Array=["首页","我的课程","创作社区"];
+		private var indexlist: Listcenterbutton;
+		private var createlist: Listcenterbutton;
+		private var shezhilist: Listcenterbutton;
+		private var lianxilist: Listcenterbutton;
+//		private var list:List;
+//		private var arr:Array=["首页","我的课程","创作社区","我的课程","创作社区"];
 		override protected  function createChildren():void
 		{
 			super.createChildren();
@@ -31,21 +38,70 @@ package com.xiaomu.view.loginView
 			Icon.source = "assets/login/pic7.jpeg";
 			addChild(Icon);
 			
-			list=new List();
-			list.dataProvider = arr;
-			list.itemRendererClass = AppMenuListItemRender;
-			list.itemRendererHeight = 30;
-			list.y = 180;
-			list.width = width;
-			//			list.height =450;
-			list.verticalAlign = VerticalAlign.MIDDLE;
-			addChild(list);
+			indexlist = new Listcenterbutton();
+			indexlist.text = "首页";
+			indexlist.fontSize = 16;
+			indexlist.width = width;
+			indexlist.color = 0xFFFFFF;
+			indexlist.height = 40;
+			indexlist.mouseOverColor = 0xFFDD67;
+			indexlist.mouseOutColor = 0xFFD236;
+			indexlist.source = "assets/head/icon02.png";
+			addChild(indexlist);
+			
+			createlist = new Listcenterbutton();
+			createlist.text = "创作社区";
+			createlist.fontSize = 16;
+			createlist.width = width;
+			createlist.color = 0xFFFFFF;
+			createlist.height = 40;
+			createlist.mouseOverColor = 0xFFDD67;
+			createlist.mouseOutColor = 0xFFD236;
+			createlist.source = "assets/head/icon02.png";
+			addChild(createlist);
+			
+			
+			shezhilist = new Listcenterbutton();
+			shezhilist.text = "设置";
+			shezhilist.fontSize = 16;
+			shezhilist.width = width;
+			shezhilist.color = 0xFFFFFF;
+			shezhilist.height = 40;
+			shezhilist.mouseOverColor = 0xFFDD67;
+			shezhilist.mouseOutColor = 0xFFD236;
+			shezhilist.source = "assets/head/icon02.png";
+			addChild(shezhilist);
+			
+			lianxilist = new Listcenterbutton();
+			lianxilist.text = "联系我们";
+			lianxilist.fontSize = 16;
+			lianxilist.width = width;
+			lianxilist.color = 0xFFFFFF;
+			lianxilist.height = 40;
+			lianxilist.mouseOverColor = 0xFFDD67;
+			lianxilist.mouseOutColor = 0xFFD236;
+			lianxilist.source = "assets/login/lianxi.png";
+			addChild(lianxilist);
+//			list=new List();
+//			list.dataProvider = arr;
+//			list.itemRendererClass = AppMenuListItemRender;
+//			list.itemRendererHeight = 30;
+//			list.y = 180;
+//			list.width = width;
+//			list.height = 200;
+//			list.radius = 10;
+//			list.verticalAlign = VerticalAlign.MIDDLE;
+//			addChild(list);
 			
 		}
 		
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
+			indexlist.y = 200;
+			createlist.y = 240;
+			shezhilist.y = height-120;
+			lianxilist.y = height-80;
 			
 			
 		}

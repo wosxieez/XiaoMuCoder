@@ -27,7 +27,7 @@ package com.xiaomu.renderer
 			
 			labelDisplay.fontSize=15;
 			labelDisplay.color = 0x965E21;
-			labelDisplay.x = 16;
+			labelDisplay.x = 20;
 			labelDisplay.fontFamily = "Microsoft YaHei";
 			labelDisplay.textAlign = TextAlign.LEFT;
 			
