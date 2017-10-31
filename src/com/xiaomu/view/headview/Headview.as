@@ -1,6 +1,8 @@
 package com.xiaomu.view.headview
 {
 	import com.xiaomu.component.BtnMode;
+	import com.xiaomu.event.LoginEvent;
+	import com.xiaomu.manager.LoginManager;
 	import com.xiaomu.renderer.ListItemRenderer;
 	
 	import flash.events.MouseEvent;
@@ -151,7 +153,9 @@ package com.xiaomu.view.headview
 		
 		protected function login_clickHandle(event:MouseEvent):void
 		{
-			
+			trace("点击进入APP按钮");
+			var enterAPPEvent : LoginEvent = new LoginEvent(LoginEvent.ENTER_APP);
+			LoginManager.getInstance().dispatchEvent(enterAPPEvent);
 			
 		}
 		

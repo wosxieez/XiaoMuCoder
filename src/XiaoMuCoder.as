@@ -2,10 +2,14 @@ package
 {
 	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.component.AppLoading;
+	import com.xiaomu.event.LoginEvent;
 	import com.xiaomu.event.VersionEvent;
+	import com.xiaomu.manager.LoginManager;
 	import com.xiaomu.manager.TipManager;
 	import com.xiaomu.manager.VersionManager;
 	import com.xiaomu.view.actionview.ActionView;
+	import com.xiaomu.view.appView.XiaoMuCreate;
+	import com.xiaomu.view.appView.XiaomuApp;
 	import com.xiaomu.view.headview.Headview;
 	import com.xiaomu.view.menuview.MenuView;
 	import com.xiaomu.view.roleview.RoleView;
@@ -17,7 +21,6 @@ package
 	
 	import coco.component.Alert;
 	import coco.core.Application;
-	import coco.core.coco;
 	import coco.event.UIEvent;
 	import coco.manager.PopUpManager;
 
@@ -40,62 +43,35 @@ package
 			borderAlpha = backgroundAlpha = 0;
 			TipManager.getInstance().init(this); // TIP管理器启动
 			addEventListener(Event.ADDED_TO_STAGE, this_addedToStageHandler);
+			LoginManager.getInstance().addEventListener(LoginEvent.ENTER_APP,enterApp_Handler);
 		}
 		
-		
-		private var menuView:MenuView;
-		private var stageView:StageView;
-		private var roleView:RoleView;
-		private var actionView:ActionView;
-		private var headview : Headview;
 		private var appLoading:AppLoading;
+		private var appView : XiaomuApp;
+		private var xiaomuCreate:XiaoMuCreate;
 		
 		
 		override protected function createChildren():void
 		{
 			super.createChildren();
 			
-			stageView = StageView.getInstance();
-			stageView.y = 80;
-			stageView.width = 400;
-			addChild(stageView);
-			
-			roleView = RoleView.getInstance();
-			roleView.width = 400;
-			addChild(roleView);
-			
-			actionView = ActionView.getInstance();
-			actionView.x = 400;
-			actionView.y = 80;
-			addChild(actionView);
-			
-			menuView = new MenuView();
-			menuView.height = 40;
-			addChild(menuView);
-			
-			headview = new Headview();
-			headview.height = 40;
-			headview.y = 40;
-			addChild(headview);
+			appView = new XiaomuApp();
+
+			xiaomuCreate = new XiaoMuCreate();
+			addChild(xiaomuCreate);
 			
 			// 500毫秒后开始检查版本更新
 			setTimeout(checkAppVersion, 500);
 		}
 		
-		override protected function updateDisplayList():void
+		protected function enterApp_Handler(event:LoginEvent):void
 		{
-			super.updateDisplayList();
+			if (appView.isPopUp) return;
 			
-			menuView.width = width;
+			PopUpManager.addPopUp(appView);
+			removeChild(xiaomuCreate);
 			
-			roleView.height = (height - menuView.height) / 2;
-			roleView.y = height - roleView.height;
-			
-			stageView.height = roleView.height;
-			
-			actionView.height = height - actionView.y;
-			actionView.width = width - actionView.x;
-		}
+		}			
 		
 		protected function this_addedToStageHandler(event:Event):void
 		{

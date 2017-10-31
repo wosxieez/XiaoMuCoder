@@ -11,6 +11,9 @@ package com.xiaomu.component
         public function ToggleButtonForApp()
         {
             super();
+			fontSize = 16;
+			color = 0xA0A0A0;
+			fontFamily = "Microsoft YaHei";
         }
 
         override protected function measure():void

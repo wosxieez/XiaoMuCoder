@@ -48,7 +48,7 @@ package com.xiaomu.view.menuview
 			
 			titleDisplay.height = height;
 			
-			closeAppButton.x = width - 10 - closeAppButton.width;
+			closeAppButton.x = width - 30 - closeAppButton.width;//cmz修改前10
 			closeAppButton.y = (height - closeAppButton.height) / 2;
 		}
 		
