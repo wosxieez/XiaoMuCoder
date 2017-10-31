@@ -43,7 +43,7 @@ package com.xiaomu.view.loginView
 			
 			logo= new PicIconbtn();
 			logo.radius = 56;
-			logo.source = "assets/login/pic7.jpeg";
+			logo.source = "assets/login/pic6.jpeg";
 			addChild(logo);
 			
 			closeAppButton = new IconButton();
