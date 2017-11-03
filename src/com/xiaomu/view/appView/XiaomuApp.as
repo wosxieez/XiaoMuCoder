@@ -22,6 +22,8 @@ package com.xiaomu.view.appView
 			titleHeight = 0;
 			height = 740;
 			LoginManager.getInstance().addEventListener(LoginEvent.ADD_LOGIN,thisLogin_Handler);
+			LoginManager.getInstance().addEventListener(LoginEvent.RETURN_APP,returnApp_Handler);
+			LoginManager.getInstance().addEventListener(LoginEvent.EDIT_USER,editUser_Handler);
 		}
 		
 		private var menu:Menuheader;
@@ -46,7 +48,7 @@ package com.xiaomu.view.appView
 			content = new ContentView();
 			content.x = 170;
 			content.y = 40;
-			addChild(content);
+//			addChild(content);
 			
 		}
 		
@@ -57,6 +59,19 @@ package com.xiaomu.view.appView
 			PopUpManager.addPopUp(login, null, true, true, 0, 0);
 			PopUpManager.removePopUp(this);
 			
+		}
+		
+		protected function returnApp_Handler(event:LoginEvent):void
+		{
+//			if (login.isPopUp) return;
+			PopUpManager.addPopUp(this);
+			PopUpManager.removePopUp(login);
+			
+		}
+		
+		protected function editUser_Handler(event:LoginEvent):void
+		{
+			addChild(content);
 		}
 		
 		override protected function updateDisplayList():void

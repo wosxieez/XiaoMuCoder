@@ -106,7 +106,8 @@ package com.xiaomu.component
 			img.x = 16;
 			img.y = (height-img.height)/2;
 			
-			lab.x = (width - fontSize)/2-10;
+//			lab.x = (width - fontSize)/2-14;
+			lab.x = (width - lab.width)/2;
 			lab.fontFamily = "Microsoft yahei";
 			lab.fontSize = fontSize;
 			lab.color = color;

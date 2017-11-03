@@ -5,6 +5,9 @@ package com.xiaomu.manager
 	
 	[Event(name="addlogin", type="com.xiaomu.event.LoginEvent")]
 	[Event(name="enterApp", type="com.xiaomu.event.LoginEvent")]
+	[Event(name="returnCreate", type="com.xiaomu.event.LoginEvent")]
+	[Event(name="returnApp", type="com.xiaomu.event.LoginEvent")]
+	[Event(name="editUser", type="com.xiaomu.event.LoginEvent")]
 
 	
 	public class LoginManager extends EventDispatcher

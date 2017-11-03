@@ -1,14 +1,14 @@
 package com.xiaomu.view.loginView
 {
-	import com.xiaomu.component.BtnMode;
-	import com.xiaomu.component.PicIconbtn;
-	import com.xiaomu.renderer.AppMenuListItemRender;
-	import com.xiaomu.renderer.ListItemRenderer;
-	
-	import coco.component.List;
-	import coco.component.VerticalAlign;
-	import coco.core.UIComponent;
 	import com.xiaomu.component.Listcenterbutton;
+	import com.xiaomu.component.PicIconbtn;
+	import com.xiaomu.event.LoginEvent;
+	import com.xiaomu.manager.LoginManager;
+	
+	import flash.events.MouseEvent;
+	
+	import coco.core.UIComponent;
+	import coco.manager.PopUpManager;
 	
 	
 	public class ListView extends UIComponent
@@ -25,8 +25,6 @@ package com.xiaomu.view.loginView
 		private var createlist: Listcenterbutton;
 		private var shezhilist: Listcenterbutton;
 		private var lianxilist: Listcenterbutton;
-//		private var list:List;
-//		private var arr:Array=["首页","我的课程","创作社区","我的课程","创作社区"];
 		override protected  function createChildren():void
 		{
 			super.createChildren();
@@ -36,6 +34,7 @@ package com.xiaomu.view.loginView
 			Icon.x = (width - Icon.width)/2-56;
 			Icon.y = (height - Icon.height)/2-294;
 			Icon.source = "assets/login/pic7.jpeg";
+			Icon.addEventListener(MouseEvent.CLICK,icon_clickHandle);
 			addChild(Icon);
 			
 			indexlist = new Listcenterbutton();
@@ -58,8 +57,8 @@ package com.xiaomu.view.loginView
 			createlist.mouseOverColor = 0xFFDD67;
 			createlist.mouseOutColor = 0xFFD236;
 			createlist.source = "assets/head/icon02.png";
+			createlist.addEventListener(MouseEvent.CLICK,create_clickHandle);
 			addChild(createlist);
-			
 			
 			shezhilist = new Listcenterbutton();
 			shezhilist.text = "设置";
@@ -70,6 +69,7 @@ package com.xiaomu.view.loginView
 			shezhilist.mouseOverColor = 0xFFDD67;
 			shezhilist.mouseOutColor = 0xFFD236;
 			shezhilist.source = "assets/head/icon02.png";
+			shezhilist.addEventListener(MouseEvent.CLICK,icon_clickHandle);
 			addChild(shezhilist);
 			
 			lianxilist = new Listcenterbutton();
@@ -82,16 +82,22 @@ package com.xiaomu.view.loginView
 			lianxilist.mouseOutColor = 0xFFD236;
 			lianxilist.source = "assets/login/lianxi.png";
 			addChild(lianxilist);
-//			list=new List();
-//			list.dataProvider = arr;
-//			list.itemRendererClass = AppMenuListItemRender;
-//			list.itemRendererHeight = 30;
-//			list.y = 180;
-//			list.width = width;
-//			list.height = 200;
-//			list.radius = 10;
-//			list.verticalAlign = VerticalAlign.MIDDLE;
-//			addChild(list);
+		}
+		
+		protected function icon_clickHandle(event:MouseEvent):void
+		{
+			var shezhiEvent : LoginEvent = new LoginEvent(LoginEvent.EDIT_USER);
+			LoginManager.getInstance().dispatchEvent(shezhiEvent);
+			
+		}
+		
+		protected function create_clickHandle(event:MouseEvent):void
+		{
+//			PopUpManager.removePopUp(this);
+			
+			trace("在app界面点击返回创作面板");
+			var returnCreateEvent : LoginEvent = new LoginEvent(LoginEvent.RETURN_CREATE);
+			LoginManager.getInstance().dispatchEvent(returnCreateEvent);
 			
 		}
 		
@@ -100,8 +106,8 @@ package com.xiaomu.view.loginView
 			super.commitProperties();
 			indexlist.y = 200;
 			createlist.y = 240;
-			shezhilist.y = height-120;
-			lianxilist.y = height-80;
+			shezhilist.y = height-80;
+			lianxilist.y = height-40;
 			
 			
 		}

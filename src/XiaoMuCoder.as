@@ -44,6 +44,7 @@ package
 			TipManager.getInstance().init(this); // TIP管理器启动
 			addEventListener(Event.ADDED_TO_STAGE, this_addedToStageHandler);
 			LoginManager.getInstance().addEventListener(LoginEvent.ENTER_APP,enterApp_Handler);
+			LoginManager.getInstance().addEventListener(LoginEvent.RETURN_CREATE,returnCreate_Handler);
 		}
 		
 		private var appLoading:AppLoading;
@@ -72,6 +73,14 @@ package
 			removeChild(xiaomuCreate);
 			
 		}			
+		
+		
+		protected function returnCreate_Handler(event:LoginEvent):void
+		{
+			PopUpManager.removePopUp(appView);
+			addChild(xiaomuCreate);
+			
+		}
 		
 		protected function this_addedToStageHandler(event:Event):void
 		{
