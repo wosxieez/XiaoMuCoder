@@ -30,6 +30,8 @@ package com.xiaomu.view.appView
 		private var listview:ListView;
 		private var content:ContentView;
 		private var login:LoginView;
+		private var loginFlag: Boolean;
+		private var contentFlag:Boolean;
 		
 		
 		override protected  function createChildren():void
@@ -37,41 +39,64 @@ package com.xiaomu.view.appView
 			super.createChildren();
 			menu = new Menuheader();
 			menu.height = 40;
+			menu.visible = true;
 			addChild(menu);
 			
 			listview = new ListView();
 			listview.y = 40;
+			listview.visible = true;
 			addChild(listview);
 			
 			login = new LoginView();
+			login.visible = false;
+			addChild(login);
 			
 			content = new ContentView();
 			content.x = 170;
 			content.y = 40;
-//			addChild(content);
-			
+			content.visible = false;
+			addChild(content);	
 		}
 		
+		override protected function commitProperties():void
+		{
+			super.commitProperties();
+			
+			if(loginFlag){
+				login.visible = true;
+				content.visible = false;
+			}
+			if(contentFlag){
+				login.visible = false;
+				content.visible = true;
+			}
+		}
+
 		protected function thisLogin_Handler(event:LoginEvent):void
 		{
-			if (login.isPopUp) return;
-			
-			PopUpManager.addPopUp(login, null, true, true, 0, 0);
-			PopUpManager.removePopUp(this);
+			trace("点击切换账号进入loginView");
+			contentFlag = false;
+			loginFlag = true;
+			invalidateProperties();
 			
 		}
 		
 		protected function returnApp_Handler(event:LoginEvent):void
 		{
-//			if (login.isPopUp) return;
-			PopUpManager.addPopUp(this);
-			PopUpManager.removePopUp(login);
+			trace("在loginView界面点击返回app按钮");
+			contentFlag = true;
+			loginFlag = false;
+			invalidateProperties();
+
 			
 		}
 		
 		protected function editUser_Handler(event:LoginEvent):void
 		{
-			addChild(content);
+			trace("在listView上点击设置按钮");
+			contentFlag = true;
+			loginFlag = false;
+			invalidateProperties();
 		}
 		
 		override protected function updateDisplayList():void

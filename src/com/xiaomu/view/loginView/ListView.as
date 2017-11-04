@@ -20,11 +20,17 @@ package com.xiaomu.view.loginView
 			height = 700;
 		}
 		
+		
 		private var Icon:PicIconbtn;
 		private var indexlist: Listcenterbutton;
 		private var createlist: Listcenterbutton;
-		private var shezhilist: Listcenterbutton;
 		private var lianxilist: Listcenterbutton;
+		
+		/**
+		 * 和icon头像图标点击调用同一个事件，即出现编辑用户界面 
+		 */
+		private var shezhilist: Listcenterbutton;
+		
 		override protected  function createChildren():void
 		{
 			super.createChildren();
@@ -86,8 +92,8 @@ package com.xiaomu.view.loginView
 		
 		protected function icon_clickHandle(event:MouseEvent):void
 		{
-			var shezhiEvent : LoginEvent = new LoginEvent(LoginEvent.EDIT_USER);
-			LoginManager.getInstance().dispatchEvent(shezhiEvent);
+			var editUserEvent : LoginEvent = new LoginEvent(LoginEvent.EDIT_USER);
+			LoginManager.getInstance().dispatchEvent(editUserEvent);
 			
 		}
 		

@@ -48,7 +48,7 @@ package
 		}
 		
 		private var appLoading:AppLoading;
-		private var appView : XiaomuApp;
+		private var xiaomuApp : XiaomuApp;
 		private var xiaomuCreate:XiaoMuCreate;
 		
 		
@@ -56,10 +56,14 @@ package
 		{
 			super.createChildren();
 			
-			appView = new XiaomuApp();
-
+			xiaomuApp = new XiaomuApp();
+			addChild(xiaomuApp);
+			xiaomuApp.visible = false;
+			
 			xiaomuCreate = new XiaoMuCreate();
 			addChild(xiaomuCreate);
+			xiaomuCreate.visible = true;
+
 			
 			// 500毫秒后开始检查版本更新
 			setTimeout(checkAppVersion, 500);
@@ -67,18 +71,23 @@ package
 		
 		protected function enterApp_Handler(event:LoginEvent):void
 		{
-			if (appView.isPopUp) return;
-			
-			PopUpManager.addPopUp(appView);
+			PopUpManager.addPopUp(xiaomuApp);
 			removeChild(xiaomuCreate);
-			
+			xiaomuApp.visible =true;
+			xiaomuCreate.visible = false;
 		}			
 		
 		
 		protected function returnCreate_Handler(event:LoginEvent):void
 		{
-			PopUpManager.removePopUp(appView);
+			PopUpManager.removePopUp(xiaomuApp);
+//			removeChild(appView);
 			addChild(xiaomuCreate);
+			xiaomuApp.visible =false;
+			xiaomuCreate.visible = true;
+			//			trace("appview:"+appView.visible);
+			//			trace("xiaomuCreate:"+xiaomuCreate.visible);
+
 			
 		}
 		
