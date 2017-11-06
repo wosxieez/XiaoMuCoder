@@ -7,13 +7,8 @@ package
 	import com.xiaomu.manager.LoginManager;
 	import com.xiaomu.manager.TipManager;
 	import com.xiaomu.manager.VersionManager;
-	import com.xiaomu.view.actionview.ActionView;
 	import com.xiaomu.view.appView.XiaoMuCreate;
 	import com.xiaomu.view.appView.XiaomuApp;
-	import com.xiaomu.view.headview.Headview;
-	import com.xiaomu.view.menuview.MenuView;
-	import com.xiaomu.view.roleview.RoleView;
-	import com.xiaomu.view.stageview.StageView;
 	
 	import flash.display.Screen;
 	import flash.events.Event;
@@ -81,14 +76,10 @@ package
 		protected function returnCreate_Handler(event:LoginEvent):void
 		{
 			PopUpManager.removePopUp(xiaomuApp);
-//			removeChild(appView);
+
 			addChild(xiaomuCreate);
 			xiaomuApp.visible =false;
-			xiaomuCreate.visible = true;
-			//			trace("appview:"+appView.visible);
-			//			trace("xiaomuCreate:"+xiaomuCreate.visible);
-
-			
+			xiaomuCreate.visible = true;		
 		}
 		
 		protected function this_addedToStageHandler(event:Event):void
