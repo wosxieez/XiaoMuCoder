@@ -50,12 +50,11 @@ package com.xiaomu.view.roleview
 		private var barButton3 : BarButton;
 		private var barButton4 : BarButton;
 		private var barButton5 : BarButton;
-		private var barButton6 : BarButton;
 		private var barButton7 : BarButton;
 		private var barButton8 : BarButton;
-		private var statusButton1_click : Boolean = false;
-		private var statusButton2_click : Boolean = false;
-		private var statusButton3_click : Boolean = false;
+//		private var statusButton1_click : Boolean = false;
+//		private var statusButton2_click : Boolean = false;
+//		private var statusButton3_click : Boolean = false;
 		private var showList : List;
 		private var noticePanel : NoticePanel;
 		
@@ -88,12 +87,14 @@ package com.xiaomu.view.roleview
 			statusButton2 = new StatusButton();
 			statusButton2.width = width/3-8;
 			statusButton2.label = "声音";
+			statusButton2.select = false;
 			statusButton2.addEventListener(MouseEvent.CLICK,sB2_clickHandler);
 			addChild(statusButton2);
 			
 			statusButton3 = new StatusButton();
 			statusButton3.width = width/3-8;
 			statusButton3.label = "数据";
+			statusButton3.select = false;
 			statusButton3.addEventListener(MouseEvent.CLICK,sB3_clickHandler);
 			addChild(statusButton3);
 			
@@ -102,40 +103,50 @@ package com.xiaomu.view.roleview
 			barButton1.width =280;
 			barButton1.source = "assets/add.png";
 			barButton1.addEventListener(MouseEvent.CLICK , bB1_clickHandler);
+			addChild(barButton1);
+			barButton1.visible = true;
 			
 			
 			barButton2 = new BarButton();
 			barButton2.labtext = "自己绘画";
 			barButton2.width = 230;
 			barButton2.source = "assets/draw.png";
+			addChild(barButton2);
+			barButton2.visible = true;
 			
 			barButton3 = new BarButton(); // 上传按钮
 			barButton3.width = 40;
 			barButton3.source = "assets/upLoad.png";
+			addChild(barButton3)
+			barButton3.visible = true;
 			
 			barButton4 = new BarButton();
 			barButton4.labtext = "添加声音";
 			barButton4.width = 280;
 			barButton4.source = "assets/add.png";
+			addChild(barButton4);
+			barButton4.visible = false;
 			
 			barButton5 = new BarButton();
 			barButton5.labtext = "我要录音";
 			barButton5.width = 230;
 			barButton5.source = "assets/audio.png";
-			
-			barButton6 = new BarButton(); // 上传按钮
-			barButton6.width = 40;
-			barButton6.source = "assets/upLoad.png";
+			addChild(barButton5);
+			barButton5.visible = false;
 			
 			barButton7 = new BarButton();
 			barButton7.labtext = "新建变量";
 			barButton7.width = 280;
 			barButton7.source ="assets/add.png";
+			addChild(barButton7);
+			barButton7.visible = false;
 			
 			barButton8 = new BarButton();
 			barButton8.labtext = "新建列表";
 			barButton8.width = 280;
 			barButton8.source = "assets/add.png";
+			addChild(barButton8);
+			barButton8.visible = false;
 			
 			showList = new List();
 			showList.width = barButton1.width;
@@ -145,6 +156,7 @@ package com.xiaomu.view.roleview
 			showList.itemRendererClass = ShowListRenderer;
 			showList.verticalAlign = VerticalAlign.TOP;
 			addChild(showList);
+			showList.visible = true;
 		}
 		
 		override protected function commitProperties():void
@@ -157,62 +169,21 @@ package com.xiaomu.view.roleview
 			{
 				showList.dataProvider = role.skin;
 				showList.labelField = "name";
-				addChild(barButton1);
-				addChild(barButton2);
-				addChild(barButton3);
-				if(statusButton2_click)
-				{
-					removeChild(barButton4);
-					removeChild(barButton5);
-					removeChild(barButton6);
-					statusButton2_click = false;
-				}
-				if(statusButton3_click)
-				{
-					removeChild(barButton7);
-					removeChild(barButton8);
-					statusButton3_click = false;
-				}
+				barButton1.visible = barButton2.visible = barButton3.visible = true;
+				barButton4.visible = barButton5.visible = barButton7.visible = barButton8.visible=false;
 			}
 			if(statusButton2.select)
 			{
 				showList.dataProvider = null;
-				addChild(barButton4);
-				addChild(barButton5);
-				addChild(barButton6);
-				if(statusButton1_click)
-				{
-					removeChild(barButton1);
-					removeChild(barButton2);
-					removeChild(barButton3);
-					statusButton1_click = false;
-				}
-				if(statusButton3_click)
-				{
-					removeChild(barButton7);
-					removeChild(barButton8);
-					statusButton3_click = false;
-				}
+				barButton4.visible = barButton5.visible = barButton3.visible = true;
+				barButton1.visible = barButton2.visible = barButton7.visible = barButton8.visible=false;
 			}
 			if(statusButton3.select)
 			{
 				showList.dataProvider = null;
-				addChild(barButton7);
-				addChild(barButton8);
-				if(statusButton1_click)
-				{
-					removeChild(barButton1);
-					removeChild(barButton2);
-					removeChild(barButton3);
-					statusButton1_click = false;
-				}
-				if(statusButton2_click)
-				{
-					removeChild(barButton4);
-					removeChild(barButton5);
-					removeChild(barButton6);
-					statusButton2_click = false;
-				}
+				barButton1.visible = barButton2.visible = barButton3.visible 
+					=barButton4.visible = barButton5.visible= false;
+				barButton7.visible = barButton8.visible = true;
 			}
 			
 		}
@@ -230,9 +201,9 @@ package com.xiaomu.view.roleview
 			barButton1.y = barButton4.y = barButton7.y = 60;
 			
 			barButton2.x = barButton5.x= barButton8.x =  (statusButton1.width*3 - barButton1.width)/2 + 12;
-			barButton2.y = barButton5.y = barButton8.y = barButton3.y= barButton6.y = 100;
+			barButton2.y = barButton5.y = barButton8.y = barButton3.y= 100;
 			
-			barButton3.x = barButton6.x = barButton2.x+barButton2.width + 10;
+			barButton3.x = barButton2.x+barButton2.width + 10;
 			
 			showList.x = barButton1.x;
 			showList.y = 150;
@@ -320,7 +291,7 @@ package com.xiaomu.view.roleview
 			statusButton1.select = statusButton2.select = false;
 			invalidateProperties();
 			
-			statusButton3_click = true;//stautsButton3 按钮已经被点击了
+//			statusButton3_click = true;//stautsButton3 按钮已经被点击了
 		}
 		
 		protected function sB2_clickHandler(event:MouseEvent):void
@@ -329,7 +300,7 @@ package com.xiaomu.view.roleview
 			statusButton1.select = statusButton3.select = false;
 			invalidateProperties();
 			
-			statusButton2_click = true;//stautsButton2 按钮已经被点击了
+//			statusButton2_click = true;//stautsButton2 按钮已经被点击了
 		}
 		
 		protected function sB1_clickHandler(event:MouseEvent):void
@@ -338,7 +309,7 @@ package com.xiaomu.view.roleview
 			statusButton2.select = statusButton3.select = false;
 			invalidateProperties();
 			
-			statusButton1_click = true; //stautsButton1 按钮已经被点击了
+//			statusButton1_click = true; //stautsButton1 按钮已经被点击了
 		}
 	}
 }
