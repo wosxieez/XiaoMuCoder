@@ -192,13 +192,18 @@ package com.xiaomu.view.roleview
 		protected function closeClickHandler(event:MouseEvent):void
 		{
 			//将关闭按钮的操作通过事件管理器派发出去
+			if(role.isBackground)
+			{
+				RoleManager.getInstance().removeBackground(role);
+			}
 			RoleManager.getInstance().removeRole(role);
 			event.stopPropagation();
 		}
 		
 		protected function this_clickHandler(event:MouseEvent):void
 		{
-			RoleManager.getInstance().selectRole(role);
+				RoleManager.getInstance().selectRole(role);
+			
 		}
 		
 		protected function this_outHandler(event:MouseEvent):void

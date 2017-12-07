@@ -11,13 +11,16 @@ package com.xiaomu.manager
 	import coco.core.coco;
 	
 	[Event(name="addRole", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="addBackground", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectRole", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="removeRole", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="removeBackground", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="setRole", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addRoleCollection", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="deleteRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectItem", type="com.xiaomu.event.RoleEvent")]
+
 
 	public class RoleManager extends EventDispatcher
 	{
@@ -75,6 +78,13 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
+		public  function addBackground(role:Role):void
+		{
+			var bgsEvent:RoleEvent = new RoleEvent(RoleEvent.ADD_BACKGROUND);
+			bgsEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(bgsEvent);
+		}
+		
 		/**
 		 * 选中一个角色 
 		 * @param role
@@ -102,6 +112,20 @@ package com.xiaomu.manager
 			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_ROLE);
 			roleEvent.role = role;
 			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
+		/**
+		 * 删除一个背景
+		 * @param role
+		 */	
+		public function removeBackground(role:Role):void
+		{
+			// 如果删除的是当前选中的角色 首页取消选中
+			selectRole(null);
+			
+			var bgsEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_BACKGROUND);
+			bgsEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(bgsEvent);
 		}
 		
 		/*设置一个角色*/
@@ -149,5 +173,8 @@ package com.xiaomu.manager
 			roleEvent.role = role;
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
+		
+		
+		
 	}
 }

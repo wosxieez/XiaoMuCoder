@@ -2,7 +2,9 @@ package com.xiaomu.actioncomponent
 {
 	import com.xiaomu.action.TestAction2;
 	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.component.DropList;
 	import com.xiaomu.component.UpFlagHookComponent;
+	import com.xiaomu.renderer.SelectboxRender;
 	import com.xiaomu.util.Theme;
 	
 	public class TestActionComponent2 extends ActionComponent
@@ -21,10 +23,10 @@ package com.xiaomu.actioncomponent
 		
 		private var flagHookComponent1:UpFlagHookComponent;
 		
-		
 		override protected function createChildren():void
 		{
 			super.createChildren();
+
 		}
 		
 		override protected function updateDisplayList():void

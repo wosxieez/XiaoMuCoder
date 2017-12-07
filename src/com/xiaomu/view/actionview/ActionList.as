@@ -71,6 +71,11 @@ package com.xiaomu.view.actionview
 			moveYAction2.mouseChildren = false;
 			moveYAction2.menuEnabled = false;
 			addChild(moveYAction2);
+			
+//			var moveYAction3:MoveYActionComponent = new MoveYActionComponent();
+//			moveYAction3.mouseChildren = false;
+//			moveYAction3.menuEnabled = false;
+//			addChild(moveYAction3);
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void

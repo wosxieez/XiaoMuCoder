@@ -6,6 +6,7 @@ package com.xiaomu.view.stageview
 	import com.xiaomu.manager.ActionComponentManager;
 	import com.xiaomu.manager.RoleManager;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
@@ -28,9 +29,12 @@ package com.xiaomu.view.stageview
 			borderColor = 0xF0E7CC;
 			backgroundColor = 0xFEFBF0;
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE, removeRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND, removeBgsHandler);
 		}
+			
 		
 		
 		//----------------------------------------------------------------------------------------------------------------
@@ -119,7 +123,41 @@ package com.xiaomu.view.stageview
 			roleContainer.addChild(roleComponent);
 		}	
 		
+		private var roleComponent_bg:RoleComponent;
+		private var roleComponent_bg1:RoleComponent;
+		
+		protected function addBgsHandler(event:RoleEvent):void
+		{
+			roleComponent_bg = new RoleComponent();
+			roleComponent_bg.role = event.role;
+			roleComponent_bg.width = roleContainer.width;
+			roleComponent_bg.height = roleContainer.height-40;
+			
+			roleComponent_bg1 = new RoleComponent();
+			roleComponent_bg1.role = event.role;
+			roleComponent_bg1.width = roleContainer.width;
+			roleComponent_bg1.height = roleContainer.height-40;
+			roleComponent_bg1.x = roleComponent_bg.width;
+			
+			roleContainer.addChild(roleComponent_bg1);
+			roleContainer.addChild(roleComponent_bg);
+		}	
+		
 		protected function removeRoleHandler(event:RoleEvent):void
+		{
+			var roleComponent:RoleComponent;
+			for (var i:int = 0; i < roleContainer.numChildren; i++)
+			{
+				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+				if (roleComponent && roleComponent.role.id == event.role.id )
+				{
+					roleContainer.removeChild(roleComponent);
+					break;
+				}
+			}
+		}	
+		
+		protected function removeBgsHandler(event:RoleEvent):void
 		{
 			var roleComponent:RoleComponent;
 			for (var i:int = 0; i < roleContainer.numChildren; i++)
@@ -127,7 +165,9 @@ package com.xiaomu.view.stageview
 				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
 				if (roleComponent && roleComponent.role.id == event.role.id)
 				{
-					roleContainer.removeChild(roleComponent);
+//					roleContainer.removeChildAt(0);
+					roleContainer.removeChild(roleComponent_bg);
+					roleContainer.removeChild(roleComponent_bg1);
 					break;
 				}
 			}
@@ -138,15 +178,20 @@ package com.xiaomu.view.stageview
 			if (event.role)
 			{
 				var roleComponent:RoleComponent;
-				for (var i:int = 0; i < roleContainer.numChildren; i++)
-				{
-					roleComponent = roleContainer.getChildAt(i) as RoleComponent;
-					if (roleComponent && roleComponent.role.id == event.role.id)
+				
+					for (var i:int = 0; i < roleContainer.numChildren; i++)
 					{
-						transformer.target = roleComponent;
-						return;
-					}
-				}
+						roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+						
+						if (roleComponent && roleComponent.role.id == event.role.id)
+						{
+							transformer.target = roleComponent;	
+//							roleContainer.setChildIndex(roleComponent_bg,0);
+							//							
+							
+							return;
+						}
+					}	
 			}
 			
 			transformer.target = null;
@@ -207,8 +252,32 @@ package com.xiaomu.view.stageview
 			for (var i:int = 0; i < roleContainer.numChildren; i++)
 			{
 				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
-				if (roleComponent)
+				if (roleComponent && playButton.selected == true)
 					roleComponent.doAction();
+			}
+			
+			if(roleComponent_bg )
+			{
+				if(playButton.selected)
+				{
+					roleComponent_bg.addEventListener(Event.ENTER_FRAME,enter_frameHandle);
+					roleComponent_bg1.addEventListener(Event.ENTER_FRAME,enter_frameHandle);
+				}
+				else{
+					roleComponent_bg.removeEventListener(Event.ENTER_FRAME,enter_frameHandle);
+					roleComponent_bg1.removeEventListener(Event.ENTER_FRAME,enter_frameHandle);
+				}		
+			}
+		}
+		
+		protected function enter_frameHandle(event:Event):void
+		{
+			roleComponent_bg.x-=1;
+			roleComponent_bg1.x-=1;
+			if(roleComponent_bg1.x <= 0){
+//				roleComponent_bg.removeEventListener(Event.ENTER_FRAME,enter_frameHandle);
+				roleComponent_bg.x = 0;
+				roleComponent_bg1.x = roleComponent_bg.width;
 			}
 		}
 		

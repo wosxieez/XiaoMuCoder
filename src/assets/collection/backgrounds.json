@@ -1,26 +1,32 @@
 [
     {
         "name": "背景1",
-        "icon": "assets/background/background1.jpg"
+        "icon": "assets/background/bg1.png",
+        "isBackground": true
     },
     {
     	 "name": "背景2",
-        "icon": "assets/background/background2.jpg"
+        "icon": "assets/background/background2.jpg",
+      "isBackground": true
     },
      {
     	 "name": "背景3",
-        "icon": "assets/background/background3.jpg"
+        "icon": "assets/background/background3.jpg",
+      "isBackground": true
     },
      {
     	 "name": "背景4",
-        "icon": "assets/background/background4.jpg"
+        "icon": "assets/background/background4.jpg",
+        "isBackground": true
     },
      {
     	 "name": "背景5",
-        "icon": "assets/background/background5.jpg"
+        "icon": "assets/background/background5.jpg",
+       "isBackground": true
     },
      {
     	 "name": "背景6",
-        "icon": "assets/background/background6.jpg"
-    }
+        "icon": "assets/background/background6.jpg",
+       "isBackground": true
+      }
 ]

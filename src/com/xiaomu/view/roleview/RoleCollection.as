@@ -14,6 +14,7 @@ package com.xiaomu.view.roleview
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
+	import mx.utils.UIDUtil;
 	
 	import coco.component.Group;
 	import coco.component.HorizontalAlign;
@@ -259,7 +260,9 @@ package com.xiaomu.view.roleview
 				role.name = item.name;
 				role.icon = item.icon;
 				role.skin = item.skin;
+				role.isBackground = item.isBackground;
 				newroles.push(role);
+				trace(role.isBackground);
 			}
 			
 			roleList.dataProvider = newroles;
@@ -327,15 +330,25 @@ package com.xiaomu.view.roleview
 			if (role)
 			{
 				var newRole:Role = new Role();
-//				newRole.id = UIDUtil.createUID(); // 生成唯一ID
+				newRole.id = UIDUtil.createUID(); // 生成唯一ID
 //				throw new Error("这块需要修改...注意");
 				newRole.name = role.name;
 				newRole.icon = role.icon;
 				newRole.skin = role.skin;
+				newRole.isBackground = role.isBackground;
 				
-				RoleManager.getInstance().addRole(newRole);
+				if(!newRole.isBackground)
+				{
+					RoleManager.getInstance().addRole(newRole);
+				}
+				else
+				{
+					RoleManager.getInstance().addBackground(newRole);
+				}
 				RoleManager.getInstance().selectRole(newRole);
 				RoleManager.getInstance().addRoleSkin(newRole); //添加新皮肤
+				
+				
 				
 				roleList.selectedIndex = -1; // 重置选中(必须)
 				PopUpManager.removePopUp(this); // 关闭窗口

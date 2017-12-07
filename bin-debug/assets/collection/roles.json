@@ -2,6 +2,7 @@
     {
         "name": "角色1",
         "icon": "assets/role/role1.png",
+       "isBackground": false,
         "skin": [
         {
         "name": "皮肤1",
@@ -24,6 +25,7 @@
     {
     	"name": "角色2",
         "icon": "assets/role/role2.png",
+         "isBackground": false,
          "skin": [
         {
         "name": "皮肤1",
@@ -46,6 +48,7 @@
     {
         "name": "角色3",
         "icon": "assets/role/role3.png",
+        "isBackground": false,
         "skin": [
         {
         "name": "皮肤1",
@@ -67,27 +70,33 @@
     },
     {
     	"name": "角色4",
-        "icon": "assets/role/role4.png"
+        "icon": "assets/role/role4.png",
+       "isBackground": false
     },
     {
         "name": "角色5",
-        "icon": "assets/role/role5.png"
+        "icon": "assets/role/role5.png",
+        "isBackground": false
     },
     {
     	"name": "角色6",
-        "icon": "assets/role/role6.png"
+        "icon": "assets/role/role6.png",
+        "isBackground": false
     },
     {
         "name": "角色1",
-        "icon": "assets/role/role1.png"
+        "icon": "assets/role/role1.png",
+         "isBackground": false
     },
     {
         "name": "角色2",
-        "icon": "assets/role/role2.png"
+        "icon": "assets/role/role2.png",
+        "isBackground": false
     },
     {
         "name": "角色3",
-        "icon": "assets/role/role3.png"
+        "icon": "assets/role/role3.png",
+         "isBackground": false
     },
     {
         "name": "角色4",
@@ -95,19 +104,23 @@
     },
     {
         "name": "角色5",
-        "icon": "assets/role/role5.png"
+        "icon": "assets/role/role5.png",
+        "isBackground": false
     },
     {
         "name": "角色6",
-        "icon": "assets/role/role6.png"
+        "icon": "assets/role/role6.png",
+         "isBackground": false
     },
     {
         "name": "角色1",
-        "icon": "assets/role/role1.png"
+        "icon": "assets/role/role1.png",
+         "isBackground": false
     },
     {
         "name": "角色2",
-        "icon": "assets/role/role2.png"
+        "icon": "assets/role/role2.png",
+         "isBackground": false
     },
     {
         "name": "角色3",

@@ -19,10 +19,14 @@ package com.xiaomu.component
 	 */	
 	public class ActionComponent extends UIComponent
 	{
+		
 		public function ActionComponent()
 		{
 			super();
-			
+			/**
+			 * 
+			 * 默认值改成true，支持鼠标输入等
+			 */
 			mouseChildren = false;
 		}
 		

@@ -1,5 +1,6 @@
 package com.xiaomu.view.actionview
 {
+	import com.xiaomu.data.Role;
 	import com.xiaomu.renderer.ActionBarItemRenderer;
 	import com.xiaomu.util.Theme;
 	
@@ -71,6 +72,7 @@ package com.xiaomu.view.actionview
 		{
 			super.createChildren();
 			
+//			actionBar = new ButtonGroup();
 			actionBar = new ButtonGroup();
 			actionBar.itemRendererColumnCount = 1;
 			actionBar.dataProvider = actionBarData;

@@ -25,10 +25,14 @@ package com.xiaomu.view.roleview
 			borderColor = 0xF0E7CC;
 			backgroundColor = 0xFEFBF0;
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addRoleHandler);
+//			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND,removeBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE,removeRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE_COLLECTION,addRoleCollectionHandler);
 		}
+		
+	
 		//----------------------------------------------------------------------------------------------------------------
 		//
 		// Get Instance
@@ -149,6 +153,7 @@ package com.xiaomu.view.roleview
 				}
 			}
 		}	
+		
 		
 		protected function removeRoleHandler(event:RoleEvent):void
 		{

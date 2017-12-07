@@ -14,6 +14,8 @@ package com.xiaomu.event
 		public static const DELETE_ROLESKIN : String = "deleteRoleSkin";
 		public static const ADD_ROLESKIN : String = "addRoleSkin";
 		public static const SELECT_ITEM : String = "selectItem";
+		public static const ADD_BACKGROUND:String = "addBackground";
+		public static const REMOVE_BACKGROUND : String = "removeBackground"
 		
 		/**
 		 * 新角色 
@@ -26,6 +28,8 @@ package com.xiaomu.event
 		
 		/*选中的索引*/
 		public var index : int;
+
+	
 		
 		public function RoleEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{

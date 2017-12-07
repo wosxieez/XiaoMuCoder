@@ -4,10 +4,14 @@ package com.xiaomu.actioncomponent
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownFlagHookComponent;
 	import com.xiaomu.component.DownHookComponent;
+	import com.xiaomu.component.DropList;
 	import com.xiaomu.component.UpHookComponent;
+	import com.xiaomu.renderer.SelectboxRender;
 	import com.xiaomu.util.Theme;
 	
+	import coco.component.DropDownList;
 	import coco.component.Label;
+	import com.xiaomu.component.ActionChoose;
 	
 	public class TestActionComponent extends ActionComponent
 	{
@@ -32,6 +36,9 @@ package com.xiaomu.actioncomponent
 		}
 		
 		private var labelDisplay:Label;
+//		private var rolePlay: ActionChoose;
+//		private var arr1:Array = ["点击","按下","放开"];
+
 		private var flagHookComponent1:DownFlagHookComponent;
 		
 		
@@ -41,8 +48,14 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "This is Test Action";
+			labelDisplay.text = "当角色被点击";
 			addChild(labelDisplay);
+			
+//			rolePlay = new ActionChoose();
+//			rolePlay.itemRendererClass = SelectboxRender;
+//			rolePlay.dataProvider = arr1;
+//			addChild(rolePlay);
+			
 		}
 		
 		override protected function updateDisplayList():void
@@ -53,6 +66,7 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay.width = width;
 			labelDisplay.height = height;
+//			labelDisplay.x = 5;
 		}
 		
 		override protected function drawSkin():void

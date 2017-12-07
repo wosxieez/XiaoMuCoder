@@ -13,6 +13,11 @@ package com.xiaomu.data
 		public var name:String;
 		
 		/**
+		 * 判断是否是背景图 
+		 */	
+		public var isBackground:Boolean;
+		
+		/**
 		 * 角色图标源
 		 */		
 		public var icon:String;
