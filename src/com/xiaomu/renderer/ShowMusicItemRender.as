@@ -3,15 +3,18 @@ package com.xiaomu.renderer
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.media.Sound;
+	import flash.net.URLRequest;
 	
 	import coco.component.DefaultItemRenderer;
 	import coco.component.Image;
 	import coco.component.TextAlign;
 	
-	public class ShowListRenderer extends DefaultItemRenderer
+	public class ShowMusicItemRender extends DefaultItemRenderer
 	{
-		public function ShowListRenderer()
+		public function ShowMusicItemRender()
 		{
 			super();
 			mouseChildren = true;
@@ -21,24 +24,43 @@ package com.xiaomu.renderer
 			addEventListener(MouseEvent.CLICK, this_clickHandler);
 			addEventListener(MouseEvent.ROLL_OUT, this_rollOutHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_SHOWLIST,itemSelectedHandle);
-			// 每一个ItemRenderer 都有一个data属性
-			// data = {name: "皮肤1", source="jfjd....1.png"};
+		}
+		
+		protected function this_clickHandler(event:MouseEvent):void
+		{
+			// TODO Auto-generated method stub
+			
 		}
 		
 		private var skinIcon : Image;
 		private var closeIcon : Image;
+		private var musicStart:Image;
+		private var currentMusic:String;
 		
 		private var _mouseOver:Boolean = false;
-//		private var mouseOver:Boolean = false;
+		//		private var mouseOver:Boolean = false;
 		private var selected:Boolean = false;
 		
 		protected function itemSelectedHandle(event:RoleEvent):void
 		{
+			var s:Sound= new Sound();
+			var req:URLRequest = new URLRequest(currentMusic);
+			s.addEventListener(Event.COMPLETE, onSoundLoaded);
+			trace("播放当前的背景音乐"+currentMusic);
+			
+			s.load(req);
+			
 			selected = mouseOver;
 			invalidateProperties();
 			invalidateSkin();
 		}		
-
+		
+		protected function onSoundLoaded(event:Event):void
+		{
+			var localSound:Sound = event.target as Sound;
+			localSound.play(0,4);
+		}
+		
 		
 		public function get mouseOver():Boolean
 		{
@@ -65,6 +87,11 @@ package com.xiaomu.renderer
 			skinIcon.height = skinIcon.width = 40;
 			addChild(skinIcon);
 			
+			musicStart = new Image();
+			//			musicStart.height =30;
+			musicStart.source ="assets/musicstart.png";
+			addChild(musicStart)
+			
 			closeIcon = new Image();
 			closeIcon.height = closeIcon.width = 30;
 			closeIcon.source ="assets/close3.png";
@@ -75,11 +102,22 @@ package com.xiaomu.renderer
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
+	
+			if(selected)
+			{
+				
+				musicStart.source ="assets/musicstop.png";
+			}
+			else
+			{
+				musicStart.source ="assets/musicstart.png";
+			}
 			
 			if (data)
 			{
 				labelDisplay.text = data.name;
 				skinIcon.source = data.source;
+				currentMusic = data.bgSource;
 			}
 		}
 		
@@ -89,6 +127,9 @@ package com.xiaomu.renderer
 			
 			skinIcon.x = 20;
 			skinIcon.y = 10;
+			
+			musicStart.x = 180;
+			musicStart.y = 20;
 			
 			closeIcon.x = 220;
 			closeIcon.y = 16;
@@ -126,7 +167,7 @@ package com.xiaomu.renderer
 					graphics.lineStyle(1, 0xF2E7C9);
 				}
 			}		
-//			graphics.beginFill(0xD7F3FD,mouseOver ? 1 : 0);
+			//			graphics.beginFill(0xD7F3FD,mouseOver ? 1 : 0);
 			graphics.drawRoundRect(0,0,width,height,8,8);
 			graphics.endFill();
 			
@@ -138,12 +179,6 @@ package com.xiaomu.renderer
 			trace("渲染器中点击的是 ： "+index);
 			//利用管理器去传递这一事件给showlist的父级RoleSettingPanel 
 			RoleManager.getInstance().deleteRoleSkin(index);
-		}
-		
-		
-		protected function this_clickHandler(event:MouseEvent):void
-		{
-			
 		}
 		
 		protected function this_rollOutHandler(event:MouseEvent):void

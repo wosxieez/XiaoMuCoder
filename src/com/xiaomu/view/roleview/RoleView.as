@@ -1,11 +1,13 @@
 package com.xiaomu.view.roleview
 {
+	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.component.IconButton2;
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	
 	import flash.events.MouseEvent;
 	
+	import coco.component.Alert;
 	import coco.component.Group;
 	import coco.component.SkinComponent;
 	import coco.layout.HorizontalOrderLayout;
@@ -25,12 +27,13 @@ package com.xiaomu.view.roleview
 			borderColor = 0xF0E7CC;
 			backgroundColor = 0xFEFBF0;
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
-			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addRoleHandler);
-//			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND,removeBgsHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addBgsHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND,removeBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE,removeRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE_COLLECTION,addRoleCollectionHandler);
 		}
+		
 		
 	
 		//----------------------------------------------------------------------------------------------------------------
@@ -58,6 +61,7 @@ package com.xiaomu.view.roleview
 		
 		private var addRoleButton:IconButton2;
 		private var group:Group;
+		private var groupbg:Group;
 		
 		private var _rcollection :RoleCollection;
 		
@@ -124,11 +128,33 @@ package com.xiaomu.view.roleview
 		
 		protected function addRoleHandler(event:RoleEvent):void
 		{
-			if (event.role)
+			if (event.role&&group.numChildren!=0)
 			{
 				var roleCover:RoleCover = new RoleCover();
 				roleCover.role = event.role;
 				group.addChild(roleCover);
+			}
+			else if(event.role&&group.numChildren==0){
+				AppAlert.show("请先选择背景");
+			}
+		}
+		
+		protected function addBgsHandler(event:RoleEvent):void
+		{
+			if (event.role)
+			{
+				var roleCover:RoleCover = new RoleCover();
+				roleCover.role = event.role;
+				
+				if(group.numChildren == 0){
+					group.addChild(roleCover);
+					trace(event.role.isBackground);
+				}
+				else{
+					group.removeChildAt(0);
+					group.addChild(roleCover);
+					trace(event.role.isBackground);
+				}
 			}
 		}
 		
@@ -170,6 +196,22 @@ package com.xiaomu.view.roleview
 				}
 			}
 		}
+		
+		protected function removeBgsHandler(event:RoleEvent):void
+		{
+			var roleCover : RoleCover;
+			for (var i:int = 0; i < group.numChildren ; i++) 
+			{
+				roleCover = group.getChildAt(i) as RoleCover ;
+				if(roleCover)
+				{
+					if(roleCover.role.id == event.role.id)
+					{
+						group.removeChild(roleCover);
+					}
+				}
+			}
+		}		
 		
 		protected function addRoleCollectionHandler(event:RoleEvent):void
 		{

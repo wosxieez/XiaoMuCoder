@@ -190,7 +190,7 @@ package com.xiaomu.view.stageview
 		{
 			var newPoint:Point = AppUtil.getInstance().getMouseZoomAxisPoint(centerPoint, 
 				helperPoint, 
-				new Point(stage.mouseX, stage.mouseY));
+			new Point(stage.mouseX, stage.mouseY));
 			width = Math.abs(newPoint.x - centerPoint.x) * 2;
 			height = Math.abs(newPoint.y - centerPoint.y) * 2;
 			newPoint.x = centerPoint.x - width / 2;

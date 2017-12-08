@@ -45,7 +45,8 @@ package com.xiaomu.renderer
 			super.createChildren();
 			
 			iconDisplay = new Image();
-			iconDisplay.width = iconDisplay.height = 80;
+			iconDisplay.width =99;
+			 iconDisplay.height = 86;
 			addChild(iconDisplay);
 			
 			nameDisplay = new Label();

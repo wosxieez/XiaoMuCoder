@@ -116,11 +116,14 @@ package com.xiaomu.view.stageview
 		
 		protected function addRoleHandler(event:RoleEvent):void
 		{
-			var roleComponent:RoleComponent = new RoleComponent();
-			roleComponent.role = event.role;
-			roleComponent.x = (roleContainer.width - roleComponent.width) / 2;
-			roleComponent.y = (roleContainer.height - roleComponent.height) / 2;
-			roleContainer.addChild(roleComponent);
+			if(roleContainer.numChildren>1){
+				var roleComponent:RoleComponent = new RoleComponent();
+				roleComponent.role = event.role;
+				roleComponent.x = (roleContainer.width - roleComponent.width) / 2;
+				roleComponent.y = (roleContainer.height - roleComponent.height) / 2;
+				roleContainer.addChild(roleComponent);
+			}
+			
 		}	
 		
 		private var roleComponent_bg:RoleComponent;
@@ -133,14 +136,27 @@ package com.xiaomu.view.stageview
 			roleComponent_bg.width = roleContainer.width;
 			roleComponent_bg.height = roleContainer.height-40;
 			
+			
 			roleComponent_bg1 = new RoleComponent();
 			roleComponent_bg1.role = event.role;
 			roleComponent_bg1.width = roleContainer.width;
 			roleComponent_bg1.height = roleContainer.height-40;
 			roleComponent_bg1.x = roleComponent_bg.width;
 			
-			roleContainer.addChild(roleComponent_bg1);
-			roleContainer.addChild(roleComponent_bg);
+			//判断以前有没有rolecomponentbg，如果有的话，，移除以前的，添加新的，如果没有的话，直接添加新的背景
+				trace("现在还没有");
+				roleContainer.addChild(roleComponent_bg1);
+				roleContainer.addChild(roleComponent_bg);
+
+//				if (role == currentRole) return;
+//				
+//				var roleEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ROLE);
+//				roleEvent.oldRole = currentRole;
+//				currentRole = role;
+//				roleEvent.role = currentRole;
+//				RoleManager.getInstance().dispatchEvent(roleEvent);
+				
+				
 		}	
 		
 		protected function removeRoleHandler(event:RoleEvent):void
@@ -163,15 +179,16 @@ package com.xiaomu.view.stageview
 			for (var i:int = 0; i < roleContainer.numChildren; i++)
 			{
 				roleComponent = roleContainer.getChildAt(i) as RoleComponent;
-				if (roleComponent && roleComponent.role.id == event.role.id)
-				{
-//					roleContainer.removeChildAt(0);
-					roleContainer.removeChild(roleComponent_bg);
-					roleContainer.removeChild(roleComponent_bg1);
-					break;
+				
+				if (roleComponent &&roleComponent.role.id == event.role.id)
+				{	
+							roleContainer.removeChild(roleComponent_bg);
+							roleContainer.removeChild(roleComponent_bg1);
+					}
+					trace("删除了背景");
+					break;		
 				}
 			}
-		}	
 		
 		protected function selectRoleHandler(event:RoleEvent):void
 		{
@@ -186,7 +203,7 @@ package com.xiaomu.view.stageview
 						if (roleComponent && roleComponent.role.id == event.role.id)
 						{
 							transformer.target = roleComponent;	
-//							roleContainer.setChildIndex(roleComponent_bg,0);
+//							roleContainer.setChildIndex(roleComponent_bg,1);
 							//							
 							
 							return;

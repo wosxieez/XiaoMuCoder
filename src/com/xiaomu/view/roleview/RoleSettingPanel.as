@@ -7,13 +7,18 @@ package com.xiaomu.view.roleview
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	import com.xiaomu.renderer.ShowListRenderer;
+	import com.xiaomu.renderer.ShowMusicItemRender;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import flash.utils.setTimeout;
 	
 	import coco.component.List;
 	import coco.component.Panel;
 	import coco.component.VerticalAlign;
+	import coco.event.UIEvent;
 	import coco.manager.PopUpManager;
 	
 	public class RoleSettingPanel extends Panel
@@ -28,6 +33,7 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addEventListener(RoleEvent.SET_ROLE,this_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.DELETE_ROLESKIN,deleteRoleSkin_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLESKIN,addRoleSkin_Handler);
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUNDMUSIC,addBgMusic_Handler);
 			// 设置面板View <---> Role（数据）
 		}
 		
@@ -55,8 +61,9 @@ package com.xiaomu.view.roleview
 //		private var statusButton1_click : Boolean = false;
 //		private var statusButton2_click : Boolean = false;
 //		private var statusButton3_click : Boolean = false;
-		private var showList : List;
 		private var noticePanel : NoticePanel;
+		private var showMusicList : List;
+		private var showList : List;
 		
 		// 设置面板数据都方在一个地方Role里面
 		private var _role:Role;
@@ -124,6 +131,7 @@ package com.xiaomu.view.roleview
 			barButton4.labtext = "添加声音";
 			barButton4.width = 280;
 			barButton4.source = "assets/add.png";
+			barButton4.addEventListener(MouseEvent.CLICK,addMusicHandle);
 			addChild(barButton4);
 			barButton4.visible = false;
 			
@@ -153,10 +161,33 @@ package com.xiaomu.view.roleview
 			showList.height = 330;
 			showList.gap = 5;
 			showList.itemRendererHeight = 60;
-			showList.itemRendererClass = ShowListRenderer;
 			showList.verticalAlign = VerticalAlign.TOP;
+			showList.addEventListener(UIEvent.CHANGE,showList_changeHandler);
 			addChild(showList);
 			showList.visible = true;
+			
+//			showMusicList = new List();
+//			showMusicList.width = barButton1.width;
+//			showMusicList.height = 330;
+//			showMusicList.gap = 5;
+//			showMusicList.itemRendererHeight = 60;
+//			showMusicList.itemRendererClass = ShowListRenderer;
+//			showMusicList.verticalAlign = VerticalAlign.TOP;
+////			showMusicList.addEventListener(UIEvent.CHANGE,showList_changeHandler);
+//			addChild(showMusicList);
+//			showMusicList.visible = true;
+		}
+		
+		
+		
+		protected function showList_changeHandler(event:UIEvent):void
+		{
+			var itemselected:Object = showList.selectedItem;
+			showList.selectedIndex = -1;
+			
+			var item_selectEvent : RoleEvent = new RoleEvent(RoleEvent.SELECT_SHOWLIST);
+			RoleManager.getInstance().dispatchEvent(item_selectEvent);
+			
 		}
 		
 		override protected function commitProperties():void
@@ -168,19 +199,23 @@ package com.xiaomu.view.roleview
 			if(statusButton1.select)
 			{
 				showList.dataProvider = role.skin;
+				showList.itemRendererClass = ShowListRenderer;
 				showList.labelField = "name";
 				barButton1.visible = barButton2.visible = barButton3.visible = true;
 				barButton4.visible = barButton5.visible = barButton7.visible = barButton8.visible=false;
 			}
 			if(statusButton2.select)
 			{
-				showList.dataProvider = null;
+				showList.dataProvider = bgArr;
+				showList.itemRendererClass = ShowMusicItemRender;
+//				showList.dataProvider = role.skin;
 				barButton4.visible = barButton5.visible = barButton3.visible = true;
 				barButton1.visible = barButton2.visible = barButton7.visible = barButton8.visible=false;
 			}
 			if(statusButton3.select)
 			{
 				showList.dataProvider = null;
+				showList.itemRendererClass = ShowListRenderer;
 				barButton1.visible = barButton2.visible = barButton3.visible 
 					=barButton4.visible = barButton5.visible= false;
 				barButton7.visible = barButton8.visible = true;
@@ -222,6 +257,23 @@ package com.xiaomu.view.roleview
 			graphics.beginFill(0xFAF4E4);
 			graphics.drawRoundRect(11,statusButton1.y-1,width-23,height-2*statusButton1.y,4,4);
 			graphics.endFill();
+		}
+		
+		private var bgArr:Array=[];
+		protected function addBgMusic_Handler(event:RoleEvent):void
+		{
+				if (event.role&&event.role.bgSource)
+				{
+					var bgrole:Role;
+					bgrole = new Role();
+					bgrole.name =event.role.name;
+					bgrole.source = event.role.icon;	
+					bgrole.bgSource = event.role.bgSource;
+					bgArr.push(bgrole);	
+					
+					invalidateProperties();
+					trace("添加背景音乐: "+event.role.bgSource);
+				}
 		}
 		
 		protected function addRoleSkin_Handler(event:RoleEvent):void
@@ -285,6 +337,15 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addRoleCollection();
 		}
 		
+		protected function addMusicHandle(event:MouseEvent):void
+		{
+			if(!RoleManager.getInstance().addRoleCollection())
+			{
+				trace("点击添加音乐按钮");
+				RoleManager.getInstance().addRoleCollection();
+			}
+		}
+		
 		protected function sB3_clickHandler(event:MouseEvent):void
 		{
 			trace("点了3");
@@ -297,9 +358,10 @@ package com.xiaomu.view.roleview
 		protected function sB2_clickHandler(event:MouseEvent):void
 		{
 			trace("点了2");
+			
 			statusButton1.select = statusButton3.select = false;
 			invalidateProperties();
-			
+//			showList.itemRendererClass = ShowMusicItemRender;
 //			statusButton2_click = true;//stautsButton2 按钮已经被点击了
 		}
 		

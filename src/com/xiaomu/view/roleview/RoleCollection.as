@@ -261,8 +261,10 @@ package com.xiaomu.view.roleview
 				role.icon = item.icon;
 				role.skin = item.skin;
 				role.isBackground = item.isBackground;
+				role.isBackgroundMusic = item.isBackgroundMusic;
+				role.bgSource = item.bgSource;
 				newroles.push(role);
-				trace(role.isBackground);
+//				trace(role.isBackground);
 			}
 			
 			roleList.dataProvider = newroles;
@@ -336,15 +338,27 @@ package com.xiaomu.view.roleview
 				newRole.icon = role.icon;
 				newRole.skin = role.skin;
 				newRole.isBackground = role.isBackground;
+				newRole.isBackgroundMusic = role.isBackgroundMusic;
+				newRole.bgSource = role.bgSource;
 				
+				trace("背景音乐"+newRole.isBackgroundMusic);
+		
 				if(!newRole.isBackground)
 				{
-					RoleManager.getInstance().addRole(newRole);
+					if(newRole.isBackgroundMusic)
+					{
+						RoleManager.getInstance().addBackgroundMusic(newRole); //添加音乐
+						trace("bei"+newRole.isBackground);
+					}
+					else{
+						RoleManager.getInstance().addRole(newRole);
+					}
 				}
 				else
 				{
 					RoleManager.getInstance().addBackground(newRole);
 				}
+				
 				RoleManager.getInstance().selectRole(newRole);
 				RoleManager.getInstance().addRoleSkin(newRole); //添加新皮肤
 				
@@ -355,5 +369,6 @@ package com.xiaomu.view.roleview
 			}
 		}
 		
+	
 	}
 }

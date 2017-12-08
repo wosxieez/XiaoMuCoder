@@ -24,5 +24,8 @@ package com.xiaomu.data
 		
 		/*皮肤*/
 		public var skin:Array;
+		public var isBackgroundMusic:Boolean;
+		public var bgSource:String;
+		public var source:String;
 	}
 }

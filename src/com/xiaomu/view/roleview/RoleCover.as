@@ -196,7 +196,10 @@ package com.xiaomu.view.roleview
 			{
 				RoleManager.getInstance().removeBackground(role);
 			}
-			RoleManager.getInstance().removeRole(role);
+			else{
+				RoleManager.getInstance().removeRole(role);
+			}
+			
 			event.stopPropagation();
 		}
 		

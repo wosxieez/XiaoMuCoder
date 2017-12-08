@@ -5,13 +5,17 @@ package com.xiaomu.manager
 	import com.xiaomu.view.stageview.RoleComponent;
 	import com.xiaomu.view.stageview.StageView;
 	
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
+	import flash.media.Sound;
+	import flash.net.URLRequest;
 	
 	import coco.core.coco;
 	
 	[Event(name="addRole", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addBackground", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="addBackgroundMusic", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectRole", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="removeRole", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="removeBackground", type="com.xiaomu.event.RoleEvent")]
@@ -20,6 +24,7 @@ package com.xiaomu.manager
 	[Event(name="deleteRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectItem", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="selectShowList", type="com.xiaomu.event.RoleEvent")]
 
 
 	public class RoleManager extends EventDispatcher
@@ -136,6 +141,7 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
+
 		
 		/**
 		 * 根据角色数据获取角色组件
@@ -176,5 +182,25 @@ package com.xiaomu.manager
 		
 		
 		
+		
+		public function addBackgroundMusic(role:Role):void
+		{
+			var rolebgmusicEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_BACKGROUNDMUSIC);
+			rolebgmusicEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(rolebgmusicEvent);
+			
+//			var s:Sound= new Sound();
+//			s.addEventListener(Event.COMPLETE, onSoundLoaded);
+//			var req:URLRequest = new URLRequest(role.bgSource);
+//			trace("添加背景音乐");
+//			s.load(req);
+		}
+		
+//		protected function onSoundLoaded(event:Event):void
+//		{
+//				var localSound:Sound = event.target as Sound;
+//				localSound.play(0,4);
+//		}
+
 	}
 }

@@ -15,7 +15,10 @@ package com.xiaomu.event
 		public static const ADD_ROLESKIN : String = "addRoleSkin";
 		public static const SELECT_ITEM : String = "selectItem";
 		public static const ADD_BACKGROUND:String = "addBackground";
+		public static const ADD_BACKGROUNDMUSIC:String = "addBackgroundMusic";
 		public static const REMOVE_BACKGROUND : String = "removeBackground"
+		public static const SELECT_BACKGROUND : String = "selectBackground"
+		public static const  SELECT_SHOWLIST:String = "selectShowList";
 		
 		/**
 		 * 新角色 
@@ -28,6 +31,9 @@ package com.xiaomu.event
 		
 		/*选中的索引*/
 		public var index : int;
+		
+	
+
 
 	
 		
