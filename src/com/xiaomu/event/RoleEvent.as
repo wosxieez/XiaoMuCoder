@@ -17,6 +17,7 @@ package com.xiaomu.event
 		public static const ADD_BACKGROUND:String = "addBackground";
 		public static const ADD_BACKGROUNDMUSIC:String = "addBackgroundMusic";
 		public static const REMOVE_BACKGROUND : String = "removeBackground"
+		public static const REMOVE_BACKGROUNDMUSIC : String = "removeBackgroundMusic"
 		public static const SELECT_BACKGROUND : String = "selectBackground"
 		public static const  SELECT_SHOWLIST:String = "selectShowList";
 		
@@ -31,6 +32,7 @@ package com.xiaomu.event
 		
 		/*选中的索引*/
 		public var index : int;
+
 		
 	
 

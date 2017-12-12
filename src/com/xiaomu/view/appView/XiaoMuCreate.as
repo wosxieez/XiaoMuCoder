@@ -1,6 +1,8 @@
 package com.xiaomu.view.appView
 {
 	import com.xiaomu.component.AppLoading;
+	import com.xiaomu.component.BtnMode;
+	import com.xiaomu.component.IconButton2;
 	import com.xiaomu.event.LoginEvent;
 	import com.xiaomu.view.actionview.ActionView;
 	import com.xiaomu.view.headview.Headview;
@@ -37,6 +39,8 @@ package com.xiaomu.view.appView
 		private var appLoading:AppLoading;
 		private var appView : XiaomuApp;
 		
+		private var skin:IconButton2;
+		
 		override protected function createChildren():void
 		{
 			super.createChildren();
@@ -64,6 +68,13 @@ package com.xiaomu.view.appView
 			headview.y = 40;
 			addChild(headview);
 			
+			skin = new IconButton2();
+			skin.source ="assets/icon/skin.png";
+//			skin.width = skin.height = 32;
+			skin.x = 570;
+			skin.y = 20;
+			actionView.addChild(skin);
+//			trace("skin"+skin);
 		}
 		
 		protected function this_addedToStageHandler(event:Event):void

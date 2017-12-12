@@ -28,8 +28,22 @@ package com.xiaomu.renderer
 		
 		protected function this_clickHandler(event:MouseEvent):void
 		{
-			// TODO Auto-generated method stub
 			
+			selected = !selected;
+			event.stopPropagation();
+			
+			if(selected){
+				var s:Sound = new Sound();
+				var req:URLRequest = new URLRequest(currentMusic);
+				s.addEventListener(Event.COMPLETE, onSoundLoaded);
+				trace("播放当前的背景音乐"+currentMusic);
+				
+				s.load(req);
+			}
+			
+			else{
+				return ;
+			}
 		}
 		
 		private var skinIcon : Image;
@@ -41,24 +55,26 @@ package com.xiaomu.renderer
 		//		private var mouseOver:Boolean = false;
 		private var selected:Boolean = false;
 		
+		
 		protected function itemSelectedHandle(event:RoleEvent):void
-		{
-			var s:Sound= new Sound();
-			var req:URLRequest = new URLRequest(currentMusic);
-			s.addEventListener(Event.COMPLETE, onSoundLoaded);
-			trace("播放当前的背景音乐"+currentMusic);
-			
-			s.load(req);
-			
+		{	
 			selected = mouseOver;
 			invalidateProperties();
 			invalidateSkin();
 		}		
 		
+		private var oldsound:Sound;
 		protected function onSoundLoaded(event:Event):void
 		{
-			var localSound:Sound = event.target as Sound;
+//			if(!oldsound)
+//			{
+				var localSound:Sound = event.target as Sound;
+//			}
+			
+			
 			localSound.play(0,4);
+			trace("现在播放的是"+localSound);
+			
 		}
 		
 		
@@ -99,18 +115,19 @@ package com.xiaomu.renderer
 			addChild(closeIcon);
 		}
 		
+		
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
 	
 			if(selected)
 			{
-				
 				musicStart.source ="assets/musicstop.png";
 			}
 			else
 			{
 				musicStart.source ="assets/musicstart.png";
+				
 			}
 			
 			if (data)
@@ -177,8 +194,9 @@ package com.xiaomu.renderer
 		{
 			trace("closeIcon侦听到点击");
 			trace("渲染器中点击的是 ： "+index);
+			event.stopPropagation();
 			//利用管理器去传递这一事件给showlist的父级RoleSettingPanel 
-			RoleManager.getInstance().deleteRoleSkin(index);
+			RoleManager.getInstance().deleteBackgroundMusic(index);
 		}
 		
 		protected function this_rollOutHandler(event:MouseEvent):void

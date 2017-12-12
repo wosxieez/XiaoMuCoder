@@ -34,9 +34,10 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addEventListener(RoleEvent.DELETE_ROLESKIN,deleteRoleSkin_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLESKIN,addRoleSkin_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUNDMUSIC,addBgMusic_Handler);
+			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUNDMUSIC,removeBgMusic_Handler);
 			// 设置面板View <---> Role（数据）
 		}
-		
+
 		//单例
 		private static var instance : RoleSettingPanel;
 		
@@ -321,6 +322,21 @@ package com.xiaomu.view.roleview
 				setTimeout(closeNoticePanel,2000);
 			}
 		}
+		
+		
+		protected function removeBgMusic_Handler(event:RoleEvent):void
+		{
+			if(bgArr.length > 0)
+			{
+				trace("有可删除的背景音乐");
+				trace("deleteListIndex  :  "+event.index);
+				bgArr.splice(event.index,1);
+				invalidateProperties();
+				
+				
+			}
+		}
+		
 		
 		private function closeNoticePanel():void
 		{

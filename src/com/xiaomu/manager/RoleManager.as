@@ -172,6 +172,14 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
+		/* 删除背景音乐*/
+		public  function deleteBackgroundMusic(index : int):void
+		{
+			var deleteBgEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_BACKGROUNDMUSIC);
+			deleteBgEvent.index = index;
+			RoleManager.getInstance().dispatchEvent(deleteBgEvent);
+		}
+		
 		/*增加角色皮肤*/
 		public function addRoleSkin(role:Role):void
 		{
@@ -201,6 +209,7 @@ package com.xiaomu.manager
 //				var localSound:Sound = event.target as Sound;
 //				localSound.play(0,4);
 //		}
+
 
 	}
 }
