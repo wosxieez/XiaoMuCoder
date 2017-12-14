@@ -6,7 +6,6 @@ package com.xiaomu.view.loginView
 	
 	import coco.component.Label;
 	import coco.core.UIComponent;
-	import coco.manager.PopUpManager;
 	
 	public class Menuheader extends UIComponent
 	{

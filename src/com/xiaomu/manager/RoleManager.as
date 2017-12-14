@@ -23,6 +23,7 @@ package com.xiaomu.manager
 	[Event(name="addRoleCollection", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="deleteRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="addRoleSkin", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="selectRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectItem", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectShowList", type="com.xiaomu.event.RoleEvent")]
 
@@ -172,6 +173,15 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
+		/* /*选中list列表中的角色*/
+		public function selectRoleSkin(role:Role):void
+		{
+			
+			var roleEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ROLESKIN);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
+		
 		/* 删除背景音乐*/
 		public  function deleteBackgroundMusic(index : int):void
 		{
@@ -190,26 +200,16 @@ package com.xiaomu.manager
 		
 		
 		
-		
+		/*增加背景音乐*/
 		public function addBackgroundMusic(role:Role):void
 		{
 			var rolebgmusicEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_BACKGROUNDMUSIC);
 			rolebgmusicEvent.role = role;
 			RoleManager.getInstance().dispatchEvent(rolebgmusicEvent);
 			
-//			var s:Sound= new Sound();
-//			s.addEventListener(Event.COMPLETE, onSoundLoaded);
-//			var req:URLRequest = new URLRequest(role.bgSource);
-//			trace("添加背景音乐");
-//			s.load(req);
 		}
 		
-//		protected function onSoundLoaded(event:Event):void
-//		{
-//				var localSound:Sound = event.target as Sound;
-//				localSound.play(0,4);
-//		}
-
-
+		
+		
 	}
 }

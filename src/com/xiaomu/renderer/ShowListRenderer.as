@@ -1,5 +1,6 @@
 package com.xiaomu.renderer
 {
+	import com.xiaomu.data.Role;
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
 	
@@ -143,7 +144,10 @@ package com.xiaomu.renderer
 		
 		protected function this_clickHandler(event:MouseEvent):void
 		{
+			selected = !selected;
 			
+			trace("获取当前选中皮肤的索引号 ： "+index);
+//			RoleManager.getInstance().selectRoleSkin(null,index);
 		}
 		
 		protected function this_rollOutHandler(event:MouseEvent):void

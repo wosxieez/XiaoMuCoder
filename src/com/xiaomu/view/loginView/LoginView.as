@@ -1,6 +1,5 @@
 package com.xiaomu.view.loginView
 {
-	import com.xiaomu.component.BtnMode;
 	import com.xiaomu.component.IconButton;
 	import com.xiaomu.component.Listcenterbutton;
 	import com.xiaomu.component.PicIconbtn;
@@ -221,7 +220,6 @@ package com.xiaomu.view.loginView
 		protected function returnApp_clickHandle(event:MouseEvent):void
 		{
 			trace("在登录界面点击返回app");
-//			trace("在app界面点击返回创作面板");
 			var returnAppEvent : LoginEvent = new LoginEvent(LoginEvent.RETURN_APP);
 			LoginManager.getInstance().dispatchEvent(returnAppEvent);
 		}

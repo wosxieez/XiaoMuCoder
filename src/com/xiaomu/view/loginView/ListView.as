@@ -99,8 +99,6 @@ package com.xiaomu.view.loginView
 		
 		protected function create_clickHandle(event:MouseEvent):void
 		{
-//			PopUpManager.removePopUp(this);
-			
 			trace("在app界面点击返回创作面板");
 			var returnCreateEvent : LoginEvent = new LoginEvent(LoginEvent.RETURN_CREATE);
 			LoginManager.getInstance().dispatchEvent(returnCreateEvent);

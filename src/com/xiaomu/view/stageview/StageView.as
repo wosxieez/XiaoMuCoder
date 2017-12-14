@@ -33,8 +33,9 @@ package com.xiaomu.view.stageview
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE, removeRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND, removeBgsHandler);
-		}
-			
+			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLESKIN,selectRoleHandler);
+//			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_SHOWLIST, selectShowlistHandler);
+		}	
 		
 		
 		//----------------------------------------------------------------------------------------------------------------
@@ -94,13 +95,19 @@ package com.xiaomu.view.stageview
 			addChild(playButton);
 		}
 		
-		override protected function updateDisplayList():void
+		override protected function commitProperties():void
 		{
-			super.updateDisplayList();
+			super.commitProperties();
 			
 			roleContainer.width = width;
 			roleContainer.height = height - 30;
 			roleContainer.scrollRect = new Rectangle(0, 0, roleContainer.width, roleContainer.height);
+		}
+		
+		override protected function updateDisplayList():void
+		{
+			super.updateDisplayList();
+			
 			playButton.y = height - 68;
 			playButton.x = 7;
 		}
@@ -192,6 +199,7 @@ package com.xiaomu.view.stageview
 		
 		protected function selectRoleHandler(event:RoleEvent):void
 		{
+			
 			if (event.role)
 			{
 				var roleComponent:RoleComponent;
@@ -205,7 +213,6 @@ package com.xiaomu.view.stageview
 							transformer.target = roleComponent;	
 //							roleContainer.setChildIndex(roleComponent_bg,1);
 							//							
-							
 							return;
 						}
 					}	
@@ -213,6 +220,28 @@ package com.xiaomu.view.stageview
 			
 			transformer.target = null;
 		}
+		
+//		protected function selectShowlistHandler(event:RoleEvent):void
+//		{
+//			if (event.role)
+//			{
+//				var roleComponent:RoleComponent;
+//				
+//				for (var i:int = 0; i < roleContainer.numChildren; i++)
+//				{
+//					roleComponent = roleContainer.getChildAt(i) as RoleComponent;
+//					
+//					if (roleComponent && roleComponent.role.id == event.role.id)
+//					{
+//						transformer.target = roleComponent;	
+//						//							roleContainer.setChildIndex(roleComponent_bg,1);
+//						//							
+//						return;
+//					}
+//				}	
+//			}
+//			
+//		}		
 		
 		/**
 		 * 根据角色数据获取角色组件 

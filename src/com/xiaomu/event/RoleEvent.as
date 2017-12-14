@@ -13,6 +13,7 @@ package com.xiaomu.event
 		public static const ADD_ROLE_COLLECTION : String= "addRoleCollection";	
 		public static const DELETE_ROLESKIN : String = "deleteRoleSkin";
 		public static const ADD_ROLESKIN : String = "addRoleSkin";
+		public static const SELECT_ROLESKIN:String= "selectRoleSkin";
 		public static const SELECT_ITEM : String = "selectItem";
 		public static const ADD_BACKGROUND:String = "addBackground";
 		public static const ADD_BACKGROUNDMUSIC:String = "addBackgroundMusic";
@@ -32,6 +33,7 @@ package com.xiaomu.event
 		
 		/*选中的索引*/
 		public var index : int;
+
 
 		
 	

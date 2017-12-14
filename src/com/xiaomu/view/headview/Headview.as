@@ -33,7 +33,6 @@ package com.xiaomu.view.headview
 		private var icon1:BtnMode;
 		private var icon2:BtnMode;
 		private var icon3:BtnMode;
-//		private var loginPanel1:LoginPanel ;
 		private var arr:Array=["打开","新建","另存为","保存到本地","打开本地作品"];
 		private var arr1:Array;
 		
@@ -62,7 +61,6 @@ package com.xiaomu.view.headview
 			btn2.mouseOverColor = 0xFFDD67;
 			btn2.mouseOutColor = 0xFFD236;
 			btn2.source = "assets/head/icon00.png";
-			//			btn2.addEventListener(MouseEvent.MOUSE_OVER,btn2_overHandle);
 			addChild(btn2);
 			
 			btn3 = new BtnMode();
@@ -220,9 +218,6 @@ package com.xiaomu.view.headview
 			
 			loginBtn.x = 820;
 			loginBtn.y = 2;
-			
-//			loginPanel1.x = (width - loginPanel1.width)/2;
-//			loginPanel1.y = (height - loginPanel1.height)/2;
 		}
 		
 		override protected  function drawSkin():void

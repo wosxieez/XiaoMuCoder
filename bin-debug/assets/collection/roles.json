@@ -1,12 +1,12 @@
 [
     {
         "name": "角色1",
-        "icon": "assets/role/role1.png",
+        "icon": "assets/role/cat.png",
        "isBackground": false,
         "skin": [
         {
         "name": "皮肤1",
-        "source": "assets/role/role1.png"
+        "source": "assets/role/cat.png"
         },
         {
          "name": "皮肤2",

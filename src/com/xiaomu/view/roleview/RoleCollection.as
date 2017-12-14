@@ -9,11 +9,13 @@ package com.xiaomu.view.roleview
 	import com.xiaomu.renderer.ListItemRenderer;
 	import com.xiaomu.renderer.RoleItemRenderer;
 	
+	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
+	
 	import mx.utils.UIDUtil;
 	
 	import coco.component.Group;
@@ -115,12 +117,6 @@ package com.xiaomu.view.roleview
 			icon4.source = "assets/close3.png";
 			icon4.addEventListener(MouseEvent.CLICK,icon4_clickHandler);
 			addChild(icon4);
-			
-//			lab2 = new Label();
-//			lab2.text = "显示类型：";
-//			lab2.fontFamily = "Microsoft YaHei";
-//			lab2.fontSize = 18;
-//			groupH2.addChild(lab2);
 			
 			toggleButton1 = new ToggleButtonForApp();
 			toggleButton1.buttonMode = true;
@@ -264,7 +260,6 @@ package com.xiaomu.view.roleview
 				role.isBackgroundMusic = item.isBackgroundMusic;
 				role.bgSource = item.bgSource;
 				newroles.push(role);
-//				trace(role.isBackground);
 			}
 			
 			roleList.dataProvider = newroles;
@@ -341,7 +336,7 @@ package com.xiaomu.view.roleview
 				newRole.isBackgroundMusic = role.isBackgroundMusic;
 				newRole.bgSource = role.bgSource;
 				
-				trace("背景音乐"+newRole.isBackgroundMusic);
+//				trace("背景音乐"+newRole.isBackgroundMusic);
 		
 				if(!newRole.isBackground)
 				{
@@ -359,16 +354,22 @@ package com.xiaomu.view.roleview
 					RoleManager.getInstance().addBackground(newRole);
 				}
 				
-				RoleManager.getInstance().selectRole(newRole);
-				RoleManager.getInstance().addRoleSkin(newRole); //添加新皮肤
+				if(!RoleSettingPanel.getInstance().isPopUp)
+				{
+					RoleManager.getInstance().selectRole(newRole);
+					trace("不是在设置面板打开rollection");
+				}
 				
 				
+					RoleManager.getInstance().addRoleSkin(newRole); //添加新皮肤
 				
+			
+				             
 				roleList.selectedIndex = -1; // 重置选中(必须)
 				PopUpManager.removePopUp(this); // 关闭窗口
 			}
 		}
+
 		
-	
 	}
 }

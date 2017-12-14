@@ -4,10 +4,10 @@ package com.xiaomu.view.roleview
 	import com.xiaomu.component.IconButton2;
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.RoleManager;
+	import com.xiaomu.view.appView.XiaoMuCreate;
 	
 	import flash.events.MouseEvent;
 	
-	import coco.component.Alert;
 	import coco.component.Group;
 	import coco.component.SkinComponent;
 	import coco.layout.HorizontalOrderLayout;
@@ -30,12 +30,11 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND,removeBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLESKIN,selectRoleSkinHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE,removeRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE_COLLECTION,addRoleCollectionHandler);
-		}
-		
-		
-	
+		}	
+
 		//----------------------------------------------------------------------------------------------------------------
 		//
 		// Get Instance
@@ -139,6 +138,20 @@ package com.xiaomu.view.roleview
 			}
 		}
 		
+		protected function selectRoleSkinHandler(event:RoleEvent):void
+		{
+			group.removeChildAt(selectindex);
+			
+				var roleCover:RoleCover = new RoleCover();
+				roleCover.role = event.role;
+				roleCover.name = event.role.name;
+				roleCover.role.icon = event.role.source;
+			group.addChildAt(roleCover,selectindex);
+			
+			// TODO Auto-generated method stub
+			
+		}	
+		
 		protected function addBgsHandler(event:RoleEvent):void
 		{
 			if (event.role)
@@ -158,6 +171,7 @@ package com.xiaomu.view.roleview
 			}
 		}
 		
+		private var selectindex:int;
 		protected function selectRoleHandler(event:RoleEvent):void
 		{
 			var selectedRoleId:String = event.role ? event.role.id : "none";
@@ -171,6 +185,7 @@ package com.xiaomu.view.roleview
 					if (roleCover.role.id == selectedRoleId)
 					{
 						roleCover.selected = true;
+						selectindex = i;
 					}
 					else
 					{
@@ -179,6 +194,8 @@ package com.xiaomu.view.roleview
 				}
 			}
 		}	
+		
+		
 		
 		
 		protected function removeRoleHandler(event:RoleEvent):void

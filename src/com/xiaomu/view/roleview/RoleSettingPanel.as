@@ -9,10 +9,7 @@ package com.xiaomu.view.roleview
 	import com.xiaomu.renderer.ShowListRenderer;
 	import com.xiaomu.renderer.ShowMusicItemRender;
 	
-	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
 	import flash.utils.setTimeout;
 	
 	import coco.component.List;
@@ -37,7 +34,9 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUNDMUSIC,removeBgMusic_Handler);
 			// 设置面板View <---> Role（数据）
 		}
+		
 
+		
 		//单例
 		private static var instance : RoleSettingPanel;
 		
@@ -59,9 +58,6 @@ package com.xiaomu.view.roleview
 		private var barButton5 : BarButton;
 		private var barButton7 : BarButton;
 		private var barButton8 : BarButton;
-//		private var statusButton1_click : Boolean = false;
-//		private var statusButton2_click : Boolean = false;
-//		private var statusButton3_click : Boolean = false;
 		private var noticePanel : NoticePanel;
 		private var showMusicList : List;
 		private var showList : List;
@@ -164,32 +160,41 @@ package com.xiaomu.view.roleview
 			showList.itemRendererHeight = 60;
 			showList.verticalAlign = VerticalAlign.TOP;
 			showList.addEventListener(UIEvent.CHANGE,showList_changeHandler);
+			showList.addEventListener(MouseEvent.CLICK,showList_clickHandler);
 			addChild(showList);
 			showList.visible = true;
 			
-//			showMusicList = new List();
-//			showMusicList.width = barButton1.width;
-//			showMusicList.height = 330;
-//			showMusicList.gap = 5;
-//			showMusicList.itemRendererHeight = 60;
-//			showMusicList.itemRendererClass = ShowListRenderer;
-//			showMusicList.verticalAlign = VerticalAlign.TOP;
-////			showMusicList.addEventListener(UIEvent.CHANGE,showList_changeHandler);
-//			addChild(showMusicList);
-//			showMusicList.visible = true;
 		}
 		
+
 		
 		
 		protected function showList_changeHandler(event:UIEvent):void
 		{
-			var itemselected:Object = showList.selectedItem;
-			showList.selectedIndex = -1;
+			var itemselected:Object= showList.selectedItem ;
+			
+//			showList.selectedIndex = -1;
+			trace(showList.selectedIndex);
+			
+			if(skinArr.length>0){
+				 var role:Role = new Role();
+				 role.name = skinArr[showList.selectedIndex].name;
+				 role.source = skinArr[showList.selectedIndex].source;
+				 RoleManager.getInstance().selectRoleSkin(role);
+				 trace("zhixingbu"+skinArr[showList.selectedIndex].name);
+			}
+			
 			
 			var item_selectEvent : RoleEvent = new RoleEvent(RoleEvent.SELECT_SHOWLIST);
 			RoleManager.getInstance().dispatchEvent(item_selectEvent);
 			
 		}
+		
+		protected function showList_clickHandler(event:MouseEvent):void
+		{
+			// TODO Auto-generated method stub
+			
+		}		
 		
 		override protected function commitProperties():void
 		{
@@ -199,7 +204,7 @@ package com.xiaomu.view.roleview
 			
 			if(statusButton1.select)
 			{
-				showList.dataProvider = role.skin;
+				showList.dataProvider =skinArr;
 				showList.itemRendererClass = ShowListRenderer;
 				showList.labelField = "name";
 				barButton1.visible = barButton2.visible = barButton3.visible = true;
@@ -277,39 +282,43 @@ package com.xiaomu.view.roleview
 				}
 		}
 		
+		private var skinArr:Array=[];
 		protected function addRoleSkin_Handler(event:RoleEvent):void
-		{
-			try
-			{
-				if (event.role&&event.role.skin.length>0)
+		{				
+				if (event.role)
 				{
-					var tempLength:int;  //数组的上一回的长度
-					
-					for(var index : int = event.role.skin.length-1; index>=tempLength; index--) //反向赋值
+					var roleSkin:Role;
+					roleSkin = new Role();
+					if(event.role.skin)
 					{
-						role.skin.unshift(event.role.skin[index]);
+						for(var index : int = 0; index<event.role.skin.length; index++) //反向赋值
+						{
+							skinArr.unshift(event.role.skin[index]);
+						}
 					}
-					tempLength = event.role.skin.length;
+					
+					else
+					{
+						roleSkin.name =event.role.name;
+						roleSkin.source = event.role.icon;		
+						skinArr.push(roleSkin);	
+					}
+					
 					invalidateProperties();
 					trace("已经执行");
-					RoleManager.getInstance().removeRole(event.role);
+				
 				}
-			} 
-			catch(error:Error) 
-			{
-				trace("该角色没有皮肤");
-				RoleManager.getInstance().removeRole(event.role);
-			}
+
 		}
 		
 		protected function deleteRoleSkin_Handler(event:RoleEvent):void
-		{
-			if(role.skin.length>1)
+		{	
+			if(skinArr.length>1)
 			{
 				trace("RoleSettingPanel接收到属性失效命令");
 				//在此出接受到 list 列表中的 选择的索引
 				trace("showListIndex  :  "+event.index);
-				role.skin.splice(event.index,1);
+				skinArr.splice(event.index,1);
 				invalidateProperties();
 			}
 			else
@@ -323,6 +332,35 @@ package com.xiaomu.view.roleview
 			}
 		}
 		
+		protected function selectRoleSkin_Handler(event:RoleEvent):void
+		{
+//			var selectedRoleindex:String = event.target ? event.target.index : "none";
+//			
+//			var showlist:ShowListRenderer;
+//			for (var i:int = 0; i < skinArr.numChildren; i++)
+//			{
+//				showlist = skinArr.getChildAt(i) as ShowListRenderer;
+//				if (showlist)
+//				{
+//					for(var index:int = 0;index < skinArr.length;index++)
+//					{
+//						if (showlist.index == skinArr.indexOf(index))
+//						{
+//							showlist.selected = true;
+//							trace("xuanzhongjuese");
+//						}
+//						else
+//						{
+//							showlist.selected = false;
+//						}
+//					}
+//				
+//				}
+//			}
+			
+			RoleManager.getInstance().selectRoleSkin(event.target.index );
+			trace("event.target.index "+event.target.index );
+		}
 		
 		protected function removeBgMusic_Handler(event:RoleEvent):void
 		{
@@ -331,9 +369,7 @@ package com.xiaomu.view.roleview
 				trace("有可删除的背景音乐");
 				trace("deleteListIndex  :  "+event.index);
 				bgArr.splice(event.index,1);
-				invalidateProperties();
-				
-				
+				invalidateProperties();		
 			}
 		}
 		
@@ -346,10 +382,12 @@ package com.xiaomu.view.roleview
 		protected function this_Handler(event:RoleEvent):void
 		{
 			role = event.role;
+//			RoleManager.getInstance().selectRole(role);
 		}
 		
 		protected function bB1_clickHandler(event:MouseEvent):void
 		{
+			trace("点击设置按钮添加素材的情况下打开rollcollection");
 			RoleManager.getInstance().addRoleCollection();
 		}
 		
@@ -367,8 +405,6 @@ package com.xiaomu.view.roleview
 			trace("点了3");
 			statusButton1.select = statusButton2.select = false;
 			invalidateProperties();
-			
-//			statusButton3_click = true;//stautsButton3 按钮已经被点击了
 		}
 		
 		protected function sB2_clickHandler(event:MouseEvent):void
@@ -377,8 +413,6 @@ package com.xiaomu.view.roleview
 			
 			statusButton1.select = statusButton3.select = false;
 			invalidateProperties();
-//			showList.itemRendererClass = ShowMusicItemRender;
-//			statusButton2_click = true;//stautsButton2 按钮已经被点击了
 		}
 		
 		protected function sB1_clickHandler(event:MouseEvent):void
@@ -386,8 +420,6 @@ package com.xiaomu.view.roleview
 			trace("点了1");
 			statusButton2.select = statusButton3.select = false;
 			invalidateProperties();
-			
-//			statusButton1_click = true; //stautsButton1 按钮已经被点击了
 		}
 	}
 }

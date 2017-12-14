@@ -40,6 +40,8 @@ package com.xiaomu.view.appView
 		private var appView : XiaomuApp;
 		
 		private var skin:IconButton2;
+		private var voice:IconButton2;
+		private var char:IconButton2;
 		
 		override protected function createChildren():void
 		{
@@ -70,11 +72,21 @@ package com.xiaomu.view.appView
 			
 			skin = new IconButton2();
 			skin.source ="assets/icon/skin.png";
-//			skin.width = skin.height = 32;
 			skin.x = 570;
 			skin.y = 20;
 			actionView.addChild(skin);
-//			trace("skin"+skin);
+			
+			voice = new IconButton2();
+			voice.source ="assets/icon/voice.png";
+			voice.x = 570;
+			voice.y = 68;
+			actionView.addChild(voice);
+			
+			char = new IconButton2();
+			char.source ="assets/icon/data.png";
+			char.x = 570;
+			char.y =116;
+			actionView.addChild(char);
 		}
 		
 		protected function this_addedToStageHandler(event:Event):void
