@@ -144,10 +144,10 @@ package com.xiaomu.renderer
 		
 		protected function this_clickHandler(event:MouseEvent):void
 		{
-			selected = !selected;
+//			selected = !selected;
 			
+//			RoleManager.getInstance().selectRoleSkin(index);
 			trace("获取当前选中皮肤的索引号 ： "+index);
-//			RoleManager.getInstance().selectRoleSkin(null,index);
 		}
 		
 		protected function this_rollOutHandler(event:MouseEvent):void

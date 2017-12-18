@@ -27,6 +27,7 @@ package com.xiaomu.view.roleview
 			borderColor = 0xF0E7CC;
 			backgroundColor = 0xFEFBF0;
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE,addRoleHandler);
+//			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLESKIN,addRoleSkinHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUND,addBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_BACKGROUND,removeBgsHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE,selectRoleHandler);
@@ -34,7 +35,8 @@ package com.xiaomu.view.roleview
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE,removeRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE_COLLECTION,addRoleCollectionHandler);
 		}	
-
+	
+		
 		//----------------------------------------------------------------------------------------------------------------
 		//
 		// Get Instance
@@ -151,6 +153,18 @@ package com.xiaomu.view.roleview
 			// TODO Auto-generated method stub
 			
 		}	
+		
+		
+//		protected function addRoleSkinHandler(event:RoleEvent):void
+//		{
+//			group.removeChildAt(selectindex);
+//			
+//			var roleCover:RoleCover = new RoleCover();
+//			roleCover.role = event.role;
+//			roleCover.name = event.role.name;
+//			roleCover.role.icon = event.role.source;
+//			group.addChildAt(roleCover,selectindex);
+//		}
 		
 		protected function addBgsHandler(event:RoleEvent):void
 		{

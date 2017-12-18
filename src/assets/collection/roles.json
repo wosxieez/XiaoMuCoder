@@ -6,19 +6,31 @@
         "skin": [
         {
         "name": "皮肤1",
-        "source": "assets/role/cat.png"
+        "source": "assets/role/skin/step1.png"
         },
         {
          "name": "皮肤2",
-        "source": "assets/role/role1.png"
+        "source": "assets/role/skin/step2.png"
         },
         {
         "name": "皮肤3",
-        "source": "assets/role/role1.png"
+        "source": "assets/role/skin/step3.png"
         },
         {
          "name": "皮肤4",
-        "source": "assets/role/role1.png"
+        "source": "assets/role/skin/step4.png"
+        },
+        {
+         "name": "皮肤5",
+         "source": "assets/role/skin/step5.png"
+        },
+        {
+         "name": "皮肤6",
+         "source": "assets/role/skin/step6.png"
+        },
+        {
+         "name": "皮肤7",
+         "source": "assets/role/skin/step7.png"
         }
         ]
     },
@@ -27,22 +39,10 @@
         "icon": "assets/role/role2.png",
          "isBackground": false,
          "skin": [
-        {
-        "name": "皮肤1",
-        "source": "assets/role/role2.png"
-        },
-        {
-         "name": "皮肤2",
-        "source": "assets/role/role2.png"
-        },
-        {
-        "name": "皮肤3",
-        "source": "assets/role/role2.png"
-        },
-        {
-         "name": "皮肤4",
-        "source": "assets/role/role2.png"
-        }
+       		 {
+         	"name": "皮肤1",
+        	"source": "assets/role/role2.png"
+       		 }
         ]
     },
     {
@@ -57,13 +57,99 @@
         {
          "name": "皮肤2",
         "source": "assets/role/role3.png"
+        }
+        ]
+    },
+    {
+    	"name": "角色4",
+        "icon": "assets/role/role4.png",
+       "isBackground": false,
+       "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
+    },
+    {
+        "name": "角色5",
+        "icon": "assets/role/role5.png",
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
+    },
+    {
+    	"name": "角色6",
+        "icon": "assets/role/role6.png",
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
+    },
+    {
+        "name": "角色1",
+        "icon": "assets/role/cat.png",
+       "isBackground": false,
+        "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/skin/step1.png"
+        },
+        {
+         "name": "皮肤2",
+        "source": "assets/role/skin/step2.png"
         },
         {
         "name": "皮肤3",
-        "source": "assets/role/role3.png"
+        "source": "assets/role/skin/step3.png"
         },
         {
          "name": "皮肤4",
+        "source": "assets/role/skin/step4.png"
+        },
+        {
+         "name": "皮肤5",
+         "source": "assets/role/skin/step5.png"
+        },
+        {
+         "name": "皮肤6",
+         "source": "assets/role/skin/step6.png"
+        },
+        {
+         "name": "皮肤7",
+         "source": "assets/role/skin/step7.png"
+        }
+        ]
+    },
+    {
+    	"name": "角色2",
+        "icon": "assets/role/role2.png",
+         "isBackground": false,
+         "skin": [
+       		 {
+         	"name": "皮肤1",
+        	"source": "assets/role/role2.png"
+       		 }
+        ]
+    },
+    {
+        "name": "角色3",
+        "icon": "assets/role/role3.png",
+        "isBackground": false,
+        "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        },
+        {
+         "name": "皮肤2",
         "source": "assets/role/role3.png"
         }
         ]
@@ -71,95 +157,129 @@
     {
     	"name": "角色4",
         "icon": "assets/role/role4.png",
-       "isBackground": false
+       "isBackground": false,
+       "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
         "name": "角色5",
         "icon": "assets/role/role5.png",
-        "isBackground": false
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
     	"name": "角色6",
         "icon": "assets/role/role6.png",
-        "isBackground": false
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
         "name": "角色1",
-        "icon": "assets/role/role1.png",
-         "isBackground": false
+        "icon": "assets/role/cat.png",
+       "isBackground": false,
+        "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/skin/step1.png"
+        },
+        {
+         "name": "皮肤2",
+        "source": "assets/role/skin/step2.png"
+        },
+        {
+        "name": "皮肤3",
+        "source": "assets/role/skin/step3.png"
+        },
+        {
+         "name": "皮肤4",
+        "source": "assets/role/skin/step4.png"
+        },
+        {
+         "name": "皮肤5",
+         "source": "assets/role/skin/step5.png"
+        },
+        {
+         "name": "皮肤6",
+         "source": "assets/role/skin/step6.png"
+        },
+        {
+         "name": "皮肤7",
+         "source": "assets/role/skin/step7.png"
+        }
+        ]
     },
     {
-        "name": "角色2",
+    	"name": "角色2",
         "icon": "assets/role/role2.png",
-        "isBackground": false
+         "isBackground": false,
+         "skin": [
+       		 {
+         	"name": "皮肤1",
+        	"source": "assets/role/role2.png"
+       		 }
+        ]
     },
     {
         "name": "角色3",
         "icon": "assets/role/role3.png",
-         "isBackground": false
+        "isBackground": false,
+        "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        },
+        {
+         "name": "皮肤2",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
-        "name": "角色4",
-        "icon": "assets/role/role4.png"
+    	"name": "角色4",
+        "icon": "assets/role/role4.png",
+       "isBackground": false,
+       "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
         "name": "角色5",
         "icon": "assets/role/role5.png",
-        "isBackground": false
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     },
     {
-        "name": "角色6",
+    	"name": "角色6",
         "icon": "assets/role/role6.png",
-         "isBackground": false
-    },
-    {
-        "name": "角色1",
-        "icon": "assets/role/role1.png",
-         "isBackground": false
-    },
-    {
-        "name": "角色2",
-        "icon": "assets/role/role2.png",
-         "isBackground": false
-    },
-    {
-        "name": "角色3",
-        "icon": "assets/role/role3.png"
-    },
-    {
-        "name": "角色4",
-        "icon": "assets/role/role4.png"
-    },
-    {
-        "name": "角色5",
-        "icon": "assets/role/role5.png"
-    },
-    {
-        "name": "角色6",
-        "icon": "assets/role/role6.png"
-    },
-    {
-        "name": "角色1",
-        "icon": "assets/role/role1.png"
-    },
-    {
-        "name": "角色2",
-        "icon": "assets/role/role2.png"
-    },
-    {
-        "name": "角色3",
-        "icon": "assets/role/role3.png"
-    },
-    {
-        "name": "角色4",
-        "icon": "assets/role/role4.png"
-    },
-    {
-        "name": "角色5",
-        "icon": "assets/role/role5.png"
-    },
-    {
-        "name": "角色6",
-        "icon": "assets/role/role6.png"
+        "isBackground": false,
+         "skin": [
+        {
+        "name": "皮肤1",
+        "source": "assets/role/role3.png"
+        }
+        ]
     }
+    
 ]

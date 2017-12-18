@@ -362,6 +362,7 @@ package com.xiaomu.view.roleview
 				
 				
 					RoleManager.getInstance().addRoleSkin(newRole); //添加新皮肤
+					trace("点击设置按钮添加素材的情况下打开rollcollection");
 				
 			
 				             

@@ -1,5 +1,6 @@
 package com.xiaomu.view.roleview
 {
+	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.component.BarButton;
 	import com.xiaomu.component.NoticePanel;
 	import com.xiaomu.component.StatusButton;
@@ -27,7 +28,7 @@ package com.xiaomu.view.roleview
 			height =500;
 			titleHeight = 0;
 			autoDrawSkin = false;
-			RoleManager.getInstance().addEventListener(RoleEvent.SET_ROLE,this_Handler);
+			RoleManager.getInstance().addEventListener(RoleEvent.SET_ROLE,setRole_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.DELETE_ROLESKIN,deleteRoleSkin_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLESKIN,addRoleSkin_Handler);
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_BACKGROUNDMUSIC,addBgMusic_Handler);
@@ -160,7 +161,6 @@ package com.xiaomu.view.roleview
 			showList.itemRendererHeight = 60;
 			showList.verticalAlign = VerticalAlign.TOP;
 			showList.addEventListener(UIEvent.CHANGE,showList_changeHandler);
-			showList.addEventListener(MouseEvent.CLICK,showList_clickHandler);
 			addChild(showList);
 			showList.visible = true;
 			
@@ -171,30 +171,31 @@ package com.xiaomu.view.roleview
 		
 		protected function showList_changeHandler(event:UIEvent):void
 		{
-			var itemselected:Object= showList.selectedItem ;
-			
+			var itemselected:Role= showList.selectedItem as Role ;
 //			showList.selectedIndex = -1;
-			trace(showList.selectedIndex);
+		
+//			trace(showList.selectedIndex);
+
 			
-			if(skinArr.length>0){
-				 var role:Role = new Role();
-				 role.name = skinArr[showList.selectedIndex].name;
+			if(skinArr.length>0&&showList.selectedIndex>=0)
+			{
+			 	var role:Role = new Role();
+			 	role.name = skinArr[showList.selectedIndex].name;
 				 role.source = skinArr[showList.selectedIndex].source;
-				 RoleManager.getInstance().selectRoleSkin(role);
+			 	RoleManager.getInstance().selectRoleSkin(role);
 				 trace("zhixingbu"+skinArr[showList.selectedIndex].name);
+				 
+			}
+			else
+			{
+				
 			}
 			
 			
-			var item_selectEvent : RoleEvent = new RoleEvent(RoleEvent.SELECT_SHOWLIST);
+		var item_selectEvent : RoleEvent = new RoleEvent(RoleEvent.SELECT_SHOWLIST);
 			RoleManager.getInstance().dispatchEvent(item_selectEvent);
 			
-		}
-		
-		protected function showList_clickHandler(event:MouseEvent):void
-		{
-			// TODO Auto-generated method stub
-			
-		}		
+		}	
 		
 		override protected function commitProperties():void
 		{
@@ -287,33 +288,27 @@ package com.xiaomu.view.roleview
 		{				
 				if (event.role)
 				{
-					var roleSkin:Role;
-					roleSkin = new Role();
-					if(event.role.skin)
-					{
-						for(var index : int = 0; index<event.role.skin.length; index++) //反向赋值
+						if(event.role.skin)
 						{
-							skinArr.unshift(event.role.skin[index]);
-						}
-					}
+							for(var index : int = 0; index<event.role.skin.length; index++) //反向赋值
+							{
+								skinArr.unshift(event.role.skin[index]);
+							}
+						}	
+						invalidateProperties();
+						
+						trace("已经执行");
 					
-					else
-					{
-						roleSkin.name =event.role.name;
-						roleSkin.source = event.role.icon;		
-						skinArr.push(roleSkin);	
-					}
-					
-					invalidateProperties();
-					trace("已经执行");
-				
 				}
-
+				else{
+					trace("该角色没有皮肤");
+				}
+		
 		}
 		
 		protected function deleteRoleSkin_Handler(event:RoleEvent):void
 		{	
-			if(skinArr.length>1)
+			if(skinArr.length>0)
 			{
 				trace("RoleSettingPanel接收到属性失效命令");
 				//在此出接受到 list 列表中的 选择的索引
@@ -330,36 +325,6 @@ package com.xiaomu.view.roleview
 				PopUpManager.centerPopUp(noticePanel);
 				setTimeout(closeNoticePanel,2000);
 			}
-		}
-		
-		protected function selectRoleSkin_Handler(event:RoleEvent):void
-		{
-//			var selectedRoleindex:String = event.target ? event.target.index : "none";
-//			
-//			var showlist:ShowListRenderer;
-//			for (var i:int = 0; i < skinArr.numChildren; i++)
-//			{
-//				showlist = skinArr.getChildAt(i) as ShowListRenderer;
-//				if (showlist)
-//				{
-//					for(var index:int = 0;index < skinArr.length;index++)
-//					{
-//						if (showlist.index == skinArr.indexOf(index))
-//						{
-//							showlist.selected = true;
-//							trace("xuanzhongjuese");
-//						}
-//						else
-//						{
-//							showlist.selected = false;
-//						}
-//					}
-//				
-//				}
-//			}
-			
-			RoleManager.getInstance().selectRoleSkin(event.target.index );
-			trace("event.target.index "+event.target.index );
 		}
 		
 		protected function removeBgMusic_Handler(event:RoleEvent):void
@@ -379,15 +344,35 @@ package com.xiaomu.view.roleview
 			PopUpManager.removePopUp(noticePanel);
 		}
 		
-		protected function this_Handler(event:RoleEvent):void
+		protected function setRole_Handler(event:RoleEvent):void
 		{
-			role = event.role;
-//			RoleManager.getInstance().selectRole(role);
+			if(event.role.isBackground){
+//				AppAlert.show("背景不能设置皮肤");
+				return ;
+			}
+			else{
+				role = event.role;
+				if (role&&role.skin.length>0)
+				{
+					for(var index : int = 0; index<event.role.skin.length; index++) //反向赋值
+					{
+						skinArr.push(event.role.skin[index]);
+					}
+					
+					invalidateProperties();
+					trace("已经执行");
+					
+				}
+				else{
+					trace("该角色没有皮肤");
+				}
+			}
+			
 		}
 		
 		protected function bB1_clickHandler(event:MouseEvent):void
 		{
-			trace("点击设置按钮添加素材的情况下打开rollcollection");
+//			trace("点击设置按钮添加素材的情况下打开rollcollection");
 			RoleManager.getInstance().addRoleCollection();
 		}
 		
