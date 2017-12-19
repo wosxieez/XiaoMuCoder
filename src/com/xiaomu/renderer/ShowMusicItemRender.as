@@ -195,8 +195,6 @@ package com.xiaomu.renderer
 			trace("closeIcon侦听到点击");
 			trace("渲染器中点击的是 ： "+index);
 			event.stopPropagation();
-			//利用管理器去传递这一事件给showlist的父级RoleSettingPanel 
-			RoleManager.getInstance().deleteBackgroundMusic(index);
 		}
 		
 		protected function this_rollOutHandler(event:MouseEvent):void

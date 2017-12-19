@@ -84,13 +84,6 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
-		public  function addBackground(role:Role):void
-		{
-			var bgsEvent:RoleEvent = new RoleEvent(RoleEvent.ADD_BACKGROUND);
-			bgsEvent.role = role;
-			RoleManager.getInstance().dispatchEvent(bgsEvent);
-		}
-		
 		/**
 		 * 选中一个角色 
 		 * @param role
@@ -120,20 +113,6 @@ package com.xiaomu.manager
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
 		
-		/**
-		 * 删除一个背景
-		 * @param role
-		 */	
-		public function removeBackground(role:Role):void
-		{
-			// 如果删除的是当前选中的角色 首页取消选中
-			selectRole(null);
-			
-			var bgsEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_BACKGROUND);
-			bgsEvent.role = role;
-			RoleManager.getInstance().dispatchEvent(bgsEvent);
-		}
-		
 		/*设置一个角色*/
 		public function setRole(role:Role):void
 		{
@@ -141,9 +120,7 @@ package com.xiaomu.manager
 			roleEvent.role = role;
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
-		
 
-		
 		/**
 		 * 根据角色数据获取角色组件
 		 * @param role
@@ -156,60 +133,6 @@ package com.xiaomu.manager
 			else
 				return StageView.getInstance().coco::getRoleComponent(role);
 		}
-		
-		
-		/*添加RoleCollection*/
-		public function addRoleCollection():void
-		{
-			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_ROLE_COLLECTION);
-			RoleManager.getInstance().dispatchEvent(roleEvent);
-		}
-		
-		/* 删除角色皮肤*/
-		public function deleteRoleSkin(index : int):void
-		{
-			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.DELETE_ROLESKIN);
-			roleEvent.index = index;
-			RoleManager.getInstance().dispatchEvent(roleEvent);
-		}
-		
-		/* /*选中list列表中的角色*/
-		public function selectRoleSkin(role:Role):void
-		{
-			
-			var roleEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ROLESKIN);
-			roleEvent.role = role;
-			RoleManager.getInstance().dispatchEvent(roleEvent);
-		}
-		
-		/* 删除背景音乐*/
-		public  function deleteBackgroundMusic(index : int):void
-		{
-			var deleteBgEvent : RoleEvent = new RoleEvent(RoleEvent.REMOVE_BACKGROUNDMUSIC);
-			deleteBgEvent.index = index;
-			RoleManager.getInstance().dispatchEvent(deleteBgEvent);
-		}
-		
-		/*增加角色皮肤*/
-		public function addRoleSkin(role:Role):void
-		{
-			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_ROLESKIN);
-			roleEvent.role = role;
-			RoleManager.getInstance().dispatchEvent(roleEvent);
-		}
-		
-		
-		
-		/*增加背景音乐*/
-		public function addBackgroundMusic(role:Role):void
-		{
-			var rolebgmusicEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_BACKGROUNDMUSIC);
-			rolebgmusicEvent.role = role;
-			RoleManager.getInstance().dispatchEvent(rolebgmusicEvent);
-			
-		}
-		
-		
-		
+	
 	}
 }

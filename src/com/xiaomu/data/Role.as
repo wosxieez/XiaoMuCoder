@@ -9,7 +9,7 @@ package com.xiaomu.data {
 		public var name: String          // 角色名称
 		public var icon: String          // 角色图标
 		public var type: String          // 角色类型   可以自己扩展如 'bg' 'music'
-		public var source: *             // 角色源数据 泛型-可以为Array 可以为String
+		public var data: *               // 角色源数据 泛型-可以为任何类型 需要自己判断
 		
 	}
 }

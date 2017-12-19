@@ -135,12 +135,7 @@ package com.xiaomu.renderer
 		
 		protected function closeIcon_clickHandler(event:MouseEvent):void
 		{
-			trace("closeIcon侦听到点击");
-			trace("渲染器中点击的是 ： "+index);
-			//利用管理器去传递这一事件给showlist的父级RoleSettingPanel 
-			RoleManager.getInstance().deleteRoleSkin(index);
 		}
-		
 		
 		protected function this_clickHandler(event:MouseEvent):void
 		{

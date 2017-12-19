@@ -1,30 +1,30 @@
 [
-	{
-    	"name": "角色",
-        "source": "assets/collection/roles.json"
-    },
-    {
-        "name": "背景",
-        "source": "assets/collection/backgrounds.json"
-    },
-    {
-    	"name": "道具",
-        "source": "assets/collection/roles.json"
-    },
-    {
-        "name": "图标",
-        "source": "assets/collection/backgrounds.json"
-    },
-     {
-        "name": "音效",
-        "source": "assets/collection/backgroundMusic.json"
-    },
-    {
-    	"name": "角色",
-        "source": "assets/collection/roles.json"
-    },
-    {
-        "name": "背景",
-        "source": "assets/collection/backgrounds.json"
-    }
+  {
+    "name": "角色",
+    "source": "assets/collection/roles.json"
+  },
+  {
+    "name": "背景",
+    "source": "assets/collection/backgrounds.json"
+  },
+  {
+    "name": "道具",
+    "source": "assets/collection/roles.json"
+  },
+  {
+    "name": "图标",
+    "source": "assets/collection/backgrounds.json"
+  },
+  {
+    "name": "音效",
+    "source": "assets/collection/music.json"
+  },
+  {
+    "name": "角色",
+    "source": "assets/collection/roles.json"
+  },
+  {
+    "name": "背景",
+    "source": "assets/collection/backgrounds.json"
+  }
 ]

@@ -1,5 +1,4 @@
-package com.xiaomu.view.stageview
-{
+package com.xiaomu.view.stageview {
 	import com.xiaomu.data.Action;
 	import com.xiaomu.data.Role;
 	
@@ -9,10 +8,8 @@ package com.xiaomu.view.stageview
 	import coco.core.UIComponent;
 	import coco.core.coco;
 	
-	public class RoleComponent extends UIComponent
-	{
-		public function RoleComponent()
-		{
+	public class RoleComponent extends UIComponent {
+		public function RoleComponent() {
 			super();
 			
 			mouseChildren = false;
@@ -30,22 +27,20 @@ package com.xiaomu.view.stageview
 		private var imgDisplay:Image;
 		
 		private var _role:Role;
-
-		public function get role():Role
-		{
+		
+		public function get role():Role {
 			return _role;
 		}
-
-		public function set role(value:Role):void
-		{
+		
+		public function set role(value:Role):void {
 			_role = value;
 			invalidateProperties();
 		}
-
+		
 		
 		/**
-		 * 脚本数据 
-		 */		
+		 * 脚本数据
+		 */
 		public var actions:Vector.<Action> = new Vector.<Action>();
 		
 		
@@ -55,51 +50,43 @@ package com.xiaomu.view.stageview
 		//
 		//----------------------------------------------------------------------------------------------------------------
 		
-		override protected function createChildren():void
-		{
+		override protected function createChildren():void {
 			super.createChildren();
 			imgDisplay = new Image();
 			addChild(imgDisplay);
 		}
 		
 		
-		
-		override protected function commitProperties():void
-		{
+		override protected function commitProperties():void {
 			super.commitProperties();
 			
-			if (role)
-			{
+			if (role) {
 				imgDisplay.source = role.icon;
 			}
 			else
 				imgDisplay.source = null;
 		}
 		
-		override protected function updateDisplayList():void
-		{
+		override protected function updateDisplayList():void {
 			super.updateDisplayList();
 			
 			imgDisplay.width = width;
 			imgDisplay.height = height;
 		}
 		
-		override protected function drawSkin():void
-		{
+		override protected function drawSkin():void {
 			super.drawSkin();
 			graphics.clear();
-			graphics.beginFill(0x0000ff,0);
-			graphics.drawRect(0,0,width,height);
+			graphics.beginFill(0x0000ff, 0);
+			graphics.drawRect(0, 0, width, height);
 			graphics.endFill();
 		}
 		
 		/**
 		 * 运行脚本动作
-		 */		
-		public function doAction():void
-		{
-			for each(var action:Action in actions)
-			{
+		 */
+		public function doAction():void {
+			for each(var action:Action in actions) {
 				action.coco::doAction(this, null);
 			}
 		}
