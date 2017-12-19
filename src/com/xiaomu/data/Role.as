@@ -1,31 +1,15 @@
-package com.xiaomu.data
-{
-	public class Role
-	{
-		/**
-		 * 角色id 
-		 */		
-		public var id:String;
+package com.xiaomu.data {
+	
+    /**
+	 * 角色数据
+	 * */
+	public class Role {
 		
-		/**
-		 * 角色名称 
-		 */		
-		public var name:String;
+		public var id: String            // 角色ID
+		public var name: String          // 角色名称
+		public var icon: String          // 角色图标
+		public var type: String          // 角色类型   可以自己扩展如 'bg' 'music'
+		public var source: *             // 角色源数据 泛型-可以为Array 可以为String
 		
-		/**
-		 * 判断是否是背景图 
-		 */	
-		public var isBackground:Boolean;
-		
-		/**
-		 * 角色图标源
-		 */		
-		public var icon:String;
-		
-		/*皮肤*/
-		public var skin:Array;
-		public var isBackgroundMusic:Boolean;
-		public var bgSource:String;
-		public var source:String;
 	}
 }
