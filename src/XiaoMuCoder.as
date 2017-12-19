@@ -1,5 +1,4 @@
-package
-{
+package {
 	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.component.AppLoading;
 	import com.xiaomu.event.LoginEvent;
@@ -18,35 +17,31 @@ package
 	import coco.core.Application;
 	import coco.event.UIEvent;
 	import coco.manager.PopUpManager;
-
 	
 	/**
-	 * XiaoMuCoder Application 
+	 * XiaoMuCoder Application
 	 * 小木编程
 	 * @author coco
-	 */	
+	 */
 	[SWF(width="1024", height="740")]
-	public class XiaoMuCoder extends Application
-	{
-		public function XiaoMuCoder()
-		{
+	public class XiaoMuCoder extends Application {
+		
+		public function XiaoMuCoder() {
 			super();
 			
 			autoDrawSkin = true;
 			borderAlpha = backgroundAlpha = 0;
 			TipManager.getInstance().init(this); // TIP管理器启动
 			addEventListener(Event.ADDED_TO_STAGE, this_addedToStageHandler);
-			LoginManager.getInstance().addEventListener(LoginEvent.ENTER_APP,enterApp_Handler);
-			LoginManager.getInstance().addEventListener(LoginEvent.RETURN_CREATE,returnCreate_Handler);
+			LoginManager.getInstance().addEventListener(LoginEvent.ENTER_APP, enterApp_Handler);
+			LoginManager.getInstance().addEventListener(LoginEvent.RETURN_CREATE, returnCreate_Handler);
 		}
 		
 		private var appLoading:AppLoading;
-		private var xiaomuApp : XiaomuApp;
+		private var xiaomuApp:XiaomuApp;
 		private var xiaomuCreate:XiaoMuCreate;
 		
-		
-		override protected function createChildren():void
-		{
+		override protected function createChildren():void {
 			super.createChildren();
 			
 			xiaomuApp = new XiaomuApp();
@@ -56,85 +51,70 @@ package
 			xiaomuCreate = new XiaoMuCreate();
 			addChild(xiaomuCreate);
 			xiaomuCreate.visible = true;
-
 			
 			// 500毫秒后开始检查版本更新
 			setTimeout(checkAppVersion, 500);
 		}
 		
-		protected function enterApp_Handler(event:LoginEvent):void
-		{
+		protected function enterApp_Handler(event:LoginEvent):void {
 			PopUpManager.addPopUp(xiaomuApp);
 			removeChild(xiaomuCreate);
-			xiaomuApp.visible =true;
+			xiaomuApp.visible = true;
 			xiaomuCreate.visible = false;
-		}			
+		}
 		
-		
-		protected function returnCreate_Handler(event:LoginEvent):void
-		{
+		protected function returnCreate_Handler(event:LoginEvent):void {
 			PopUpManager.removePopUp(xiaomuApp);
-
 			addChild(xiaomuCreate);
-			xiaomuApp.visible =false;
-			xiaomuCreate.visible = true;		
+			xiaomuApp.visible = false;
+			xiaomuCreate.visible = true;
 		}
 		
-		protected function this_addedToStageHandler(event:Event):void
-		{
+		protected function this_addedToStageHandler(event:Event):void {
 			// 程序居中代码
-			stage.nativeWindow.x = Screen.mainScreen.visibleBounds.x + 
-				(Screen.mainScreen.visibleBounds.width - stage.stageWidth) / 2;
+			stage.nativeWindow.x = Screen.mainScreen.visibleBounds.x +
+					(Screen.mainScreen.visibleBounds.width - stage.stageWidth) / 2;
 			stage.nativeWindow.y = Screen.mainScreen.visibleBounds.y +
-				(Screen.mainScreen.visibleBounds.height - stage.stageHeight) / 2;
+					(Screen.mainScreen.visibleBounds.height - stage.stageHeight) / 2;
 		}
-		
 		
 		/**
 		 * 检查程序版本更新
-		 */		
-		private function checkAppVersion():void
-		{
+		 */
+		private function checkAppVersion():void {
 			VersionManager.getInstance().addEventListener(VersionEvent.CHECK_RESULT, version_checkResultHandler);
 			VersionManager.getInstance().checkVersion();
 		}
 		
-		protected function version_checkResultHandler(event:VersionEvent):void
-		{
-			if (event.available)
-			{
-				AppAlert.show(
-					"最新版本:" + VersionManager.getInstance().latestVersionLabel +
-					"\r当前版本:" + VersionManager.getInstance().curVersionLabel + 
-					"\r\r发现新版应用程序，是否立即更新", 
-					"版本提示", 
-					Alert.OK|Alert.CANCEL, 
-					null, 
-					versionCloseHandler);
+		protected function version_checkResultHandler(event:VersionEvent):void {
+			if (event.available) {
+				AppAlert.show("最新版本:" + VersionManager.getInstance().latestVersionLabel +
+						"\r当前版本:" + VersionManager.getInstance().curVersionLabel +
+						"\r\r发现新版应用程序，是否立即更新",
+						"版本提示",
+						Alert.OK | Alert.CANCEL,
+						null,
+						versionCloseHandler);
 			}
 		}
 		
-		private function versionCloseHandler(e:UIEvent):void
-		{
-			if (e.detail == Alert.OK)
-			{
+		private function versionCloseHandler(e:UIEvent):void {
+			if (e.detail == Alert.OK) {
 				appLoading = new AppLoading();
 				PopUpManager.addPopUp(appLoading, null, true);
 				PopUpManager.centerPopUp(appLoading);
-				
 				VersionManager.getInstance().addEventListener(VersionEvent.PROGRESS, version_processHandler);
-				VersionManager.getInstance().addEventListener(VersionEvent.DOWNLOAD_RESULT, version_downloadResultHandler);
+				VersionManager.getInstance().addEventListener(VersionEvent.DOWNLOAD_RESULT,
+						version_downloadResultHandler);
 				VersionManager.getInstance().download();
 			}
 		}
 		
-		protected function version_processHandler(event:VersionEvent):void
-		{
+		protected function version_processHandler(event:VersionEvent):void {
 			appLoading.value = event.progressValue / 100;
 		}
 		
-		protected function version_downloadResultHandler(event:VersionEvent):void
-		{
+		protected function version_downloadResultHandler(event:VersionEvent):void {
 			// 新版本下载完毕， 开始安装更新
 			VersionManager.getInstance().install();
 		}

@@ -83,11 +83,6 @@ package com.xiaomu.view.roleview
 		{
 			super.createChildren();
 			
-			addRoleButton = new IconButton2();
-			addRoleButton.source = "assets/fodder.png";
-			addRoleButton.addEventListener(MouseEvent.CLICK, addRoleButton_clickHandler);
-			addChild(addRoleButton);
-			
 			var layout:HorizontalOrderLayout = new HorizontalOrderLayout();
 			layout.padding = 10;
 			layout.gap = 10;
@@ -95,6 +90,11 @@ package com.xiaomu.view.roleview
 			group = new Group();
 			group.layout = layout;
 			addChild(group);
+			
+			addRoleButton = new IconButton2();
+			addRoleButton.source = "assets/fodder.png";
+			addRoleButton.addEventListener(MouseEvent.CLICK, addRoleButton_clickHandler);
+			addChild(addRoleButton);
 		}
 		
 		override protected function updateDisplayList():void
