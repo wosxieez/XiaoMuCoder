@@ -3,6 +3,8 @@ package com.xiaomu.action
 	import com.xiaomu.data.Action;
 	import com.xiaomu.view.stageview.RoleComponent;
 	
+	import flash.display.Stage;
+	
 	import coco.animation.Animation;
 	import coco.event.AnimationEvent;
 	
@@ -19,6 +21,11 @@ package com.xiaomu.action
 		{
 			var animation:Animation = new Animation(actionTarget);
 			animation.add("y", actionTarget.y + 100);
+			trace(actionTarget.y);
+			
+		
+	
+			
 			animation.addEventListener(AnimationEvent.COMPLETE, animation_completeHandler);
 			animation.start();
 		}

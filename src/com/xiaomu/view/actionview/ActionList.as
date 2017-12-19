@@ -2,6 +2,7 @@ package com.xiaomu.view.actionview
 {
 	import com.xiaomu.actioncomponent.MoveXActionComponent;
 	import com.xiaomu.actioncomponent.MoveYActionComponent;
+	import com.xiaomu.actioncomponent.RotateActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.component.ActionComponent;
@@ -72,10 +73,10 @@ package com.xiaomu.view.actionview
 			moveYAction2.menuEnabled = false;
 			addChild(moveYAction2);
 			
-//			var moveYAction3:MoveYActionComponent = new MoveYActionComponent();
-//			moveYAction3.mouseChildren = false;
-//			moveYAction3.menuEnabled = false;
-//			addChild(moveYAction3);
+			var rotate30Degree:RotateActionComponent = new RotateActionComponent();
+			rotate30Degree.mouseChildren = false;
+			rotate30Degree.menuEnabled = false;
+			addChild(rotate30Degree);
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void

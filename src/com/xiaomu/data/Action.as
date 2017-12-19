@@ -20,6 +20,10 @@ package com.xiaomu.data
 		 */		
 		public var y:Number;
 		/**
+		 * 旋转角度 
+		 */		
+		public var rotate:Number;
+		/**
 		 * 对应的ActionComponent组件类名称 
 		 */		
 		public var className:String;

@@ -18,7 +18,8 @@ package com.xiaomu.action
 		override protected function onAction(actionTarget:RoleComponent):void
 		{
 			var animation:Animation = new Animation(actionTarget);
-			animation.add("x", actionTarget.x + 100);
+//			animation.add("x", actionTarget.x + 100);
+			animation.add("x", actionTarget.x);
 			animation.addEventListener(AnimationEvent.COMPLETE, animation_completeHandler);
 			animation.start();
 		}

@@ -185,7 +185,6 @@ package com.xiaomu.view.roleview
 			PopUpManager.addPopUp(roleSettingPanel,null, true, true, 0, .1);
 			PopUpManager.centerPopUp(roleSettingPanel);
 			
-			
 			RoleManager.getInstance().setRole(role);
 		}
 		
