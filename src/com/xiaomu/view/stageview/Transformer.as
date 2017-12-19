@@ -55,6 +55,7 @@ package com.xiaomu.view.stageview
 				height = target.height;
 				x = target.x;
 				y = target.y;
+				rotation = target.rotation;
 				
 				if (parent)
 					parent.setChildIndex(this, parent.numChildren - 1);
@@ -81,6 +82,7 @@ package com.xiaomu.view.stageview
 				target.height = height;
 				target.x = x;
 				target.y = y;
+				target.rotation = rotation;
 			}
 		}
 		
@@ -169,8 +171,8 @@ package com.xiaomu.view.stageview
 				}
 				case 2:  // rotate
 				{
-//					rotate();
-//					event.updateAfterEvent();
+					rotate();
+					event.updateAfterEvent();
 					break;
 				}
 				default:

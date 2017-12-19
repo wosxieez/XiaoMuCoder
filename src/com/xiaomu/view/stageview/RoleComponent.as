@@ -3,6 +3,8 @@ package com.xiaomu.view.stageview
 	import com.xiaomu.data.Action;
 	import com.xiaomu.data.Role;
 	
+	import flash.geom.Matrix;
+	
 	import coco.component.Image;
 	import coco.core.UIComponent;
 	import coco.core.coco;
@@ -59,6 +61,8 @@ package com.xiaomu.view.stageview
 			imgDisplay = new Image();
 			addChild(imgDisplay);
 		}
+		
+		
 		
 		override protected function commitProperties():void
 		{
