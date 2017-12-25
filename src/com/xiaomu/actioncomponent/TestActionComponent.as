@@ -19,8 +19,8 @@ package com.xiaomu.actioncomponent
 		{
 			super();
 			
-			width = 150;
-			height = 30;
+			width = 130;
+			height = 32;
 			
 			upHookComponent = new UpHookComponent();
 			upHookComponent.x = 15;
@@ -29,7 +29,7 @@ package com.xiaomu.actioncomponent
 			downHookComponent.x = 15;
 			
 			flagHookComponent1 = new DownFlagHookComponent();
-			flagHookComponent1.x = 90;
+			flagHookComponent1.x = 60;
 			addDownFlagHookComponent(flagHookComponent1);
 		
 			actionClass = TestAction;
@@ -48,7 +48,7 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "当角色被点击";
+			labelDisplay.text = "当开始  被点击";
 			addChild(labelDisplay);
 			
 //			rolePlay = new ActionChoose();
@@ -64,19 +64,21 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent.y = height;
 			
-			labelDisplay.width = width;
+			labelDisplay.width = width-10;
 			labelDisplay.height = height;
-//			labelDisplay.x = 5;
 		}
 		
 		override protected function drawSkin():void
 		{
 			graphics.clear();
-			graphics.beginFill(Theme.ACTION_COLOR);
-			graphics.drawRect(0, 0, width, height);
-			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
+			graphics.beginFill(Theme.EVENT_COLOR);
+			graphics.drawCircle(-5,height/2-4,(height+8)/2);
 			graphics.endFill();
-			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.ACTION_COLOR);
+			graphics.beginFill(Theme.EVENT_COLOR);
+			graphics.drawRoundRectComplex(0, 0, width, height,0,16,0,16);
+//			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
+			graphics.endFill();
+			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.EVENT_COLOR);
 			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
 			graphics.endFill();
 			graphics.beginFill(flagHookComponent1.matchActionHook ? Theme.MATCHED_COLOR : Theme.EVENT_COLOR);

@@ -1,12 +1,13 @@
 package com.xiaomu.view.actionview
 {
+	import com.xiaomu.actioncomponent.ContinueComponent;
 	import com.xiaomu.actioncomponent.MoveXActionComponent;
 	import com.xiaomu.actioncomponent.MoveYActionComponent;
 	import com.xiaomu.actioncomponent.RotateActionComponent;
+	import com.xiaomu.actioncomponent.ShakeActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.actioncomponent.XandYComponent;
-	import com.xiaomu.actioncomponent.ShakeActionComponent;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.manager.ActionComponentManager;
@@ -85,10 +86,15 @@ package com.xiaomu.view.actionview
 			XangYAction.menuEnabled = false;
 			addChild(XangYAction);
 			
-			var dou:ShakeActionComponent = new ShakeActionComponent();
-			dou.mouseChildren = false;
-			dou.menuEnabled = false;
-			addChild(dou);
+			var Shake:ShakeActionComponent = new ShakeActionComponent();
+			Shake.mouseChildren = false;
+			Shake.menuEnabled = false;
+			addChild(Shake);
+			
+			var continue1:ContinueComponent = new ContinueComponent();
+			continue1.mouseChildren = false;
+			continue1.menuEnabled = false;
+			addChild(continue1);
 			
 			
 			

@@ -54,7 +54,7 @@ package com.xiaomu.actioncomponent
 		{
 			graphics.clear();
 			graphics.beginFill(Theme.ACTION_COLOR);
-			graphics.drawRect(0, 0, width, height);
+			graphics.drawRoundRectComplex(0, 0, width, height,0,15,0,15);
 			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
 			graphics.endFill();
 			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.ACTION_COLOR);

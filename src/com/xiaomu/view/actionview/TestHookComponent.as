@@ -1,9 +1,10 @@
 package com.xiaomu.view.actionview
 {
-	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.ActionComponent;
-	import com.xiaomu.event.ActionHookEvent;
+	import com.xiaomu.component.DownHookComponent;
+	import com.xiaomu.component.HookComponent;
 	import com.xiaomu.component.UpHookComponent;
+	import com.xiaomu.event.ActionHookEvent;
 	
 	public class TestHookComponent extends ActionComponent
 	{

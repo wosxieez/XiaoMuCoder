@@ -44,6 +44,8 @@ package com.xiaomu.action
 				dis.x = offsetXYArray[0] + point.x;
 				dis.y = offsetXYArray[1] + point.y;
 			},speed);
+			
+			trace("startShake  :"+startShake);
 		}
 	
 	}

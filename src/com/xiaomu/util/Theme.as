@@ -42,10 +42,10 @@ package com.xiaomu.util
 		
 		public static const EVENT_COLOR:uint = 0x6E87EE; // 事件组件的背景色
 		public static const CONTROL_COLOR:uint = 0x8DCCFD; // 控制组件的背景色
-		public static const ACTION_COLOR:uint = 0xD05858; // 脚本组件的背景色
+		public static const ACTION_COLOR:uint = 0xD05858;// 脚本组件的背景色
 		public static const SKIN_COLOR:uint = 0xD161EC; // 皮肤组件的背景色
 		public static const VOICE_COLOR:uint = 0x9761EC; // 声音组件的背景色
 		public static const OPERATION_COLOR:uint = 0x9EE260; // 运算组件的背景色
-		public static const MATCHED_COLOR:uint = 0x5DCCF5; // 组件匹配上的颜色
+		public static const MATCHED_COLOR:uint = 0x5DCCF5;// 组件匹配上的颜色
 	}
 }
