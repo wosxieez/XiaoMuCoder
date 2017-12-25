@@ -22,10 +22,7 @@ package com.xiaomu.action
 			var animation:Animation = new Animation(actionTarget);
 			animation.add("y", actionTarget.y + 100);
 			trace(actionTarget.y);
-			
-		
-	
-			
+
 			animation.addEventListener(AnimationEvent.COMPLETE, animation_completeHandler);
 			animation.start();
 		}

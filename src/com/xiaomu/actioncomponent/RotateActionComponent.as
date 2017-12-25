@@ -1,5 +1,6 @@
 package com.xiaomu.actioncomponent
 {
+	import com.xiaomu.action.XandYAction;
 	import com.xiaomu.action.RotateAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownHookComponent;
@@ -13,6 +14,7 @@ package com.xiaomu.actioncomponent
 		public function RotateActionComponent()
 		{
 			super();
+			
 			
 			width = 150;
 			height = 30;
@@ -35,7 +37,7 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "旋转90度";
+			labelDisplay.text = "原地旋转30度";
 			addChild(labelDisplay);
 		}
 		

@@ -14,6 +14,7 @@ package com.xiaomu.renderer {
 			autoDrawSkin = false;
 			addEventListener(MouseEvent.ROLL_OVER, this_rollOverHandler);
 			addEventListener(MouseEvent.ROLL_OUT, this_rollOutHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ITEM,itemSelectedHandle);
 		}
 		
 		protected function itemSelectedHandle(event:RoleEvent):void {

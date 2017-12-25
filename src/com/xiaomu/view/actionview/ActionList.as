@@ -5,6 +5,8 @@ package com.xiaomu.view.actionview
 	import com.xiaomu.actioncomponent.RotateActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
+	import com.xiaomu.actioncomponent.XandYComponent;
+	import com.xiaomu.actioncomponent.ShakeActionComponent;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.manager.ActionComponentManager;
@@ -77,6 +79,19 @@ package com.xiaomu.view.actionview
 			rotate30Degree.mouseChildren = false;
 			rotate30Degree.menuEnabled = false;
 			addChild(rotate30Degree);
+			
+			var XangYAction:XandYComponent = new XandYComponent();
+			XangYAction.mouseChildren = false;
+			XangYAction.menuEnabled = false;
+			addChild(XangYAction);
+			
+			var dou:ShakeActionComponent = new ShakeActionComponent();
+			dou.mouseChildren = false;
+			dou.menuEnabled = false;
+			addChild(dou);
+			
+			
+			
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void

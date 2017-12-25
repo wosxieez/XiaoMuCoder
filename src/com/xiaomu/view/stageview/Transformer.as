@@ -1,6 +1,7 @@
 package com.xiaomu.view.stageview {
 	import com.xiaomu.util.AppUtil;
 	
+	import flash.display.DisplayObject;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
@@ -154,8 +155,8 @@ package com.xiaomu.view.stageview {
 				}
 				case 2:  // rotate
 				{
-					rotate();
-					event.updateAfterEvent();
+//					rotate();
+//					event.updateAfterEvent();
 					break;
 				}
 				default: {

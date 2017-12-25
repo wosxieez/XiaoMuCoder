@@ -226,6 +226,9 @@ package com.xiaomu.view.roleview {
 			urlLoader.addEventListener(Event.COMPLETE, item_completeHandler);
 			urlLoader.load(new URLRequest(category.source));
 			itemList.selectedIndex = -1;
+			
+			var itemSelectEvent:RoleEvent = new RoleEvent(RoleEvent.SELECT_ITEM);
+			RoleManager.getInstance().dispatchEvent(itemSelectEvent);
 		}
 		
 		protected function item_completeHandler(event:Event):void {
@@ -309,8 +312,6 @@ package com.xiaomu.view.roleview {
 				roleList.selectedIndex = -1; // 重置选中(必须)
 				PopUpManager.removePopUp(this); // 关闭窗口
 			}
-		}
-		
-		
+		}		
 	}
 }
