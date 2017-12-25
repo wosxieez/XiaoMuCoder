@@ -4,14 +4,8 @@ package com.xiaomu.action
 	import com.xiaomu.view.stageview.RoleComponent;
 	
 	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.events.TimerEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.utils.Timer;
-	
-	import coco.animation.Animation;
-	import coco.event.AnimationEvent;
 	
 	public class RotateAction extends Action
 	{
@@ -20,21 +14,9 @@ package com.xiaomu.action
 			super();	
 		}		
 		
-		private var animation:Animation = new Animation();
-		
 		override protected function onAction(actionTarget:RoleComponent):void
 		{			
-			var animation:Animation = new Animation(actionTarget);
-			var angle:Number = 45;  
-			
 			centerRotate(actionTarget,actionTarget.rotation+30);
-	
-			animation.addEventListener(AnimationEvent.COMPLETE, animation_completeHandler);
-			animation.start();
-		}
-		
-		protected function animation_completeHandler(event:AnimationEvent):void
-		{
 			endAction();
 		}
 		

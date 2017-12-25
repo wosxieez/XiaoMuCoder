@@ -24,6 +24,7 @@ package com.xiaomu.action
 		override protected function onAction(actionTarget:RoleComponent):void
 		{			
 			shake(actionTarget);
+			endAction();
 		}
 			
 		protected function shake(dis:DisplayObject,times:uint = 20,offset:uint = 4,speed:uint = 32):void {

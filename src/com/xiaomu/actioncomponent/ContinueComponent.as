@@ -1,7 +1,6 @@
 package com.xiaomu.actioncomponent
 {
 	import com.xiaomu.action.Continue;
-	import com.xiaomu.action.MoveXAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.UpHookComponent;
@@ -52,8 +51,10 @@ package com.xiaomu.actioncomponent
 		{
 			super.updateDisplayList();
 			
-			downHookComponent.y = height;
-			upHookComponent1.y = height;
+			downHookComponent.y = height+50;
+			
+			downHookComponent1.y = height;//中间部分朝下的钩子
+			upHookComponent1.y = height+30;//中间部分朝上的钩子
 			
 			labelDisplay.width = width;
 			labelDisplay.height = height;
@@ -67,17 +68,17 @@ package com.xiaomu.actioncomponent
 			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
 			graphics.endFill();
 			graphics.beginFill(Theme.CONTROL_COLOR);
-			graphics.drawRect(upHookComponent1.x, upHookComponent1.y, 10, 5);
+			graphics.drawRect(downHookComponent1.x, downHookComponent1.y, 10, 5);
 			graphics.endFill();
 			graphics.beginFill(Theme.CONTROL_COLOR);
 			graphics.drawRect(0,height,15,30);
 			graphics.drawRoundRectComplex(0, height+30, 80, 20,0,10,0,10);
 			graphics.endFill();
 			graphics.beginFill(0XFFFFFF);
-			graphics.drawRect(downHookComponent1.x, downHookComponent1.y+60, 10, 5);
+			graphics.drawRect(upHookComponent1.x, upHookComponent1.y, 10, 5);
 			graphics.endFill();
 			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.CONTROL_COLOR);
-			graphics.drawRect(downHookComponent.x, downHookComponent.y+50, 10, 5);
+			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
 			graphics.endFill();
 		}
 		
