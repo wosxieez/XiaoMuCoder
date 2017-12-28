@@ -6,6 +6,7 @@ package com.xiaomu.action
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
+	import coco.animation.Animation;
 	import coco.event.AnimationEvent;
 
 	
@@ -16,13 +17,22 @@ package com.xiaomu.action
 			super();
 		}
 		
+		private var animation:Animation = new Animation();
+		
+
+		
+		protected function animation_completeHandler(event:AnimationEvent):void
+		{
+			endAction();
+		}
+		
 		override protected function onAction(actionTarget:RoleComponent):void
 		{
 			var num:Number = 0;
 			var start:int = setInterval(function():void{
 				actionTarget.rotation = actionTarget.rotation+30;
 				num++;
-				if(num>=40){
+				if(num>=36){
 					clearInterval(start);//test， start只是标志，没有实际意义
 					endAction();
 				}

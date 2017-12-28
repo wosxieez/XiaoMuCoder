@@ -56,16 +56,6 @@ package com.xiaomu.view.actionview
 		{
 			super.createChildren();
 			
-			var testActionComponent:TestActionComponent = new TestActionComponent();
-			testActionComponent.mouseChildren = false;
-			testActionComponent.menuEnabled = false;
-			addChild(testActionComponent);
-			
-			var testActionComponent2:TestActionComponent2 = new TestActionComponent2();
-			testActionComponent2.mouseChildren = false;
-			testActionComponent2.menuEnabled = false;
-			addChild(testActionComponent2);
-			
 			var moveXAction:MoveXActionComponent = new MoveXActionComponent();
 			moveXAction.mouseChildren = false;
 			moveXAction.menuEnabled = false;
@@ -90,14 +80,6 @@ package com.xiaomu.view.actionview
 			Shake.mouseChildren = false;
 			Shake.menuEnabled = false;
 			addChild(Shake);
-			
-			var continue1:ContinueComponent = new ContinueComponent();
-			continue1.mouseChildren = false;
-			continue1.menuEnabled = false;
-			addChild(continue1);
-			
-			
-			
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void

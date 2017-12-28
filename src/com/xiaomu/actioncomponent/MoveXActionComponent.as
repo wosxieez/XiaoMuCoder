@@ -3,10 +3,13 @@ package com.xiaomu.actioncomponent
 	import com.xiaomu.action.MoveXAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownHookComponent;
+	import com.xiaomu.component.TextInputs;
 	import com.xiaomu.component.UpHookComponent;
 	import com.xiaomu.util.Theme;
+	import com.xiaomu.view.headview.InputText;
 	
 	import coco.component.Label;
+	import coco.component.TextInput;
 	
 	public class MoveXActionComponent extends ActionComponent
 	{
@@ -27,6 +30,7 @@ package com.xiaomu.actioncomponent
 		}
 		
 		private var labelDisplay:Label;
+		private var inputs:InputText;
 		
 		
 		override protected function createChildren():void
@@ -35,8 +39,13 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "X坐标+100";
+			labelDisplay.text = "X坐标+  ";
 			addChild(labelDisplay);
+			
+			inputs = new InputText();
+			inputs.width = 40;
+			inputs.labelText = "100";
+			addChild(inputs);
 		}
 		
 		override protected function updateDisplayList():void
@@ -45,8 +54,10 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent.y = height;
 			
-			labelDisplay.width = width;
+			labelDisplay.width = width-30;
 			labelDisplay.height = height;
+			
+			inputs.x = width-66;
 		}
 		
 		override protected function drawSkin():void

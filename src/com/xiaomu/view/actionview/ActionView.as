@@ -60,6 +60,8 @@ package com.xiaomu.view.actionview
 		private var actionBar:ButtonGroup;
 		private var actionContent:ActionContent;
 		private var actionList:ActionList;
+		private var eventList:EventList;
+		private var controlList:ControlList;
 		
 		
 		//----------------------------------------------------------------------------------------------------------------
@@ -87,6 +89,21 @@ package com.xiaomu.view.actionview
 			actionContent = new ActionContent();
 			actionContent.x = 100;
 			addChild(actionContent);
+			
+			eventList = new EventList();
+			eventList.x = 100;
+			eventList.width = 200;
+			eventList.height = height;
+			
+			controlList = new ControlList();
+			controlList.x = 100;
+			controlList.width = 200;
+			controlList.height = height;
+			
+			actionList = new ActionList();
+			actionList.x = 100;
+			actionList.width = 200;
+			actionList.height = height;
 		}
 		
 		override protected function updateDisplayList():void
@@ -97,8 +114,8 @@ package com.xiaomu.view.actionview
 			actionContent.width = width - actionContent.x;
 			actionContent.height = height;
 			
-			if (actionList)
-				actionList.height = height;
+//			if (actionList)
+				actionList.height = controlList.height = eventList.height =  height;
 		}
 		
 		override protected function drawSkin():void
@@ -112,18 +129,42 @@ package com.xiaomu.view.actionview
 		
 		protected function actionBar_changeHandler(event:UIEvent):void
 		{
-			if (!actionList)
-			{
-				actionList = new ActionList();
-				actionList.x = 100;
-				actionList.width = 200;
-				actionList.height = height;
+			switch (actionBar.selectedIndex) {
+				case 0:
+					PopUpManager.removeAllPopUp();
+					PopUpManager.addPopUp(eventList, this, false, true);
+					break;
+				
+				case 1:
+					PopUpManager.removeAllPopUp();
+					PopUpManager.addPopUp(controlList, this, false, true);
+					break;
+				
+				case 2:
+					PopUpManager.removeAllPopUp();
+					PopUpManager.addPopUp(actionList, this, false, true);
+					break;
+				
+				default:
+					trace("暂时没有");
+					break;
 			}
 			
-			if (!actionList.isPopUp)
-				PopUpManager.addPopUp(actionList, this, false, true);
-			
 			actionBar.selectedIndex = -1;
+			
+//				if (!actionList)
+//					{
+//						actionList = new ActionList();
+//						actionList.x = 100;
+//						actionList.width = 200;
+//						actionList.height = height;
+//					 }
+//							
+//				if (!actionList.isPopUp)
+//					PopUpManager.addPopUp(actionList, this, false, true);
+			
+	
+			
 		}
 		
 	}

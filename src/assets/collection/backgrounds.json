@@ -28,5 +28,10 @@
     "name": "背景6",
     "icon": "assets/background/background6.jpg",
     "type": "bg"
+  },
+  {
+    "name": "背景7",
+    "icon": "assets/background/house.jpg",
+    "type": "bg"
   }
 ]

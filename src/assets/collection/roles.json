@@ -69,7 +69,7 @@
   },
   {
     "name": "角色5",
-    "icon": "assets/role/role5.png",
+    "icon": "assets/role/zhizhuxia.png",
     "data": [
       {
         "name": "皮肤1",
@@ -79,7 +79,7 @@
   },
   {
     "name": "角色6",
-    "icon": "assets/role/role6.png",
+    "icon": "assets/role/bianfuxia.png",
     "data": [
       {
         "name": "皮肤1",
