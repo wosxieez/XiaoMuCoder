@@ -5,6 +5,7 @@ package com.xiaomu.view.actionview
 	import com.xiaomu.actioncomponent.MoveYActionComponent;
 	import com.xiaomu.actioncomponent.RotateActionComponent;
 	import com.xiaomu.actioncomponent.ShakeActionComponent;
+	import com.xiaomu.actioncomponent.SubtractXActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.actioncomponent.XandYComponent;
@@ -22,6 +23,7 @@ package com.xiaomu.view.actionview
 	import coco.component.HorizontalAlign;
 	import coco.layout.VerticalLayout;
 	import coco.manager.PopUpManager;
+	import com.xiaomu.actioncomponent.SubtractYActionComponent;
 	
 	
 	/**
@@ -61,10 +63,20 @@ package com.xiaomu.view.actionview
 			moveXAction.menuEnabled = false;
 			addChild(moveXAction);
 			
+			var subtractXAction:SubtractXActionComponent = new SubtractXActionComponent();
+			subtractXAction.mouseChildren = false;
+			subtractXAction.menuEnabled = false;
+			addChild(subtractXAction);
+			
 			var moveYAction2:MoveYActionComponent = new MoveYActionComponent();
 			moveYAction2.mouseChildren = false;
 			moveYAction2.menuEnabled = false;
 			addChild(moveYAction2);
+			
+			var subtractYAction:SubtractYActionComponent = new SubtractYActionComponent();
+			subtractYAction.mouseChildren = false;
+			subtractYAction.menuEnabled = false;
+			addChild(subtractYAction);
 			
 			var rotate30Degree:RotateActionComponent = new RotateActionComponent();
 			rotate30Degree.mouseChildren = false;

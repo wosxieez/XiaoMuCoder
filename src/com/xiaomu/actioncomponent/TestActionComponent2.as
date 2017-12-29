@@ -5,8 +5,7 @@ package com.xiaomu.actioncomponent
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.DropList;
 	import com.xiaomu.component.UpFlagHookComponent;
-	import com.xiaomu.component.UpHookComponent;
-	import com.xiaomu.renderer.SelectboxRender;
+	
 	import com.xiaomu.util.Theme;
 	
 	import coco.component.Label;

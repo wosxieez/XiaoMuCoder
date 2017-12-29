@@ -4,8 +4,7 @@ package com.xiaomu.view.stageview {
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.ActionComponentManager;
 	import com.xiaomu.manager.RoleManager;
-	
-	import flash.events.Event;
+
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
@@ -153,9 +152,6 @@ package com.xiaomu.view.stageview {
 		
 		}
 		
-		private var roleComponent_bg:RoleComponent;
-		private var roleComponent_bg1:RoleComponent;
-		
 		protected function removeRoleHandler(event:RoleEvent):void {
 			var roleComponent:RoleComponent;
 			for (var i:int = 0; i < roleContainer.numChildren; i++) {
@@ -234,28 +230,6 @@ package com.xiaomu.view.stageview {
 				if (roleComponent && playButton.selected == true)
 					roleComponent.doAction();
 			}
-			
-			if (roleComponent_bg) {
-				if (playButton.selected) {
-					roleComponent_bg.addEventListener(Event.ENTER_FRAME, enter_frameHandle);
-					roleComponent_bg1.addEventListener(Event.ENTER_FRAME, enter_frameHandle);
-				}
-				else {
-					roleComponent_bg.removeEventListener(Event.ENTER_FRAME, enter_frameHandle);
-					roleComponent_bg1.removeEventListener(Event.ENTER_FRAME, enter_frameHandle);
-				}
 			}
 		}
-		
-		protected function enter_frameHandle(event:Event):void {
-			roleComponent_bg.x -= 1;
-			roleComponent_bg1.x -= 1;
-			if (roleComponent_bg1.x <= 0) {
-				//				roleComponent_bg.removeEventListener(Event.ENTER_FRAME,enter_frameHandle);
-				roleComponent_bg.x = 0;
-				roleComponent_bg1.x = roleComponent_bg.width;
-			}
-		}
-		
-	}
 }
