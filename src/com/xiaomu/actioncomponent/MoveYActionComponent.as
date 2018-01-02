@@ -24,7 +24,8 @@ package com.xiaomu.actioncomponent
 			downHookComponent = new DownHookComponent();
 			downHookComponent.x = 15;
 			
-			actionClass = MoveYAction;
+		    actionClass = MoveYAction;
+
 		}
 		
 		private var labelDisplay:Label;

@@ -1,11 +1,16 @@
 package com.xiaomu.view.actionview
 {
+	import com.xiaomu.action.MoveToXAction;
+	import com.xiaomu.action.MoveToYAction;
 	import com.xiaomu.actioncomponent.ContinueComponent;
+	import com.xiaomu.actioncomponent.MoveToXActionComponent;
+	import com.xiaomu.actioncomponent.MoveToYActionComponent;
 	import com.xiaomu.actioncomponent.MoveXActionComponent;
 	import com.xiaomu.actioncomponent.MoveYActionComponent;
 	import com.xiaomu.actioncomponent.RotateActionComponent;
 	import com.xiaomu.actioncomponent.ShakeActionComponent;
 	import com.xiaomu.actioncomponent.SubtractXActionComponent;
+	import com.xiaomu.actioncomponent.SubtractYActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.actioncomponent.XandYComponent;
@@ -23,7 +28,6 @@ package com.xiaomu.view.actionview
 	import coco.component.HorizontalAlign;
 	import coco.layout.VerticalLayout;
 	import coco.manager.PopUpManager;
-	import com.xiaomu.actioncomponent.SubtractYActionComponent;
 	
 	
 	/**
@@ -63,6 +67,11 @@ package com.xiaomu.view.actionview
 			moveXAction.menuEnabled = false;
 			addChild(moveXAction);
 			
+			var moveToXAction:MoveToXActionComponent = new MoveToXActionComponent();
+			moveToXAction.mouseChildren = false;
+			moveToXAction.menuEnabled = false;
+			addChild(moveToXAction);
+			
 			var subtractXAction:SubtractXActionComponent = new SubtractXActionComponent();
 			subtractXAction.mouseChildren = false;
 			subtractXAction.menuEnabled = false;
@@ -72,6 +81,11 @@ package com.xiaomu.view.actionview
 			moveYAction2.mouseChildren = false;
 			moveYAction2.menuEnabled = false;
 			addChild(moveYAction2);
+			
+			var moveToYAction:MoveToYActionComponent = new MoveToYActionComponent();
+			moveToYAction.mouseChildren = false;
+			moveToYAction.menuEnabled = false;
+			addChild(moveToYAction);
 			
 			var subtractYAction:SubtractYActionComponent = new SubtractYActionComponent();
 			subtractYAction.mouseChildren = false;
