@@ -10,9 +10,9 @@ package com.xiaomu.action
 	import coco.event.AnimationEvent;
 
 	
-	public class Continue extends Action
+	public class DoWhileAction extends Action
 	{
-		public function Continue()
+		public function DoWhileAction()
 		{
 			super();
 		}

@@ -1,6 +1,7 @@
 package com.xiaomu.view.actionview
 {
 	import com.xiaomu.actioncomponent.ContinueComponent;
+	import com.xiaomu.actioncomponent.DoWhileActionComponent;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.AppAlert;
 	import com.xiaomu.manager.ActionComponentManager;
@@ -43,10 +44,10 @@ package com.xiaomu.view.actionview
 		{
 			super.createChildren();
 			
-			var continue1:ContinueComponent = new ContinueComponent();
-			continue1.mouseChildren = false;
-			continue1.menuEnabled = false;
-			addChild(continue1);
+			var dowhile:DoWhileActionComponent = new DoWhileActionComponent();
+			dowhile.mouseChildren = false;
+			dowhile.menuEnabled = false;
+			addChild(dowhile);
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void
