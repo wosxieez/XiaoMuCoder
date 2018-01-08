@@ -65,11 +65,24 @@ package com.xiaomu.actioncomponent
 		{
 			graphics.clear();
 			graphics.beginFill(Theme.ACTION_COLOR);
-			graphics.drawRoundRectComplex(0, 0, width, height,0,15,0,15);
-			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
-			graphics.endFill();
-			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.ACTION_COLOR);
-			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
+			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0xEDABA6);
+			graphics.moveTo(0,0);
+			graphics.lineTo(upHookComponent.x,0);
+			graphics.lineTo(upHookComponent.x,5);
+			graphics.lineTo(upHookComponent.x+10,5);
+			graphics.lineTo(upHookComponent.x+10,0);
+			graphics.lineTo(width-15,0);
+			
+			graphics.curveTo(width,2,width,15);
+			graphics.curveTo(width,30,width-16,30);
+			
+			graphics.lineTo(width-15,height);
+			graphics.lineTo(downHookComponent.x+10,height);
+			graphics.lineTo(downHookComponent.x+10,height+5);
+			graphics.lineTo(downHookComponent.x,height+5);
+			graphics.lineTo(downHookComponent.x,height);
+			graphics.lineTo(0,height);
+			graphics.lineTo(0,0);
 			graphics.endFill();
 		}
 		
