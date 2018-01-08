@@ -19,8 +19,6 @@ package com.xiaomu.action
 		
 		private var animation:Animation = new Animation();
 		
-
-		
 		protected function animation_completeHandler(event:AnimationEvent):void
 		{
 			endAction();

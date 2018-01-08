@@ -17,7 +17,7 @@ package com.xiaomu.actioncomponent
 		{
 			super();
 			
-			width = 150;
+			width = 160;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -39,7 +39,8 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "X坐标+  ";
+			labelDisplay.text = "将X坐标增加  ";
+			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
 			
 			inputs = new InputText();
@@ -57,7 +58,7 @@ package com.xiaomu.actioncomponent
 			labelDisplay.width = width-30;
 			labelDisplay.height = height;
 			
-			inputs.x = width-66;
+			inputs.x = width-56;
 		}
 		
 		override protected function drawSkin():void

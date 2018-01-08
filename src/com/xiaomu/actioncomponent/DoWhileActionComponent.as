@@ -53,7 +53,7 @@ package com.xiaomu.actioncomponent
 					}
 				else
 					{
-						 measuredHeight = 120;
+						 measuredHeight = 100;
 					}
 			}
 						
@@ -68,26 +68,34 @@ package com.xiaomu.actioncomponent
 			override protected function drawSkin():void
 			{			
 				graphics.clear();
+//				graphics.lineStyle(2,0xFFDD00); 
 				graphics.beginFill(Theme.CONTROL_COLOR);
 				graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
-				graphics.drawRoundRectComplex(0, 0, width, 30,0,15,0,15);
+				graphics.drawRoundRectComplex(0, 0, width, 30,0,15,0,15);	
+//				graphics.lineStyle(2,0xFFffff);
+//				graphics.moveTo(upHookComponent.x,0);
+//				graphics.lineTo(upHookComponent.x+10,0);
 				graphics.endFill();
-									
+				
+						
+				
 				graphics.beginFill(Theme.CONTROL_COLOR);
 				graphics.drawRect(downHookComponent2.x, height - 30, 10, 5);
 				graphics.drawRoundRectComplex(0, height - 30, width-36, 30,0,15,0,15);
 				graphics.endFill();
 									
-				graphics.beginFill(downHookComponent.matchActionHook ? 0x00FF00 : 0x81CBFA);
+				graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.CONTROL_COLOR);
 				graphics.drawRect(downHookComponent.x, height, 10, 5);
 				graphics.endFill();
 								
 				graphics.beginFill(Theme.CONTROL_COLOR);
 				graphics.drawRect(0, 30, downHookComponent2.x - 15, height - 60);
 				graphics.endFill();
-									
+								
+				
 				graphics.beginFill(downHookComponent2.matchActionHook ? Theme.MATCHED_COLOR : Theme.CONTROL_COLOR);
 				graphics.drawRect(downHookComponent2.x, downHookComponent2.y, 10, 5);
+				
 				graphics.endFill();
 		}
 							

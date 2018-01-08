@@ -1,8 +1,5 @@
 package com.xiaomu.view.actionview
 {
-	import com.xiaomu.action.MoveToXAction;
-	import com.xiaomu.action.MoveToYAction;
-	import com.xiaomu.actioncomponent.ContinueComponent;
 	import com.xiaomu.actioncomponent.MoveToXActionComponent;
 	import com.xiaomu.actioncomponent.MoveToYActionComponent;
 	import com.xiaomu.actioncomponent.MoveXActionComponent;
@@ -11,8 +8,6 @@ package com.xiaomu.view.actionview
 	import com.xiaomu.actioncomponent.ShakeActionComponent;
 	import com.xiaomu.actioncomponent.SubtractXActionComponent;
 	import com.xiaomu.actioncomponent.SubtractYActionComponent;
-	import com.xiaomu.actioncomponent.TestActionComponent;
-	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.actioncomponent.XandYComponent;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.AppAlert;

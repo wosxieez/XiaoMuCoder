@@ -45,7 +45,7 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default" platformId="default">
-      <airSettings airCertificatePath="/Users/coco/Documents/閺夘厼绐炵紒澶哥隘缁夋垶濡�鐠囦椒鍔�New/coco.p12" airTimestamp="false" anePathSet="true" version="1">
+      <airSettings airCertificatePath="/Users/coco/Documents/闁哄鍘肩粣鐐电磼婢跺摜闅樼紒澶嬪灦婵★拷閻犲洣妞掗崝锟絅ew/coco.p12" airTimestamp="false" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths/>
         <newLaunchParams/>
@@ -57,5 +57,6 @@
     </buildTarget>
   </buildTargets>
 </actionScriptProperties>
+
 
 

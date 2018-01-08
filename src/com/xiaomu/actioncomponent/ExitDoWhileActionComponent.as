@@ -1,22 +1,19 @@
 package com.xiaomu.actioncomponent
 {
-	import com.xiaomu.action.MoveToXAction;
-	import com.xiaomu.action.MoveToYAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.UpHookComponent;
 	import com.xiaomu.util.Theme;
-	import com.xiaomu.view.headview.InputText;
 	
 	import coco.component.Label;
 	
-	public class MoveToYActionComponent extends ActionComponent
+	public class ExitDoWhileActionComponent extends ActionComponent
 	{
-		public function MoveToYActionComponent()
+		public function ExitDoWhileActionComponent()
 		{
 			super();
 			
-			width = 160;
+			width = 150;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -24,52 +21,45 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent = new DownHookComponent();
 			downHookComponent.x = 15;
-			
-			actionClass = MoveToYAction;
 		}
 		
 		private var labelDisplay:Label;
-		private var inputs:InputText;
-		
-		
-		override protected function createChildren():void
-		{
+		override protected function createChildren():void {
 			super.createChildren();
 			
 			labelDisplay = new Label();
-			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "Y坐标移动到  ";
+			labelDisplay.text = "退出循环";
 			labelDisplay.fontFamily = "Microsoft yahei";
+			labelDisplay.color = 0xFFFFFF;
+			labelDisplay.height = 30;
 			addChild(labelDisplay);
-			
-			inputs = new InputText();
-			inputs.width = 40;
-			inputs.labelText = "200";
-			addChild(inputs);
 		}
 		
-		override protected function updateDisplayList():void
-		{
+		override protected function commitProperties():void {
+			super.commitProperties();
+			
+			labelDisplay.width = width;
+			
+		}
+		
+		override protected function updateDisplayList():void {
 			super.updateDisplayList();
 			
 			downHookComponent.y = height;
-			
-			labelDisplay.width = width-30;
-			labelDisplay.height = height;
-			
-			inputs.x = width-56;
 		}
 		
-		override protected function drawSkin():void
-		{
+		override protected function drawSkin():void {
+			super.drawSkin();
+			
 			graphics.clear();
-			graphics.beginFill(Theme.ACTION_COLOR);
+			graphics.beginFill(Theme.CONTROL_COLOR);
 			graphics.drawRoundRectComplex(0, 0, width, height,0,15,0,15);
 			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
 			graphics.endFill();
-			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.ACTION_COLOR);
+			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.CONTROL_COLOR);
 			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
 			graphics.endFill();
+			
 		}
 	}
 }

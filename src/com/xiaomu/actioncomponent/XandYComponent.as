@@ -16,7 +16,7 @@ package com.xiaomu.actioncomponent
 			super();
 			
 			
-			width = 150;
+			width = 160;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -37,6 +37,7 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
+			labelDisplay.fontFamily = "Microsoft yahei";
 			labelDisplay.text = "移动到X:150,Y:150";
 			addChild(labelDisplay);
 		}

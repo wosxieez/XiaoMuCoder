@@ -15,7 +15,7 @@ package com.xiaomu.actioncomponent
 		{
 			super();
 			
-			width = 150;
+			width = 160;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -37,6 +37,7 @@ package com.xiaomu.actioncomponent
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
 			labelDisplay.text = "抖动";
+			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
 		}
 		
