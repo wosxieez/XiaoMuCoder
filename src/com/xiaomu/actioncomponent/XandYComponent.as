@@ -56,6 +56,7 @@ package com.xiaomu.actioncomponent
 		{
 //			graphics.clear();
 //			graphics.beginFill(Theme.ACTION_COLOR);
+//			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0xEDABA6);
 //			graphics.drawRoundRectComplex(0, 0, width, height,0,15,0,15);
 //			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
 //			graphics.endFill();

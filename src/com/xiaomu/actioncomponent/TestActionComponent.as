@@ -4,14 +4,9 @@ package com.xiaomu.actioncomponent
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DownFlagHookComponent;
 	import com.xiaomu.component.DownHookComponent;
-	import com.xiaomu.component.DropList;
 	import com.xiaomu.component.UpHookComponent;
-	import com.xiaomu.renderer.SelectboxRender;
 	import com.xiaomu.util.Theme;
-	
-	import coco.component.DropDownList;
 	import coco.component.Label;
-	import com.xiaomu.component.ActionChoose;
 	
 	public class TestActionComponent extends ActionComponent
 	{
@@ -70,20 +65,36 @@ package com.xiaomu.actioncomponent
 		
 		override protected function drawSkin():void
 		{
+			//先画圆
 			graphics.clear();
 			graphics.beginFill(Theme.EVENT_COLOR);
-			graphics.drawCircle(-5,height/2-4,(height+8)/2);
+			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0x5B87E1);
+			graphics.drawCircle(-4,height/2-4,(height+8)/2);
 			graphics.endFill();
+			
+			//画矩形，重贴边框部分重新画
 			graphics.beginFill(Theme.EVENT_COLOR);
 			graphics.drawRoundRectComplex(0, 0, width, height,0,16,0,16);
-//			graphics.drawRect(upHookComponent.x, upHookComponent.y, 10, 5);
+			graphics.lineStyle(2,Theme.EVENT_COLOR);
+			graphics.moveTo(0,height-2);
+			graphics.lineTo(0,0);
+			graphics.lineTo(10,0);
+			
+			graphics.moveTo(downHookComponent.x,height);
+			graphics.lineTo(downHookComponent.x+10,height);
 			graphics.endFill();
-			graphics.beginFill(downHookComponent.matchActionHook ? Theme.MATCHED_COLOR : Theme.EVENT_COLOR);
+			
+			graphics.beginFill(Theme.EVENT_COLOR);
+			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0x5B87E1);
 			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
+			graphics.lineStyle(2,Theme.EVENT_COLOR);
+			graphics.moveTo(downHookComponent.x+2,height);
+			graphics.lineTo(downHookComponent.x+8,height);
 			graphics.endFill();
-			graphics.beginFill(flagHookComponent1.matchActionHook ? Theme.MATCHED_COLOR : Theme.EVENT_COLOR);
-			graphics.drawRoundRectComplex(flagHookComponent1.x, flagHookComponent1.y, 50, 30, 5, 5, 5, 5);
-			graphics.endFill();
+			
+//			graphics.beginFill(flagHookComponent1.matchActionHook ? Theme.MATCHED_COLOR : Theme.EVENT_COLOR);
+//			graphics.drawRoundRectComplex(flagHookComponent1.x, flagHookComponent1.y, 50, 30, 5, 5, 5, 5);
+//			graphics.endFill();
 		}
 		
 	}
