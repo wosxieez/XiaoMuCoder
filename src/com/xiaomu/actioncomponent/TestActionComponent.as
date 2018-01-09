@@ -86,7 +86,12 @@ package com.xiaomu.actioncomponent
 			
 			graphics.beginFill(Theme.EVENT_COLOR);
 			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0x5B87E1);
-			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
+			graphics.moveTo(downHookComponent.x+11,height-2);
+//			graphics.lineTo(downHookComponent.x+10,height);
+			graphics.lineTo(downHookComponent.x+7,height+6);
+			graphics.lineTo(downHookComponent.x,height+6);
+			graphics.lineTo(downHookComponent.x-4,height-2);
+//			graphics.drawRect(downHookComponent.x, downHookComponent.y, 10, 5);
 			graphics.lineStyle(2,Theme.EVENT_COLOR);
 			graphics.moveTo(downHookComponent.x+2,height);
 			graphics.lineTo(downHookComponent.x+8,height);

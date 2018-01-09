@@ -60,9 +60,9 @@ package com.xiaomu.actioncomponent
 				graphics.lineStyle(2,0x5FB7E4,0.7);
 			}
 			graphics.moveTo(0,0);
-			graphics.lineTo(upHookComponent.x,0);
-			graphics.lineTo(upHookComponent.x,5);
-			graphics.lineTo(upHookComponent.x+10,5);
+			graphics.lineTo(upHookComponent.x-3,0);
+			graphics.lineTo(upHookComponent.x,6);
+			graphics.lineTo(upHookComponent.x+7,6);
 			graphics.lineTo(upHookComponent.x+10,0);
 			graphics.lineTo(width-15,0);
 			
@@ -71,15 +71,15 @@ package com.xiaomu.actioncomponent
 			
 			graphics.lineTo(width-15,30);
 			graphics.lineTo(downHookComponent2.x+10,30);
-			graphics.lineTo(downHookComponent2.x+10,35);
-			graphics.lineTo(downHookComponent2.x,35);
-			graphics.lineTo(downHookComponent2.x,30);
+			graphics.lineTo(downHookComponent2.x+7,36);
+			graphics.lineTo(downHookComponent2.x,36);
+			graphics.lineTo(downHookComponent2.x-3,30);
 			graphics.lineTo(downHookComponent2.x - 15, 30);
 			graphics.lineTo(downHookComponent2.x - 15, height-30);
 			
-			graphics.lineTo(downHookComponent2.x, height-30);
-			graphics.lineTo(downHookComponent2.x, height-25);
-			graphics.lineTo(downHookComponent2.x+10, height-25);
+			graphics.lineTo(downHookComponent2.x-3, height-30);
+			graphics.lineTo(downHookComponent2.x, height-24);
+			graphics.lineTo(downHookComponent2.x+7, height-24);
 			graphics.lineTo(downHookComponent2.x+10, height-30);
 			graphics.lineTo(width-50, height-30);
 			
@@ -88,9 +88,9 @@ package com.xiaomu.actioncomponent
 			
 			graphics.lineTo(width-50,height);
 			graphics.lineTo(downHookComponent.x+10,height);
-			graphics.lineTo(downHookComponent.x+10,height+5);
-			graphics.lineTo(downHookComponent.x,height+5);
-			graphics.lineTo(downHookComponent.x,height);
+			graphics.lineTo(downHookComponent.x+7,height+6);
+			graphics.lineTo(downHookComponent.x,height+6);
+			graphics.lineTo(downHookComponent.x-3,height);
 			graphics.lineTo(0,height);
 			graphics.lineTo(0,0);
 			graphics.endFill();

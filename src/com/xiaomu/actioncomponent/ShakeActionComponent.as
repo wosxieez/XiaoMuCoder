@@ -57,9 +57,9 @@ package com.xiaomu.actioncomponent
 			graphics.beginFill(Theme.ACTION_COLOR);
 			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0xEDABA6);
 			graphics.moveTo(0,0);
-			graphics.lineTo(upHookComponent.x,0);
-			graphics.lineTo(upHookComponent.x,5);
-			graphics.lineTo(upHookComponent.x+10,5);
+			graphics.lineTo(upHookComponent.x-3,0);
+			graphics.lineTo(upHookComponent.x,6);
+			graphics.lineTo(upHookComponent.x+7,6);
 			graphics.lineTo(upHookComponent.x+10,0);
 			graphics.lineTo(width-15,0);
 			
@@ -68,9 +68,9 @@ package com.xiaomu.actioncomponent
 			
 			graphics.lineTo(width-15,height);
 			graphics.lineTo(downHookComponent.x+10,height);
-			graphics.lineTo(downHookComponent.x+10,height+5);
-			graphics.lineTo(downHookComponent.x,height+5);
-			graphics.lineTo(downHookComponent.x,height);
+			graphics.lineTo(downHookComponent.x+7,height+6);
+			graphics.lineTo(downHookComponent.x,height+6);
+			graphics.lineTo(downHookComponent.x-3,height);
 			graphics.lineTo(0,height);
 			graphics.lineTo(0,0);
 			graphics.endFill();
