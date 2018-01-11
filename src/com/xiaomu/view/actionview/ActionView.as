@@ -62,6 +62,7 @@ package com.xiaomu.view.actionview
 		private var actionList:ActionList;
 		private var eventList:EventList;
 		private var controlList:ControlList;
+		private var apperenceList:ApperenceList;
 		
 		
 		//----------------------------------------------------------------------------------------------------------------
@@ -104,6 +105,11 @@ package com.xiaomu.view.actionview
 			actionList.x = 100;
 			actionList.width = 200;
 			actionList.height = height;
+			
+			apperenceList = new ApperenceList();
+			apperenceList.x = 100;
+			apperenceList.width = 200;
+			apperenceList.height = height;
 		}
 		
 		override protected function updateDisplayList():void
@@ -115,7 +121,7 @@ package com.xiaomu.view.actionview
 			actionContent.height = height;
 			
 //			if (actionList)
-				actionList.height = controlList.height = eventList.height =  height;
+				actionList.height = controlList.height = eventList.height =  apperenceList.height = height;
 		}
 		
 		override protected function drawSkin():void
@@ -143,6 +149,11 @@ package com.xiaomu.view.actionview
 				case 2:
 					PopUpManager.removeAllPopUp();
 					PopUpManager.addPopUp(actionList, this, false, true);
+					break;
+				
+				case 3:
+					PopUpManager.removeAllPopUp();
+					PopUpManager.addPopUp(apperenceList, this, false, true);
 					break;
 				
 				default:

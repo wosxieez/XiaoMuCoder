@@ -2,6 +2,7 @@ package com.xiaomu.actioncomponent
 {
 	import com.xiaomu.action.MoveYAction;
 	import com.xiaomu.component.ActionComponent;
+	import com.xiaomu.component.DialogSelect;
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.UpHookComponent;
 	import com.xiaomu.util.Theme;
@@ -29,7 +30,7 @@ package com.xiaomu.actioncomponent
 		}
 		
 		private var labelDisplay:Label;
-		private var inputs:InputText;
+		private var inputs:DialogSelect;
 		
 		override protected function createChildren():void
 		{
@@ -41,10 +42,17 @@ package com.xiaomu.actioncomponent
 			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
 			
-			inputs = new InputText();
-			inputs.width = 40;
+			inputs = new DialogSelect();
 			inputs.labelText = "100";
 			addChild(inputs);
+		}
+		
+		override protected function commitProperties():void {
+			super.commitProperties();
+			
+			inputs.width = 50;
+			inputs.height = 28;
+			inputs.fontSize = 12;
 		}
 		
 		override protected function updateDisplayList():void
@@ -57,6 +65,7 @@ package com.xiaomu.actioncomponent
 			labelDisplay.height = height;
 			
 			inputs.x = width-56;
+			inputs.y = 2;
 		}
 		
 		override protected function drawSkin():void

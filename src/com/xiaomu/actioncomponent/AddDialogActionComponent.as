@@ -1,7 +1,6 @@
 package com.xiaomu.actioncomponent
 {
-	import com.xiaomu.action.MoveToXAction;
-	import com.xiaomu.action.MoveToYAction;
+	import com.xiaomu.action.MoveXAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DialogSelect;
 	import com.xiaomu.component.DownHookComponent;
@@ -11,13 +10,13 @@ package com.xiaomu.actioncomponent
 	
 	import coco.component.Label;
 	
-	public class MoveToYActionComponent extends ActionComponent
+	public class AddDialogActionComponent extends ActionComponent
 	{
-		public function MoveToYActionComponent()
+		public function AddDialogActionComponent()
 		{
 			super();
 			
-			width = 160;
+			width = 180;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -26,7 +25,7 @@ package com.xiaomu.actioncomponent
 			downHookComponent = new DownHookComponent();
 			downHookComponent.x = 15;
 			
-			actionClass = MoveToYAction;
+//			actionClass = MoveXAction;
 		}
 		
 		private var labelDisplay:Label;
@@ -39,21 +38,14 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "Y坐标移动到  ";
+			labelDisplay.text = "新建对话框  ";
 			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
 			
 			inputs = new DialogSelect();
-			inputs.labelText = "200";
+			inputs.width = 60;
+			inputs.labelText = "Hi";
 			addChild(inputs);
-		}
-		
-		override protected function commitProperties():void {
-			super.commitProperties();
-			
-			inputs.width = 50;
-			inputs.height = 28;
-			inputs.fontSize = 12;
 		}
 		
 		override protected function updateDisplayList():void
@@ -62,18 +54,18 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent.y = height;
 			
-			labelDisplay.width = width-30;
+			labelDisplay.width = width-50;
 			labelDisplay.height = height;
 			
-			inputs.x = width-56;
-			inputs.y = 2;
+			inputs.x = width-76;
+			inputs.y = 1;
 		}
 		
 		override protected function drawSkin():void
 		{
 			graphics.clear();
-			graphics.beginFill(Theme.ACTION_COLOR);
-			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0xEDABA6);
+			graphics.beginFill(Theme.SKIN_COLOR);
+			graphics.lineStyle(2,downHookComponent.matchActionHook ? 0xFFCC33 : 0xD695C4);
 			graphics.moveTo(0,0);
 			graphics.lineTo(upHookComponent.x-3,0);
 			graphics.lineTo(upHookComponent.x,6);

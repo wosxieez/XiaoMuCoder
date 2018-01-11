@@ -68,8 +68,8 @@ package com.xiaomu.component
 		}
 		
 		
-		private var lab : Label;
-		private var _labelText : String;
+		protected var lab : Label;
+		protected var _labelText : String;
 		
 		override protected  function createChildren():void
 		{
