@@ -1,19 +1,19 @@
 package com.xiaomu.actioncomponent
 {
-	import com.xiaomu.action.AddDialogAction;
-	import com.xiaomu.action.MoveXAction;
+	import com.xiaomu.action.HiddenAfterMomentsAction;
+	import com.xiaomu.action.ShowAfterMomentsAction;
 	import com.xiaomu.component.ActionComponent;
 	import com.xiaomu.component.DialogSelect;
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.UpHookComponent;
 	import com.xiaomu.util.Theme;
-	import com.xiaomu.view.headview.InputText;
 	
 	import coco.component.Label;
+	import coco.component.TextAlign;
 	
-	public class AddDialogActionComponent extends ActionComponent
+	public class HiddenAfterMomentsActionComponent extends ActionComponent
 	{
-		public function AddDialogActionComponent()
+		public function HiddenAfterMomentsActionComponent()
 		{
 			super();
 			
@@ -26,10 +26,11 @@ package com.xiaomu.actioncomponent
 			downHookComponent = new DownHookComponent();
 			downHookComponent.x = 15;
 			
-			actionClass = AddDialogAction;
+			actionClass = HiddenAfterMomentsAction;
 		}
 		
 		private var labelDisplay:Label;
+		private var labelDisplay1:Label;
 		private var inputs:DialogSelect;
 		
 		
@@ -39,13 +40,19 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "新建对话框  ";
+			labelDisplay.text = "在";
+			labelDisplay.x = 34;
 			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
 			
+			labelDisplay1 = new Label();
+			labelDisplay1.color = 0xFFFFFF;
+			labelDisplay1.text = "秒内逐渐隐藏";
+			labelDisplay1.fontFamily = "Microsoft yahei";
+			addChild(labelDisplay1);
+			
 			inputs = new DialogSelect();
-			inputs.width = 60;
-			inputs.labelText = "Hi";
+			inputs.labelText = "1";
 			addChild(inputs);
 		}
 		
@@ -55,11 +62,20 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent.y = height;
 			
-			labelDisplay.width = width-50;
-			labelDisplay.height = height;
+			labelDisplay.height = labelDisplay1.height = height;
 			
-			inputs.x = width-76;
+			labelDisplay1.x = 92;
+			
+			inputs.x = labelDisplay.fontSize+labelDisplay.x+5;
 			inputs.y = 1;
+		}
+		
+		override protected function commitProperties():void {
+			super.commitProperties();
+			
+			inputs.width = 40;
+			inputs.height = 30;
+			inputs.fontSize = 14;
 		}
 		
 		override protected function drawSkin():void

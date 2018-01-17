@@ -37,7 +37,7 @@ package com.xiaomu.view.actionview
 			
 			var vlayout:VerticalLayout = new VerticalLayout();
 			vlayout.padding = vlayout.gap = 20;
-			vlayout.horizontalAlign = HorizontalAlign.CENTER;
+			vlayout.horizontalAlign = HorizontalAlign.LEFT;
 			layout = vlayout;
 			
 			autoDrawSkin = true;

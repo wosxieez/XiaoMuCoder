@@ -75,7 +75,6 @@ package com.xiaomu.view.actionview
 		{
 			super.createChildren();
 			
-//			actionBar = new ButtonGroup();
 			actionBar = new ButtonGroup();
 			actionBar.itemRendererColumnCount = 1;
 			actionBar.dataProvider = actionBarData;
@@ -93,22 +92,22 @@ package com.xiaomu.view.actionview
 			
 			eventList = new EventList();
 			eventList.x = 100;
-			eventList.width = 200;
+			eventList.width = 220;
 			eventList.height = height;
 			
 			controlList = new ControlList();
 			controlList.x = 100;
-			controlList.width = 200;
+			controlList.width = 220;
 			controlList.height = height;
 			
 			actionList = new ActionList();
 			actionList.x = 100;
-			actionList.width = 200;
+			actionList.width = 220;
 			actionList.height = height;
 			
 			apperenceList = new ApperenceList();
 			apperenceList.x = 100;
-			apperenceList.width = 200;
+			apperenceList.width = 220;
 			apperenceList.height = height;
 		}
 		

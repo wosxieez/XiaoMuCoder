@@ -1,6 +1,10 @@
 package com.xiaomu.view.actionview
 {
 	import com.xiaomu.actioncomponent.AddDialogActionComponent;
+	import com.xiaomu.actioncomponent.HiddenActionComponent;
+	import com.xiaomu.actioncomponent.HiddenAfterMomentsActionComponent;
+	import com.xiaomu.actioncomponent.ShowActionComponent;
+	import com.xiaomu.actioncomponent.ShowAfterMomentsActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent2;
 	import com.xiaomu.component.ActionComponent;
@@ -26,7 +30,7 @@ package com.xiaomu.view.actionview
 			
 			var vlayout:VerticalLayout = new VerticalLayout();
 			vlayout.padding = vlayout.gap = 20;
-			vlayout.horizontalAlign = HorizontalAlign.CENTER;
+			vlayout.horizontalAlign = HorizontalAlign.LEFT;
 			layout = vlayout;
 			
 			autoDrawSkin = true;
@@ -49,6 +53,26 @@ package com.xiaomu.view.actionview
 			addDialogActionComponent.mouseChildren = false;
 			addDialogActionComponent.menuEnabled = false;
 			addChild(addDialogActionComponent);
+			
+			var hiddenActionComponent:HiddenActionComponent = new HiddenActionComponent();
+			hiddenActionComponent.mouseChildren = false;
+			hiddenActionComponent.menuEnabled = false;
+			addChild(hiddenActionComponent);
+			
+			var showActionComponent:ShowActionComponent = new ShowActionComponent();
+			showActionComponent.mouseChildren = false;
+			showActionComponent.menuEnabled = false;
+			addChild(showActionComponent);
+			
+			var showAfterMomentsActionComponent:ShowAfterMomentsActionComponent = new ShowAfterMomentsActionComponent();
+			showAfterMomentsActionComponent.mouseChildren = false;
+			showAfterMomentsActionComponent.menuEnabled = false;
+			addChild(showAfterMomentsActionComponent);
+			
+			var hiddenAfterMomentsActionComponent:HiddenAfterMomentsActionComponent = new HiddenAfterMomentsActionComponent();
+			hiddenAfterMomentsActionComponent.mouseChildren = false;
+			hiddenAfterMomentsActionComponent.menuEnabled = false;
+			addChild(hiddenAfterMomentsActionComponent);
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void

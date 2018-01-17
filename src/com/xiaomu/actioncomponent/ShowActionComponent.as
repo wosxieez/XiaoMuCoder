@@ -1,23 +1,20 @@
 package com.xiaomu.actioncomponent
 {
-	import com.xiaomu.action.AddDialogAction;
-	import com.xiaomu.action.MoveXAction;
+	import com.xiaomu.action.ShowAction;
 	import com.xiaomu.component.ActionComponent;
-	import com.xiaomu.component.DialogSelect;
 	import com.xiaomu.component.DownHookComponent;
 	import com.xiaomu.component.UpHookComponent;
 	import com.xiaomu.util.Theme;
-	import com.xiaomu.view.headview.InputText;
 	
 	import coco.component.Label;
 	
-	public class AddDialogActionComponent extends ActionComponent
+	public class ShowActionComponent extends ActionComponent
 	{
-		public function AddDialogActionComponent()
+		public function ShowActionComponent()
 		{
 			super();
 			
-			width = 180;
+			width =100;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -26,11 +23,10 @@ package com.xiaomu.actioncomponent
 			downHookComponent = new DownHookComponent();
 			downHookComponent.x = 15;
 			
-			actionClass = AddDialogAction;
+			actionClass = ShowAction;
 		}
 		
 		private var labelDisplay:Label;
-		private var inputs:DialogSelect;
 		
 		
 		override protected function createChildren():void
@@ -39,14 +35,9 @@ package com.xiaomu.actioncomponent
 			
 			labelDisplay = new Label();
 			labelDisplay.color = 0xFFFFFF;
-			labelDisplay.text = "新建对话框  ";
+			labelDisplay.text = "显示";
 			labelDisplay.fontFamily = "Microsoft yahei";
 			addChild(labelDisplay);
-			
-			inputs = new DialogSelect();
-			inputs.width = 60;
-			inputs.labelText = "Hi";
-			addChild(inputs);
 		}
 		
 		override protected function updateDisplayList():void
@@ -55,11 +46,8 @@ package com.xiaomu.actioncomponent
 			
 			downHookComponent.y = height;
 			
-			labelDisplay.width = width-50;
+			labelDisplay.width = width;
 			labelDisplay.height = height;
-			
-			inputs.x = width-76;
-			inputs.y = 1;
 		}
 		
 		override protected function drawSkin():void

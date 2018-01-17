@@ -24,6 +24,10 @@ package com.xiaomu.data
 		 */		
 		public var rotate:Number;
 		/**
+		 * 透明度 
+		 */		
+		public var alpha:Number;
+		/**
 		 * 对应的ActionComponent组件类名称 
 		 */		
 		public var className:String;

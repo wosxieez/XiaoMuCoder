@@ -25,7 +25,7 @@ package com.xiaomu.component
 		{
 			super.updateDisplayList();
 			
-			lab.x =(width-fontSize)/2-4;
+			lab.x =(width-lab.fontSize)/2-2;
 			lab.y =(height - fontSize)/2-7;	
 		}
 		
