@@ -26,6 +26,7 @@ package com.xiaomu.manager
 	[Event(name="selectRoleSkin", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectItem", type="com.xiaomu.event.RoleEvent")]
 	[Event(name="selectShowList", type="com.xiaomu.event.RoleEvent")]
+	[Event(name="addDialog", type="com.xiaomu.event.RoleEvent")]
 
 
 	public class RoleManager extends EventDispatcher
@@ -134,5 +135,11 @@ package com.xiaomu.manager
 				return StageView.getInstance().coco::getRoleComponent(role);
 		}
 	
+		public function addDialog(role:Role):void
+		{
+			var roleEvent : RoleEvent = new RoleEvent(RoleEvent.ADD_DIALOG);
+			roleEvent.role = role;
+			RoleManager.getInstance().dispatchEvent(roleEvent);
+		}
 	}
 }

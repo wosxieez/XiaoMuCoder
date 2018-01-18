@@ -1,10 +1,11 @@
 package com.xiaomu.view.stageview {
+	import com.xiaomu.component.NewDialogComponent;
 	import com.xiaomu.component.PlayButton;
 	import com.xiaomu.data.Role;
 	import com.xiaomu.event.RoleEvent;
 	import com.xiaomu.manager.ActionComponentManager;
 	import com.xiaomu.manager.RoleManager;
-
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
@@ -27,7 +28,10 @@ package com.xiaomu.view.stageview {
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_ROLE, addRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.SELECT_ROLE, selectRoleHandler);
 			RoleManager.getInstance().addEventListener(RoleEvent.REMOVE_ROLE, removeRoleHandler);
+			RoleManager.getInstance().addEventListener(RoleEvent.ADD_DIALOG, addDialogHandle);
 		}
+		
+	
 		
 		//----------------------------------------------------------------------------------------------------------------
 		//
@@ -56,6 +60,7 @@ package com.xiaomu.view.stageview {
 		private var playButton:PlayButton;
 		private var aButton:Button;
 		private var bButton:Button;
+		private var newdialog:NewDialogComponent;
 		
 		
 		//----------------------------------------------------------------------------------------------------------------
@@ -82,6 +87,8 @@ package com.xiaomu.view.stageview {
 			playButton.source = "assets/begin1.png";
 			playButton.addEventListener(MouseEvent.CLICK, playButton_clickHandler);
 			addChild(playButton);
+			
+		
 		}
 		
 		override protected function commitProperties():void {
@@ -97,6 +104,8 @@ package com.xiaomu.view.stageview {
 			
 			playButton.y = height - 68;
 			playButton.x = 7;
+			
+			
 		}
 		
 		override protected function drawSkin():void {
@@ -127,6 +136,22 @@ package com.xiaomu.view.stageview {
 			roleComponent.x = (roleContainer.width - roleComponent.width) / 2;
 			roleComponent.y = (roleContainer.height - roleComponent.height) / 2;
 			roleContainer.addChild(roleComponent);
+		}
+		
+		protected function addDialogHandle(event:RoleEvent):void
+		{
+			if(newdialog){
+				return ;
+			}
+			else{
+				newdialog = new NewDialogComponent();
+				newdialog.labtext = event.role.name;
+				newdialog.imgsource = event.role.icon;
+				newdialog.x = 10;
+				newdialog.y = 186;
+				addChild(newdialog);
+			}
+			
 		}
 		
 		private function addBackgroundRole(role:Role):void {

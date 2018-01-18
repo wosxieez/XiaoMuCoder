@@ -41,8 +41,8 @@ package com.xiaomu.component
 			lab.x = 68;
 			lab.y = 10;
 			
-			imgIcon.width = 36;
-			imgIcon.height = 30;
+			imgIcon.width = 50;
+			imgIcon.height = 60;
 			imgIcon.x = 17;
 			imgIcon.y = 9;
 		}

@@ -11,6 +11,7 @@ package com.xiaomu.event
 		public static const REMOVE_ROLE : String = "removeRole"  //  移除角色
 		public static const SET_ROLE : String = "setRole" //  设置角色
 		public static const SELECT_ITEM:String = "itemSelect"   //选中rolecollection中itemlist列表
+		public static const ADD_DIALOG:String = "addDialog"   //增加对话列表
 		
 		/**
 		 * 新角色 
