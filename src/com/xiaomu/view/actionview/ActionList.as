@@ -1,5 +1,6 @@
 package com.xiaomu.view.actionview
 {
+	import com.xiaomu.actioncomponent.AddSizeActionComponent;
 	import com.xiaomu.actioncomponent.MoveToXActionComponent;
 	import com.xiaomu.actioncomponent.MoveToYActionComponent;
 	import com.xiaomu.actioncomponent.MoveXActionComponent;

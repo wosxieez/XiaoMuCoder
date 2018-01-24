@@ -141,5 +141,6 @@ package com.xiaomu.manager
 			roleEvent.role = role;
 			RoleManager.getInstance().dispatchEvent(roleEvent);
 		}
+		
 	}
 }

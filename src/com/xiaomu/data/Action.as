@@ -28,6 +28,14 @@ package com.xiaomu.data
 		 */		
 		public var alpha:Number;
 		/**
+		 * 宽度 
+		 */		
+		public var width:Number;
+		/**
+		 * 高度
+		 */		
+		public var height:Number;
+		/**
 		 * 对应的ActionComponent组件类名称 
 		 */		
 		public var className:String;

@@ -31,7 +31,11 @@ package com.xiaomu.view.stageview {
 			RoleManager.getInstance().addEventListener(RoleEvent.ADD_DIALOG, addDialogHandle);
 		}
 		
-	
+		protected function removeDialogHandle(event:RoleEvent):void
+		{
+			if(newdialog)
+			removeChild(newdialog);
+		}		
 		
 		//----------------------------------------------------------------------------------------------------------------
 		//
@@ -140,17 +144,18 @@ package com.xiaomu.view.stageview {
 		
 		protected function addDialogHandle(event:RoleEvent):void
 		{
-			if(newdialog){
-				return ;
+			for(var i:int = 0; i < StageView.getInstance().numChildren;i++){
+				newdialog = StageView.getInstance().getChildAt(i) as NewDialogComponent;
+				if(newdialog&&StageView.getInstance().getChildByName("newdialog") != null){
+					removeChild(newdialog);
+				}
 			}
-			else{
 				newdialog = new NewDialogComponent();
 				newdialog.labtext = event.role.name;
 				newdialog.imgsource = event.role.icon;
 				newdialog.x = 10;
 				newdialog.y = 186;
 				addChild(newdialog);
-			}
 			
 		}
 		

@@ -1,8 +1,10 @@
 package com.xiaomu.view.actionview
 {
 	import com.xiaomu.actioncomponent.AddDialogActionComponent;
+	import com.xiaomu.actioncomponent.AddSizeActionComponent;
 	import com.xiaomu.actioncomponent.HiddenActionComponent;
 	import com.xiaomu.actioncomponent.HiddenAfterMomentsActionComponent;
+	import com.xiaomu.actioncomponent.SetSizeActionComponent;
 	import com.xiaomu.actioncomponent.ShowActionComponent;
 	import com.xiaomu.actioncomponent.ShowAfterMomentsActionComponent;
 	import com.xiaomu.actioncomponent.TestActionComponent;
@@ -12,6 +14,7 @@ package com.xiaomu.view.actionview
 	import com.xiaomu.manager.ActionComponentManager;
 	import com.xiaomu.manager.RoleManager;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
@@ -73,6 +76,16 @@ package com.xiaomu.view.actionview
 			hiddenAfterMomentsActionComponent.mouseChildren = false;
 			hiddenAfterMomentsActionComponent.menuEnabled = false;
 			addChild(hiddenAfterMomentsActionComponent);
+			
+			var addSize:AddSizeActionComponent = new AddSizeActionComponent();
+			addSize.mouseChildren = false;
+			addSize.menuEnabled = false;
+			addChild(addSize);
+			
+			var setSize:SetSizeActionComponent = new SetSizeActionComponent();
+			setSize.mouseChildren = false;
+			setSize.menuEnabled = false;
+			addChild(setSize);
 		}
 		
 		protected function this_mouseDownHandler(event:MouseEvent):void
