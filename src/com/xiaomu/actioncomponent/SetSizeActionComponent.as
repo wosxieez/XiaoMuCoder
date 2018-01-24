@@ -16,7 +16,7 @@ package com.xiaomu.actioncomponent
 		{
 			super();
 			
-			width = 180;
+			width = 194;
 			height = 30;
 			
 			upHookComponent = new UpHookComponent();
@@ -57,7 +57,7 @@ package com.xiaomu.actioncomponent
 		override protected function commitProperties():void {
 			super.commitProperties();
 			
-			inputs.width = 45;
+			inputs.width = 40;
 			inputs.height = 28;
 		}
 		
@@ -68,9 +68,9 @@ package com.xiaomu.actioncomponent
 			downHookComponent.y = height;
 			
 			labelDisplay.width = width-25;
-			labelDisplay.height = height;
+			labelDisplay.height = labelDisplay1.height = height;
 			
-			inputs.x = labelDisplay.width-30;
+			inputs.x = labelDisplay.width-35;
 			inputs.y = 2;
 			
 			labelDisplay1.x = inputs.x+inputs.width;
