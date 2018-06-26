@@ -45,7 +45,7 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default" platformId="default">
-      <airSettings airCertificatePath="/Users/coco/Documents/闂佸搫顧夐崢鑲╃玻閻愮數纾煎璺烘憸闂呮绱掓径瀣仸濠碘槄鎷烽柣鐘叉矗濡炴帡宕濋敓绲卐w/coco.p12" airTimestamp="false" anePathSet="true" version="1">
+      <airSettings airCertificatePath="/Users/coco/Documents/合肥小木软件/xiaomu.p12" airTimestamp="false" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths/>
         <newLaunchParams/>
@@ -57,7 +57,3 @@
     </buildTarget>
   </buildTargets>
 </actionScriptProperties>
-
-
-
-

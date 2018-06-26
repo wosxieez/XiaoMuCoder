@@ -41,7 +41,7 @@
 	<!-- <description></description> -->
 
 	<!-- Copyright information. Optional -->
-	<copyright>CopyRight © 2017 合肥小木软件有限公司 版权所有</copyright>
+	<copyright>CopyRight © 2018 合肥小木软件有限公司 版权所有</copyright>
 
 	<!-- Publisher ID. Used if you're updating an application created prior 
 		to 1.5.3 -->
@@ -126,7 +126,7 @@
 
 		<!-- Display Resolution for the app (either "standard" or "high"). Optional, 
 			OSX-only. Default "standard" -->
-		<!-- <requestedDisplayResolution></requestedDisplayResolution> -->
+		<requestedDisplayResolution>high</requestedDisplayResolution>
 		<autoOrients>false</autoOrients>
 		<fullScreen>false</fullScreen>
 		<visible>true</visible>
