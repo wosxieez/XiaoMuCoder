@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "output": "bin-debug/XiaoMuCoder.swf",
+    "source-path": ["src"],
+    "library-path": ["libs"]
+  },
+  "files": ["src/XiaoMuCoder.as"],
+  "application": "src/XiaoMuCoder-app.xml",
+  "copySourcePathAssets": true,
+  "additionalOptions": "-locale en_US",
+  "airOptions": {
+    "output": "XiaoMuCoder.air",
+    "signingOptions": {
+      "keystore": "/Users/coco/Documents/合肥小木软件/xiaomu.p12",
+      "storetype": "pkcs12"
+    }
+  },
+  "config": "air"
+}

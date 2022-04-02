@@ -209,34 +209,34 @@ package com.xiaomu.manager
 		
 		protected function urlLoader_completeHandler(e:Event):void
 		{
-			// local version
-			var localXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
-			var nss:Namespace = localXML.namespace();
-			curVersionNumber = localXML.nss::versionNumber;
-			curVersionLabel = localXML.nss::versionLabel;
+			// // local version
+			// var localXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
+			// var nss:Namespace = localXML.namespace();
+			// curVersionNumber = localXML.nss::versionNumber;
+			// curVersionLabel = localXML.nss::versionLabel;
 			
-			//  version
-			var remoteXML:XML = XML(e.target.data);
-			var ns:Namespace = remoteXML.namespace();
-			latestVersionNumber = remoteXML.ns::versionNumber;
-			latestVersionLabel = remoteXML.ns::versionLabel;
-			downloadFilename = remoteXML.ns::filename;
-			downloadFileSize = remoteXML.ns::filesize;
-			downloadURL = remoteXML.ns::url;
-			description = remoteXML.ns::description;
+			// //  version
+			// var remoteXML:XML = XML(e.target.data);
+			// var ns:Namespace = remoteXML.namespace();
+			// latestVersionNumber = remoteXML.ns::versionNumber;
+			// latestVersionLabel = remoteXML.ns::versionLabel;
+			// downloadFilename = remoteXML.ns::filename;
+			// downloadFileSize = remoteXML.ns::filesize;
+			// downloadURL = remoteXML.ns::url;
+			// description = remoteXML.ns::description;
 			
-			// 1.2.3 -> 123
-			var nowVersion:String = curVersionNumber.split('.').join('');
-			var remoteVersion:String = latestVersionNumber.split('.').join('');
+			// // 1.2.3 -> 123
+			// var nowVersion:String = curVersionNumber.split('.').join('');
+			// var remoteVersion:String = latestVersionNumber.split('.').join('');
 			
-			var event:VersionEvent = new VersionEvent(VersionEvent.CHECK_RESULT);
+			// var event:VersionEvent = new VersionEvent(VersionEvent.CHECK_RESULT);
 			
-			if (Number(nowVersion) < Number(remoteVersion))
-				available = event.available = true;
-			else
-				available = event.available = false;
+			// if (Number(nowVersion) < Number(remoteVersion))
+			// 	available = event.available = true;
+			// else
+			// 	available = event.available = false;
 			
-			dispatchEvent(event);
+			// dispatchEvent(event);
 		}
 		
 		private function check_errorHandler(e:IOErrorEvent):void
