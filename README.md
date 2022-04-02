@@ -1,3 +1,5 @@
 ###  小木编程
 
-![图标](https://raw.githubusercontent.com/wosxieez/XiaoMuCoder/dev/src/assets/icon/icon192.png)
+![截图](https://raw.githubusercontent.com/wosxieez/XiaoMuCoder/dev/screen1.jpg)
+
+![截图](https://raw.githubusercontent.com/wosxieez/XiaoMuCoder/dev/screen2.jpg)
