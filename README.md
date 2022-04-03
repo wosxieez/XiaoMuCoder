@@ -1,6 +1,6 @@
 ###  小木编程
 
-* 运行时下载 [Mac](https://airsdk.harman.com/assets/downloads/AdobeAIR.dmg) [Win](https://airsdk.harman.com/assets/downloads/AdobeAIR.exe)
+* 运行时下载 [MacOS](https://airsdk.harman.com/assets/downloads/AdobeAIR.dmg)    [Windows](https://airsdk.harman.com/assets/downloads/AdobeAIR.exe)
 * [客户端下载](https://github.com/wosxieez/XiaoMuCoder/releases)
 
 <br/>
