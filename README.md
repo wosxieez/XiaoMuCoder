@@ -6,7 +6,6 @@
 * [Win运行时下载](https://airsdk.harman.com/assets/downloads/AdobeAIR.exe)
 * [客户端下载](https://github.com/wosxieez/XiaoMuCoder/releases)
 <br/>
-<img src="<br/>
-<img src="https://hefeixiaomu.oss-cn-hangzhou.aliyuncs.com/coco/screen8.png" alt="" width="800" height="500"/>" alt="" width="600" height="400"/>
+<img src="https://hefeixiaomu.oss-cn-hangzhou.aliyuncs.com/coco/screen8.png" alt="" width="800" height="500"/>
 <br/>
-<img src="https://hefeixiaomu.oss-cn-hangzhou.aliyuncs.com/coco/screen9.png" alt="" width="800" height="500"/>" alt="" width="600" height="400"/>
+<img src="https://hefeixiaomu.oss-cn-hangzhou.aliyuncs.com/coco/screen9.png" alt="" width="800" height="500"/>
